@@ -57,5 +57,34 @@ def main():
     df1 = df.reindex(index=dates[:4],columns = list("ABCD") + ["G"])
     df1.loc[dates[0]:dates[1],"G"]=1
     print(df1)
+    print(df1.dropna())
+    print(df1.fillna(value=1))
+
+    # Statistic
+    print(df.mean())
+    print(df.var())
+
+    s = pd.Series([1,2,4,np.nan,5,7,9,10],index=dates)
+    print(s)
+    print(s.shift(2))
+    print(s.diff())
+    print(s.value_counts())
+    print(df.apply(np.cumsum))
+    print(df.apply(lambda x:x.max()-x.min()))
+
+    #Concat
+    pieces = [df[:3],df[-3:]]
+    print(pd.concat(pieces))
+
+    left = pd.DataFrame({"key":["x","y"],"value":[1,2]})
+    right = pd.DataFrame({"key":["x","z"],"value":[3,4]})
+    print('LEFT',left)
+    print('RIGHT', right)
+    print(pd.merge(left,right,on="key",how="outer"))
+    df3 = pd.DataFrame({"A": ["a","b","c","b"],"B":list(range(4))})
+    print(df3.groupby("A").sum())
+
+
+
 if __name__ == "__main__":
     main()
