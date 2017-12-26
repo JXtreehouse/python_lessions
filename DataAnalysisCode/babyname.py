@@ -18,7 +18,7 @@ for year in years: # for循环：第二节课讲解
     frame['year'] = year # 增加变量year：第八节课讲解
     pieces.append(frame)
 baby_names = pd.concat(pieces, ignore_index=True) # 转换为pd数据： 第五节课讲解
-baby_names
+print(baby_names)
 baby_names.head(10)
 
 baby_names.describe()
