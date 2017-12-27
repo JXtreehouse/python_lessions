@@ -54,5 +54,54 @@ freq_by_gender_year = baby_names.pivot_table(index = 'year',columns='gender',val
 
 # 一行命令即可做出高质量图形
 freq_by_gender_year.plot(title='Frequency by year and gender')
-plt.show()
+# plt.show()
 
+###
+#起名趋势分析
+###
+#增加一个变量rank，这个是根据年份性别依据名字出现频率所产生的次序
+baby_names['ranked'] = baby_names.groupby(['year','gender'])['frequency'].rank(ascending=False)
+# print(baby_names.head(10))
+
+#计算每个名每年按性别占总出生人数的百分比
+def add_pct(group):#自定义
+    group['pct'] = group.frequency / group.frequency.sum()*100
+    return group
+# #groupby和apply函数
+baby_names = baby_names.groupby(['year','gender']).apply(add_pct)
+# # 查看新加的百分比（pct）
+# print(baby_names.head())
+
+####
+#查看每年最流行的名字所占百分比趋势
+####
+
+#将数据分为男孩和女孩
+dff = baby_names[baby_names.gender == 'F']
+dfm = baby_names[baby_names.gender == 'M']
+#获取每年排名第一的名字
+rank1m = dfm[dfm.ranked == 1]
+rank1f = dff[dff.ranked == 1]
+
+plt.plot(rank1m.year, rank1m.pct, color="blue", linewidth = 2, label = 'Boys')
+plt.fill_between(rank1m.year, rank1m.pct, color="blue", alpha = 0.1, interpolate=True)
+plt.xlim(1880,2012)
+plt.ylim(0,9)
+plt.xticks(scipy.arange(1880,2012,10), rotation=70)
+plt.title("Popularity of #1 boys' name by year", size=18, color="blue")
+plt.xlabel('Year', size=15)
+plt.ylabel('% of male births', size=15)
+plt.show()
+plt.close()
+
+
+plt.plot(rank1f.year, rank1f.pct, color="red", linewidth = 2, label = 'Girls')
+plt.fill_between(rank1f.year, rank1f.pct, color="red", alpha = 0.1, interpolate=True)
+plt.xlim(1880,2012)
+plt.ylim(0,9)
+plt.xticks(scipy.arange(1880,2012,10), rotation=70)
+plt.title("Popularity of #1 girls' name by year", size=18, color="red")
+plt.xlabel('Year', size=15)
+plt.ylabel('% of female births', size=15)
+plt.show()
+plt.close()
