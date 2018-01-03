@@ -67,3 +67,34 @@ ax = setosa.plot(kind='scatter', x="petal_length", y="petal_width", color='Red',
 versicolor.plot(kind='scatter', x="petal_length", y="petal_width", color='Green', ax=ax, label='versicolor')
 virginica.plot(kind='scatter', x="petal_length", y="petal_width", color='Orange', ax=ax, label='virginica')
 plt.show()
+
+#箱图
+#使用mean()方法获取花瓣宽度均值
+print(iris.petal_width.mean())
+#使用median()方法获取花瓣宽度的中位数
+print(iris.petal_width.median())
+# 可以使用describe方法来总结数值变量
+print(iris.describe())
+
+
+# 绘制花瓣宽度的箱图
+# 箱图展示了数据中的中位数，四分位数，最大值，最小值
+iris.petal_width.plot(kind='box')
+# plt.show()
+
+# 按品种分类，分别绘制不同品种花瓣宽度的箱图
+iris[['petal_width','species']].boxplot(grid=False,by='species',figsize=(10,6))
+# plt.show()
+
+setosa.describe()
+
+# 计算每个品种鸢尾花各个属性（花萼、花瓣的长度和宽度）的最小值、平均值又是分别是多少？ （提示：使用min、mean 方法。）
+print(iris.groupby(['species']).agg(['min','mean']))
+
+#计算鸢尾花每个品种的花萼长度（sepal_length) 大于6cm的数据个数。
+# 方法1
+print(iris[iris['sepal_length']> 6].groupby('species').size())
+# 方法2
+def more_len(group,length=6):
+    return len(group[group['sepal_length'] > length])
+print(iris.groupby(['species']).apply(more_len,6))
