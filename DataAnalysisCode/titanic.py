@@ -107,7 +107,7 @@ print(titanic_df.pivot_table(values='Survived', index='Pclass', aggfunc=np.mean)
 
 # 绘制舱位和生还概率的条形图
 # 使用sns.barplot做条形图，图中y轴给出 Survived 均值的点估计
-sns.barplot(data=titanic_df,x='Pclass',y='Survived',ci=None)
+#sns.barplot(data=titanic_df,x='Pclass',y='Survived',ci=None)
 # plt.show()
 
 #####
@@ -120,7 +120,7 @@ print(titanic_df[["Sex", "Survived"]].groupby('Sex').mean() \
 print(titanic_df.pivot_table(values="Survived",index='Sex',aggfunc=np.mean))
 
 # 绘制条形图
-sns.barplot(data=titanic_df,x='Sex',y='Survived',ci=None)
+#sns.barplot(data=titanic_df,x='Sex',y='Survived',ci=None)
 #plt.show()
 
 
@@ -132,3 +132,72 @@ print(titanic_df[['Pclass','Sex', 'Survived']].groupby(['Pclass', 'Sex']).mean()
 
 # 方法2：pivot_table
 titanic_df.pivot_table(values='Survived', index=['Pclass', 'Sex'], aggfunc=np.mean)
+
+# 方法3：pivot_talbe
+# columns指定另一个分类变量，只不过我们将它列在列里而不是行里，这也是为什么这个变量称为columns
+print(titanic_df.pivot_table(values="Survived",index="Pclass",columns="Sex",aggfunc=np.mean))
+
+#绘制条形图：使用sns.barplot
+#sns.barplot(data=titanic_df,x='Pclass',y='Survived',hue='Sex',ci=None)
+# plt.show()
+
+# 绘制折线图：使用sns.pointplot
+sns.pointplot(data=titanic_df,x='Pclass',y="Survived",hue="Sex",ci=None)
+#plt.show()
+
+####
+#年龄与生还情况
+####
+#与上面的舱位、性别这些分类变量不同，年龄是一个连续的变量
+
+#生还组和罹难组的年龄分布直方图
+#使用seaborn包中的 FacetGrid().map() 来快速生成高质量图片
+# col='Survived'指定将图片在一行中做出生还和罹难与年龄的关系图
+sns.FacetGrid(titanic_df,col='Survived').\
+    map(plt.hist,'Age',bins=20,normed=True)
+# plt.show()
+
+
+###
+#将连续型变量离散化
+###
+#我们使用cut函数
+#我们可以看到每个区间的大小是固定的,大约是16岁
+
+titanic_df['AgeBand'] = pd.cut(titanic_df['Age'],5)
+print(titanic_df.head())
+
+#查看落在不同年龄区间里的人数
+#方法1：value_counts(), sort=False表示不需要将结果排序
+print(titanic_df.AgeBand.value_counts(sort=False))
+
+#方法2：pivot_table
+print(titanic_df.pivot_table(values='Survived',index='AgeBand',aggfunc='count'))
+
+#查看各个年龄区间的生还率
+print(titanic_df.pivot_table(values="Survived",index='AgeBand',aggfunc=np.mean))
+sns.barplot(data=titanic_df,x='AgeBand',y='Survived',ci=None)
+plt.xticks(rotation=60)
+plt.show()
+
+
+####
+# 年龄、性别 与生还概率
+####
+# 查看落在不同区间里男女的生还概率
+print(titanic_df.pivot_table(values='Survived',index='AgeBand', columns='Sex', aggfunc=np.mean))
+
+sns.pointplot(data=titanic_df, x='AgeBand', y='Survived', hue='Sex', ci=None)
+plt.xticks(rotation=60)
+
+plt.show()
+
+####
+#年龄、舱位、性别 与生还概率
+####
+titanic_df.pivot_table(values='Survived',index='AgeBand', columns=['Sex', 'Pclass'], aggfunc=np.mean)
+
+
+
+# 回顾sns.pointplot 绘制舱位、性别与生还概率的关系图
+sns.pointplot(data=titanic_df, x='Pclass', y='Survived', hue='Sex', ci=None)
