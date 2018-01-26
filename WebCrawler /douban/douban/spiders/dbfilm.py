@@ -13,6 +13,7 @@ class DoubanMovieTop250Spider(scrapy.Spider):
         url = 'https://movie.douban.com/top250'
         yield Request(url, headers=self.headers)
 
+
     def parse(self, response):
         item = DoubanMovieItem()
         movies = response.xpath('//ol[@class="grid_view"]/li')
