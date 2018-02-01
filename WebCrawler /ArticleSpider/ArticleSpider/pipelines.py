@@ -12,8 +12,7 @@ class ArticlespiderPipeline(object):
     def process_item(self, item, spider):
         return item
 
-class 通过item loader 加载item
-(object):
+class JsonWithEncodingPipeline(object):
     def __init__(self):
         self.file = codecs.open('article.json', 'w', encoding="utf-8")
     def process_item(self, item, spider):
