@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'ArticleSpider.pipelines.JsonWithEncodingPipeline': 2,
+   'ArticleSpider.pipelines.JsonExporterPipeline': 2,
    #'scrapy.pipelines.images.ImagesPipeline': 2,
    'ArticleSpider.pipelines.ArticleImagePipeline': 1,
 }
