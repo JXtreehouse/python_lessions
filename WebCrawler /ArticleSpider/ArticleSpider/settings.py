@@ -68,7 +68,7 @@ ITEM_PIPELINES = {
    #'ArticleSpider.pipelines.JsonExporterPipeline': 3,
    #'scrapy.pipelines.images.ImagesPipeline': 2,
    #'ArticleSpider.pipelines.ArticleImagePipeline': 2,
-   'ArticleSpider.pipelines.MysqlPipeline':1
+   'ArticleSpider.pipelines.MysqlTwistedPipeline':1
 }
 
 IMAGES_URLS_FIELD = "front_image_url"
@@ -101,3 +101,8 @@ IMAGES_EXPIRES = 15  # 15天内不抓取重复的图片
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+MYSQL_HOST = "127.0.0.1"
+MYSQL_DBNAME = "article_spider"
+MYSQL_TABLENAME = "jobboleArticle"
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = "wyc2016"
