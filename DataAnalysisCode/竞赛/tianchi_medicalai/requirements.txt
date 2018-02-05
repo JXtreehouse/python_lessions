@@ -1,7 +1,0 @@
-SimpleITK>=1.0.0
-scikit-image
-numpy>=1.11.0
-scipy
-pillow
-tqdm
-
