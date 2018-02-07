@@ -1,0 +1,49 @@
+
+优达学城数据分析师纳米学位项目 P5
+安然提交开放式问题
+
+向我们总结此项目的目标以及机器学习对于实现此目标有何帮助。作为答案的部分，提供一些数据集背景信息以及这些信息如何用于回答项目问题。你在获得数据时它们是否包含任何异常值，你是如何进行处理的？【相关标准项：“数据探索”，“异常值调查”】
+答：项目目标是通过数据找出盗用公司资金的嫌疑人；通过机器学习来预测未标记的人是否是嫌疑人；
+2000年美国最大十家公司之一的安然公司在2002年突然破产，其中公司内存在严重的欺诈行为，数据集就是安然公司高管的邮件和详细财务的数据，可以根据未标记人跟嫌疑人的邮件往来信息和财务数据来预测一个人是否是嫌疑人，其中得到财务最大的人就很有可能是嫌疑人，跟嫌疑人交流相对密集的人也可能是嫌疑人；
+数据集共有146个人的邮件和财务信息，其7个邮件信息，13个财务信息，其中18个已知的嫌疑人和128个非嫌疑人，数据不均衡；
+异常值：’LOCKHART EUGENE E’信息全为nan没有价值删除掉，TOTAL和TRAVEL AGENCY IN THE PARK可能是拼写错误删除掉，
+其余的nan值设置成0。
+email_address，loan_advances这两个特征不是数值或布尔型的数量太多了，没有价值删除掉
+你最终在你的 POI 标识符中使用了什么特征，你使用了什么筛选过程来挑选它们？你是否需要进行任何缩放？为什么？作为任务的一部分，你应该尝试设计自己的特征，而非使用数据集中现成的——解释你尝试创建的特征及其基本原理。（你不一定要在最后的分析中使用它，而只设计并测试它）。在你的特征选择步骤，如果你使用了算法（如决策树），请也给出所使用特征的特征重要性；如果你使用了自动特征选择函数（如 SelectBest），请报告特征得分及你所选的参数值的原因。【相关标准项：“创建新特征”、“适当缩放特征”、“智能选择功能”】
+答：这里因为数据不均衡所以使用Precision和Recall来衡量效果；#精确率(precision)是计算对是"正确被检索的item"占所有“实际被检索到的item”的比列
+在这里就是(poi的人被检索为poi的人数)/（检索到的poi的总数）
+召回率(recall)是"正确被检索的item"占所有"应该被检索到的item"的比例
+这里就是（正确被检索为poi的人数）／（实际的poi人数=18）
+最终使用[other','from_this_person_to_poi''expenses','exercised_stock_options']]特征，通过交叉验证StratifiedShuffleSplit和feature_importances_从两个特征数量试到十个特征数量发现4个特征数量表现最好，
+新增加bns和poi_messages，bns特征即salary和bonus之和通过这个特征可以避免遗漏salary与bonus之和很大而其中一个值很小的情况，poi_messages及（from_poi_to_this_person／from_messages）通过这个特征可以知道那些人跟poi 邮件交往更多；
+贝叶斯和决策树对特征缩放不敏感但是用到的SVM算法，统一缩放特征；
+用feature_importances_查看特征的重要性'other'得分0.057，from_this_person_to_poi得分0.036，expenses得分0.071，exercised_stock_options得分0.0633；用交叉验证和feature_importances_方法跑了10次分别选出了在3、4、5个特征数中得分最高的一组特征：
+3个特征['exercised_stock_options', 'deferred_income', 'poi_messages']得分Precision=0.45, Recall=0.42,
+4个特征[other', 'from_this_person_to_poi'； 'expenses', 'exercised_stock_options']得分Precision=0.52，Recall=0.48；
+5个特征['expenses', 'total_stock_value', 'bns', 'other', 'exercised_stock_options']得分Precision=0.41，Recall=0.42；
+还有一个重复出现在这里个高得分特征集中的特征集['exercised_stock_options', 'other', 'expenses']得分Precision=0.43，Recall=0.42；
+综合以上最终选用四个特征的特征集，Precision=0.52，Recall=0.48
+因为GridSearchCV默认使用的StratifedKFold的交叉验证方式，但是测试时使用的是StratifiedShuffleSplit方式，所以放弃使用GridSearchCV改为手动调整参数。调整max_depth-初始的树的深度，更好拟合数据
+你最终使用了什么算法？你还尝试了其他什么算法？不同算法之间的模型性能有何差异？【相关标准项：“选择算法”】
+答：最终使用了决策树算法，还尝试贝叶斯算法，贝叶斯算法Precision和Recall值差距较大，决策树算法Precision和Recall差距较小
+用同一特征[other', 'from_this_person_to_poi'； 'expenses', 'exercised_stock_options']决策树得分Precision=0.52，Recall=0.48；贝叶斯得分Precision=0.48，Recall=0.19，这一组特征贝叶斯的精确率和召回率明显低于决策树特别是召回率还不到0.2说明这一组特征用贝叶斯正确分类到的poi很低。
+贝叶斯算法：选出3-7个特征集的最佳特征和一个特征多次出现在这几个特征集里面的额特征集，最后得出6个特征集效果最好Precision=0.48，Recall=0.41，特征为['poi', 'exercised_stock_options', 'bns', 'long_term_incentive', 'poi_messages', 'salary', 'bonus', 'deferred_income']
+最终选择了决策树算法4个特征集为  ['poi', 'other', 'from_this_person_to_poi', 'expenses', 'exercised_stock_options']
+Precision=0.52，Recall=0.48
+在决策树上最佳特征集中加入新特征bns,看看Precision和Recall是不是比原来高，加入新特征后Precision=0.40，Recall=0.38，所以这个特征没有选好，不用在最终特征中，
+调整算法的参数是什么意思，如果你不这样做会发生什么？你是如何调整特定算法的参数的？（一些算法没有需要调整的参数 – 如果你选择的算法是这种情况，指明并简要解释对于你最终未选择的模型或需要参数调整的不同模型，例如决策树分类器，你会怎么做）。【相关标准项：“调整算法”】
+答：优化分类器的性能，使分类器能够更好地拟合数据，不调整参数分类起不能更好的拟合数据；调整的方式在一个参数的范围内循环遍历选择最佳参数。
+最终选择的是决策树分类器调整了criterion参数，选择用‘gini’代表基尼系数
+max_depth表示决策树最大的深度设置成9 ，如果不调试max_depth数据拟合不太好。
+什么是验证，未正确执行情况下的典型错误是什么？你是如何验证你的分析的？【相关标准项：“验证策略”】
+答：验证是评估分类器的性能，最典型的错误是过拟合，数据分为训练集和测试集，用交叉验证验证我的分析
+给出至少 2 个评估度量并说明每个的平均性能。解释对用简单的语言表明算法性能的度量的解读。【相关标准项：“评估度量的使用”】
+答：Precision是实际为poi的人被正确分类为poi的人数除以检索到的所有poi;
+Recall是正确被检索为poi的人数除以实际的poi人数。
+
+参考资料：
+Udacity数据分析进阶P5项目
+Air DU分享gitHhub项目
+安然事件的概括
+优达学城
+2017年12月

@@ -1,0 +1,449 @@
+
+
+
+
+
+
+
+
+作业
+
+2016美国大选数据分析
+
+使用本课所学的绘图方法,对美国大选数据进行分析
+投稿到简书"解密大数据专栏"
+参考思路
+各县的人口,收入,教育水平的分布
+两位候选人投票数的比较,以及在各县输赢的比例
+各县的选举结果和人口,收入,教育水平的关系
+
+
+前言
+
+原本这次作业无望的。
+但看到daisy同学提交的作业，她是那么认真在完成。有不懂的，她硬是通过各种渠道研究钻研出来。 这份精神太值得学习了。
+so ,有了daisy同学作为榜样，Dr.Fish老师指点，polo助教鼓舞。有了这篇文章。
+
+导入模块
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from pandas import Series, DataFrame
+
+导入文件
+data = pd.read_csv('election_data.csv')
+
+观察数据
+data.head(3)
+
+
+
+
+
+
+
+
+data.tail(3)
+
+
+
+
+
+
+
+
+数据整理
+# 自己重新整理一下列的顺序并重新设立新的索引列。
+df = data[['county','fips','state','Hillary Clinton','Donald Trump','population','education','income']]
+df = df.set_index('county')  #设置county为索引列
+ # 生成新列H_ratio记录希拉里在此县得票百分比 
+df['H_ratio'] = df['Hillary Clinton'] / df['population'] * 100 
+ # 生成新列T_ratio记录特朗普在此县得票百分比 
+df['T_ratio'] = df['Donald Trump'] / df['population'] * 100   
+df.head()
+
+
+
+
+
+
+
+
+# 下面代码是向polo助教 讨教到的。让自己少研究1个月
+def whois_winner(row):
+  if row['Donald Trump'] > row['Hillary Clinton']:
+    row['Winner']="Trump"      # 当特朗普的得票数大于希拉里成立的话，就在winner列 写上特朗普
+  else:
+     row['Winner'] = "Hillary"   # 当上述条件不成立的话，就在winner列 写上希拉里
+  return row
+df = df.apply(whois_winner, axis=1)
+df.head()
+
+
+
+
+
+
+
+
+数据分析
+df.describe()
+
+
+
+
+
+
+
+
+声明:因源数据只有2711个县,数据有缺失值(实际上美国有3143个县), 下面所有写"全国",指的是这份数据上的所有数据.并未实际情况的美国全国.
+# 这是源代码
+print('各县人口 平均值为:',df.population.mean(),'人')
+print('各县高中教育水平以上占比 平均值为:',df.education.mean(),'%')
+print('各县人均收入为:',df.income.mean(),'美元')
+sum_HC=sum(df['Hillary Clinton'])
+sum_DT=sum(df['Donald Trump'])
+print ( '全国支持希拉里的总票数有:',sum_HC,'票')
+print ( '全国支持特朗普的总票数有:',sum_DT,'票')
+print ( '截止此数据收集时，希拉里的小票得票高于特朗普',sum_HC - sum_DT,'票')
+
+运行结果
+各县人口数 平均值为: 104202.68129841387 人
+各县高中教育水平以上占比 平均值为: 83.7861674658797 %
+各县人均收入为: 23012.773515308003 美元
+全国支持希拉里的总票数有: 14072955 票
+全国支持特朗普的总票数有: 12559572 票
+截止此数据收集时，希拉里的小票得票高于特朗普 1513383 票
+
+# 支持特朗普暂时领先的县 的大致情况
+DT = df[df.Winner == 'Trump']
+DT.describe()
+
+
+
+
+
+
+
+
+由以上表格可以看出:
+
+支持特朗普暂时领先的县有1924个
+支持特朗普暂时领先的县 平均人口:66973.35人
+支持特朗普暂时领先的县 平均高中教育以上的占比:84.46%
+支持特朗普暂时领先的县 人均收入:$23074.08
+支持特朗普暂时领先的县 特朗普的平均得票占比： 7.75%
+支持特朗普暂时领先的县 希拉里的平均得票占比： 2.97%
+
+# 支持希拉里暂时领先的县 的大致情况
+HC = df[df.Winner == 'Hillary']
+HC.describe()
+
+
+
+
+
+
+
+
+由以上表格可以看出:
+
+支持希拉里暂时领先的县有785个
+支持希拉里暂时领先的县 平均人口: 195672.4人
+支持希拉里暂时领先的县 平均高中教育以上的占比: 82.12%
+支持希拉里暂时领先的县 人均收入: $22864.54
+支持希拉里暂时领先的县 希拉里的平均得票占比： 6.60%
+支持希拉里暂时领先的县 特朗普的平均得票占比： 3.11%
+
+# 辛苦做了38个州对应38个颜色的字典，后来发现没什么用T_T.
+map_dict = {      
+    'Texas':'#FF0066',
+    'Georgia':'#FF3366',
+    'Virginia':'#FF6666',
+    'Kentucky':'#FF9966',
+    'Missouri':'#FFCC66',
+    'Illinois':'#FFFF66',
+    'North Carolina':'#330066',
+    'Iowa':'#333366',
+    'Tennessee':'#336666',
+    'Nebraska':'#339966',
+    'Indiana':'#33CC66',
+    'Ohio':'#33FF66',
+    'Michigan':'#660066',
+    'Mississippi':'#663366',
+    'Oklahoma':'#666666',
+    'Arkansas':'#669966',
+    'Wisconsin':'#66CC66',
+    'Pennsylvania':'#66FF66',
+    'Alabama':'#990066',
+    'Florida':'#993366',
+    'South Dakota':'#996666',
+    'Louisiana':'#999966',
+    'New York':'#99CC66',
+    'California':'#99FF66',
+    'Montana':'#CC0066',
+    'West Virginia':'#CC3366',
+    'South Carolina':'#CC6666',
+    'Idaho':'#CC9966',
+    'Washington':'#CCCC66',
+    'Oregon':'#CCFF66',
+    'New Mexico':'#000066',
+    'Utah':'#003366',
+    'Maryland':'#006666',
+    'New Jersey':'#009966',
+    'Nevada':'#00CC66',
+    'Arizona':'#00FF66',
+    'Hawaii':'#6666FF',
+    'Delaware':'#FF99FF',
+}
+# 将县按所在州对应不同的颜色（38个州，38个颜色）
+colors = df.state.map(map_dict)   
+
+数据展现
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签 
+plt.figure(figsize=(17,12)) 
+size = df.population / 1e4 * 4  # 数据点大小，正比于人口数
+plt.scatter(x = df.income, y = df.education, s=size, c=colors, alpha=0.33) # 参数s设置点的大小
+plt.xscale('log')  # 对x轴采用对数刻度
+plt.xlabel('各县人均收入（美元）',fontsize=20)  
+plt.ylabel('各县高中教育以上占比',fontsize=20)  
+plt.title('美国各县的人口,收入,教育水平的关系（2016）',fontsize=25)
+plt.text(27749, 75, 'Los Angeles')   # 在图中添加文本
+plt.text(27899, 78, 'Harris')   # 在图中添加文本
+plt.text(8300, 79.4, 'Oglala Lakota')   # 在图中添加文本
+plt.text(8600, 75.3, 'Wheeler')   # 在图中添加文本
+plt.text(29000, 61, '泡泡点越大，代表此县人口数越大',fontsize=20 )   # 在图中添加文本
+plt.grid(True)  # 添加网格
+plt.show()
+
+
+
+
+
+
+
+
+图中两个县引起了我的注意。Oglala Lakota 和 Wheeler 虽然这两个县的人均收入全国最低。
+但还是很重视教育的。两县高中教育水平以上占比分别是78.8 ，74.8. 个人看好此两县，在不久的将来有望脱贫。
+
+下面单独分析 特朗普目前领先的县
+# 后来发现用两个颜色代表两位候选人即可。T_T
+map_dict2 = {
+    'Trump':'red',                  # 特地谷歌一下，特朗普是共和党，一般使用红色
+    'Hillary':'#6666FF',            # 希拉里是民主党，一般使用蓝色
+}
+colors2 = df.Winner.map(map_dict2)   # 颜色配置
+size2 = df.population / 1e4 * 5 # 数据点大小，正比于人口数
+
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签 
+plt.figure(figsize=(17,12)) 
+plt.scatter( x = df.income,y = df.T_ratio, s=size2, c=colors2, alpha=0.25) # 参数s设置点的大小
+plt.xscale('log')  # 对x轴采用对数刻度
+plt.xlabel('全国各县人均收入 单位：美元',fontsize=20)  
+plt.ylabel('全国各县 特朗普得票 百分比 ',fontsize=20)  
+plt.title('特朗普得票领先各县的 人口 人均收入的关系',fontsize=25)
+plt.text(9000, 33, '红色：代表特朗普领先的县(1924个)',fontsize=20 )   # 在图中添加文本
+plt.text(9000, 31, '蓝色：代表特朗普落后的县(785个)',fontsize=20 )   # 在图中添加文本
+plt.text(9000, 28, '泡泡点越大，代表此县人口越多',fontsize=20 )   # 在图中添加文本
+plt.grid(True)  # 添加网格
+plt.show()
+
+
+
+
+
+
+
+
+通过上图观察：
+
+特朗普领先的县 主要是小县。（红色的泡泡点小）
+特朗普领先的县 数量多。（红色点数量多于蓝色点）
+此图的分布有个特点有点像正三角。
+说明特朗普 专攻中产阶级（得票越领先的县，收入越居中横轴线）。
+
+
+下面单独分析 希拉里目前领先的县
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签 
+plt.figure(figsize=(17,12)) 
+plt.scatter( x = df.income,y = df.H_ratio, s=size2, c=colors2, alpha=0.25) # 参数s设置点的大小
+plt.xscale('log')  # 对x轴采用对数刻度
+plt.xlabel('全国各县人均收入 单位：美元',fontsize=20)  
+plt.ylabel('全国各县 希拉里得票 百分比 ',fontsize=20)  
+plt.title('希拉里得票领先各县的 人口 人均收入的关系',fontsize=25)
+plt.text(9000, 33, '蓝色：代表希拉里领先的县(785个)',fontsize=20 )   # 在图中添加文本
+plt.text(9000, 31, '红色：代表希拉里落后的县(1924个)',fontsize=20 )   # 在图中添加文本
+plt.text(9000, 28, '泡泡点越大，代表此县人口越多',fontsize=20 )   # 在图中添加文本
+plt.grid(True)  # 添加网格
+plt.show()
+
+
+
+
+
+
+
+
+通过上图观察：
+
+希拉里得票领先的县 大县不少。（蓝色的泡泡点偏大）
+希拉里得票领先的县 数量少。（蓝色点数量少于红色点）
+此图的泡泡点分布无显明特征
+希拉里得票领先的县 低产阶级主力。
+高产阶级比较喜欢支持希拉里
+
+
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签 
+plt.figure(figsize=(17,12)) 
+size3 = df.population / 1e4 * 6   # 数据点大小，正比于得票数
+plt.scatter(x = df.income, y = df.education,s=size3, c=colors2, alpha=0.3) # 参数s设置点的大小
+plt.xscale('log')  # 对x轴采用对数刻度
+plt.xlabel('各县人均收入（美元）',fontsize=20)  
+plt.ylabel('各县高中教育以上占比',fontsize=20)  
+plt.title(' 各县的人口,收入,教育水平的关系',fontsize=25)
+plt.text(30000, 65, '红色：特朗普得票领先的县',fontsize=20 )   # 在图中添加文本
+plt.text(30000, 63, '蓝色：希拉里得票领先的县',fontsize=20 )   # 在图中添加文本
+plt.text(30000, 60.5, '泡泡点越大，代表此县人口数越多',fontsize=20 )   # 在图中添加文本
+plt.grid(True)  # 添加网格
+plt.show()
+
+
+
+
+
+
+
+
+
+7.23晚 更新
+以上都是以县为单位 的分析。下面以州为单位的分析
+# 以州为单位。统计各州 两位候选人在各州的得票总数 ，各州人口总数 。 并生成 aaa 数据表
+aaa=df[['state','Hillary Clinton','Donald Trump','population']].groupby('state').sum()
+aaa.head()
+
+
+
+
+
+
+
+
+# 以州为单位。统计各州 教育平均值 人均收入平均值。 并生成bbb数据表
+bbb=df[['state','education','income']].groupby('state').mean()
+bbb.head()
+
+
+
+
+
+
+
+
+# 将以上 两个格合并起来 生成ccc数据表。 
+# 我知道abc这样命名不规范。但也实在憋不出合适的单词。 麻烦老师助教 指点一下取什么名好。
+ccc=aaa.join(bbb)
+
+# 以人口总数这列按降序排列
+zhou = ccc.sort_values(by='population',ascending = False)
+zhou['H_ratio'] = zhou['Hillary Clinton'] / zhou['population'] * 100
+zhou['T_ratio'] = zhou['Donald Trump'] / zhou['population'] * 100
+zhou['Diff']= zhou['H_ratio'] - zhou['T_ratio']
+def whois_winner(row):
+  if row['Donald Trump'] > row['Hillary Clinton']:
+    row['Winner']="Trump"       # 当特朗普的票数大于希拉里的票数成立的话，就在winner列 写上特朗普
+  else:
+     row['Winner'] = "Hillary"   # 当特朗普的票数大于希拉里的票数不成立的话，就在winner列 写上希拉里
+  return row
+zhou = zhou.apply(whois_winner, axis=1)
+zhou.head()
+
+
+
+
+
+
+
+
+# 看一下两们候选人分别有多少个州领先
+zhou.Winner.value_counts()
+
+Hillary    22
+Trump      16
+Name: Winner, dtype: int64
+
+zhou.describe()
+
+
+
+
+
+
+
+
+# 下面一大代码代码只是为了实现表格里加一行简称。小白写得很长。
+
+# 将导入的源文件 设‘state’为索引
+state_index = data.set_index('state')
+
+# 单独切简称一栏出来,并去重
+state_jc = state_index['state_abbreviation'].drop_duplicates()
+
+# 转成dateframe格式
+state_dateframe = DataFrame(state_jc)
+
+# 合并到zhou表格，生成新的表格state_df
+state_df = zhou.join(state_dateframe)
+state_df
+
+
+
+
+
+
+将老师给的源文件 转化成以州为单位的数据表
+
+map_dict3 = {
+    'Trump':'red',
+    'Hillary':'#6666FF',
+}
+colors3 = state_df.Winner.map(map_dict3)
+size3 = state_df.population / 1e4 * 5 # 数据点大小，正比于人口数
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签 
+plt.figure(figsize=(17,16)) 
+plt.scatter( x = state_df.income,y = state_df.Diff, s=size3, c=colors3, alpha=0.25) 
+plt.xlabel('各州人均收入 单位：美元',fontsize=20)  
+plt.ylabel('各州得票率百分比差值 （红色共和党特朗普）VS（蓝色民主党希拉里） ',fontsize=20)  
+plt.title('各州得票情况 人口 人均收入的关系图',fontsize=25)
+plt.text(28000, -2, '蓝色：希拉里得票领先的州(22个)',fontsize=20 )   # 在图中添加文本
+plt.text(28000, -2.5, '红色：特朗普得票领先的州(16个)',fontsize=20 )   # 在图中添加文本
+plt.text(28000, -3, '越往上下两端靠，代表此州党派意识越一致',fontsize=20 )   # 在图中添加文本
+plt.text(28000, -3.5, '越往0轴靠，代表此州党派越动荡，越容易变动',fontsize=20 )   # 在图中添加文本
+plt.text(28000, -4, '泡泡点越大，代表此州人口越多',fontsize=20 )   # 在图中添加文本
+xz=list(state_df.income)    #图表上展示的泡泡点对应 X轴坐标
+yz=list(state_df.Diff)      #图表上展示的泡泡点对应 Y轴坐标
+jc=list(state_df.state_abbreviation)   #要在泡泡点上写的内容
+for a,b,c in zip(xz,yz,jc):
+    plt.text(a, b-0.15, c, ha='center', va= 'bottom', fontsize=22) 
+plt.grid(True)  # 添加网格
+plt.show()
+
+
+
+
+
+
+
+
+
+从上表可以看出得票率差值在4%以上的
+希拉里 有1个州 MD
+特朗普 有4个州 MT,NE,WA,IN
+给特朗普的意见是 向FL,PA,GA,OK,OR五州拉票，胜率较大。
+给希拉里的意见是 向AZ,OH,IL,UT,MS五州拉票，胜率较大。
+
+
+相关参考资料（向下面几篇文章作者致谢）：
+商业数据分析第二次课作业-0719
+matplotlib可视化之如何给图形添加数据标签？
+有哪些数据风向标更好地预测了这次美国总统选举结果？
+4分钟看懂美国选举

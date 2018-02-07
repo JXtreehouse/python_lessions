@@ -1,0 +1,99 @@
+
+
+在余博士的教材指导下，终于完成了python的环境设置,非常感谢余博士。
+在把代码打进去，直方图出现的那一刻真的好兴奋，终于学会用python做直方图了，用python做比excel快多了。真的没错，编程是每个人该学会的技能。
+
+言归正转，下面是作业：
+
+一组人的体重
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+weight_data=pd.read_table('weight.txt')
+weight_data.shape
+
+(80, 1)
+80个样本数据，一行
+
+#求均值
+
+weight_data['weight'].mean()
+
+50.7
+
+#求方差
+
+weight_data['weight'].var()
+
+39.27594936708859
+
+fig=plt.figure()
+x=weight_data['weight']
+ax=fig.add_subplot(111)
+numBins=15
+ax.hist(x,numBins,color='blue',alpha=0.8,rwidth=0.9)
+plt.title(u'weight')
+plt.show()
+
+
+
+
+
+
+Paste_Image.png
+
+分析：
+（1）样本是80个人的体重
+（2）平均体重是50.7kg
+（3）这群人的体重偏离平均体重39.27kg
+(4) 体重集中在45kg-50kg的人数最多
+
+样本是49年至60年每个月的乘客数量
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import stats
+passengers_data = pd.read_csv('AirPassengers.csv')
+passengers_data.shape
+
+#read_csv 从文件、URL、文件型对象中加载带分隔符的数据。默认分隔符为逗号
+
+(144, 2)
+
+144个数据，2行
+#求NumPassengers这列数的平均数
+
+passengers_data['NumPassengers'].mean()
+
+280.2986111111111
+
+#求NumPassengers这列数的方差
+
+passengers_data['NumPassengers'].var()
+
+14391.917200854701
+
+fig = plt.figure()
+x = passengers_data['NumPassengers']
+ax = fig.add_subplot(111)
+ax.hist(x , bins = 20, color = 'blue', alpha = 0.8, rwidth = 0.9)
+
+plt.title('passenger')
+plt.show()
+
+
+
+
+
+
+Paste_Image.png
+
+分析：
+（1）样本是49年至60年这12年144个月每个月的乘客数量
+（2）12年来每个月乘座飞机的平均人数是280人
+（3）由于时间维度比较长，历史背景条件不一样，所以这组数据的波   动比较大，方差是14391
+（4）每个月出行人数最多是100至200之间，500-600最少
+（5）这组数据这样做直方图太笼统了，很想按年和月做直方图，可惜现在还不会，等以后学了再做吧。

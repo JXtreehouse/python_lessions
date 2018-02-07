@@ -1,0 +1,205 @@
+
+
+分析要爬取目标的网页的网页结构与元素标签位置信息
+
+任务回顾
+1.爬取网页：看准网 http://www.kanzhun.com
+2.主要目的：爬取各公司的基础信息，评分以及“数据分析”，“数据运营”等数据领域岗位的面经
+前期准备
+确定要爬取的详细网页。根据对数据的需求，确定要爬取的对象，即公司信息与数据相关的面经信息；综合根据看准网的网页结构，确定将“面试”导航栏作为数据爬取的入口，此时的网页地址为：http://www.kanzhun.com/msh/?ka=head-interview
+
+
+
+
+
+看准网网页布局
+
+进入新页面后，可以看到如下布局的网页页面。除了与主页面相同的导航栏外，新页面中主要包括搜索栏，该搜索栏可以搜索感兴趣的公司、职位等。
+在搜索栏下是标签栏，不同的搜索内容都有四个主要的导航方向，分别是公司、工资、招聘以及面试。分别从不同的角度提供相关的信息。
+
+
+
+
+
+面试专栏主界面
+
+在这一步骤中，先尝试输入关键词“数据分析”，此时的网页地址为：http://www.kanzhun.com/interviewl/search/?stype=&q=%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90 （网址等号后是“数据分析”的URL编码格式）
+在网页左下方有“热门公司”这一栏，分别按照热度与面经数量进行降序显示。根据本人对数据的需求（公司有热度，所谓的大平台），所以初步计划是根据这一栏中公司的热度从高到低爬取数据。
+以热度第一的公司百度为例，点进公司链接，打开新页面，此时的网页地址为：http://www.kanzhun.com/gsm11514.html?q=%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90&ka=select-hotcom-1 （select-hotcom-1 可理解为热度第一的标识）
+热度第二的阿里的网页地址为：http://www.kanzhun.com/gsm9012.html?q=%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90&ka=select-hotcom-2
+可以初步看出两个网页地址主要的区别：除了热度排行，还包括各公司网站主地址不同（如gsm11514.html与gsm9012.html）
+所以之后的爬虫方案可以初步设计为：爬取指定公司的数据。
+
+
+
+
+
+与搜索职位相关的热门公司排行
+
+网页结构
+此时，已初步确定要爬取的链接。接下来主要对要爬取的网页进行网页结构分析。还是以百度为例。
+
+
+
+
+
+
+
+
+
+
+
+
+主要分析界面
+
+从上图中可以看到网页的主要布局。第一个还是网页的导航栏（包括搜索栏等），向下看是公司的基本信息，包括综合评分、企业规模、企业性质、平均工资等信息。再下面是标签栏，可以从不同的角度了解这家公司，当然主要感兴趣的还是面试哈。
+然后是条件筛选栏，根据不同的地域和职位筛选想要的结果。再下侧是主要的面经专栏，此时显示的是查询“数据分析”职位的相关面试。右侧是面试难度显示栏。
+
+
+
+
+
+面经完整结构
+
+完整的面经栏如上图所示。包括给出面经的用户，面试所在公司的岗位，面试地点，面经内容，同时显示用户对面试的个人评测结果。
+html元素标签信息
+
+
+
+
+
+图片对应元素标签
+
+根据chrome开发工具得到网页的html完整信息。
+#公司的图片对应的元素
+<div class="banner_pic">
+            <div class="banner_logo">
+                <a ka="com-logo" href="/gso11514.html">#公司编号
+                    ![百度](http://upload-images.jianshu.io/upload_images/3487919-1eeda18a956592c3.gif?imageMogr2/auto-orient/strip)#公司的图片<span></span>
+                </a>
+            </div>
+ </div>
+
+
+
+
+
+
+公司基本信息对应的元素标签
+
+#公司基本信息
+<div class="banner_word">
+            <div class="bw_company">
+                <h1>百度</h1>#公司的名称
+                <em>
+                    4.2</em>#公司综合评分
+                <div class="star_box">
+                    <i class="star"></i>
+                </div>
+            </div>
+            <div class="bw_explain">
+                <span>互联网</span>#公司类型
+                        <em class="line"></em><span>北京</span>#公司地址
+                        <em class="line"></em><span>10000人以上</span>#公司规模</div>
+            <div class="bw_brief" id="view-profile" ka="com-detail-more">
+                全球最大的中文搜索引擎、最大的中文网站
+           <span class="more">more</span>#公司简介
+            </div>
+        </div>
+
+
+#关注数
+<div class="banner_interest">
+             <span class="none"><em class="follow_num" data-num="9681">9681</em>关注</span>
+             <a href="javascript:" ka="company-header-follow" class="js-follow-company icon_guanzhu " data-url="/user/v3/follow.json" data-id="11514"></a>#关注的原数据
+         </div>
+
+#公司详情信息
+<div class="com_it">
+    <section class="com_infor">
+        <div class="ci_left">
+            <span class="cil_perc">#好评比例
+                84
+                %
+            </span>
+            <span class="cil_num">#参与公司评价总人数
+                来自
+                    8226
+                个员工
+            </span>
+            <span class="cil_rev"><a ka="percent-review-list" href="/gsr11514.html#co_tab" rel="nofollow">好评![](/v3/images/icons/i_right.png)</a></span>
+        </div>
+        <div class="ci_center">
+            ![](/v3/images/icons/i_fengexian.png)
+        </div>
+        <div class="ci_right">
+            <span class="cir_perc">#平均月薪
+                9954</span>
+            <span class="cir_num">#参与月薪调查总人数
+                来自
+                12502
+                个员工
+            </span>
+            <span class="cir_rev"><a ka="percent-salary-list" href="/gsx11514.html#co_tab" rel="nofollow">元(平均月薪)![](/v3/images/icons/i_right.png)</a></span>
+        </div>
+    </section>
+    <section id="co_tab" class="com_tab">
+        <div class="tab_ul">
+            <ul>#标签栏
+                <li><a ka="com-blocker1-overview" href="/gso11514.html#co_tab" title="百度介绍">主页</a></li>
+                <li><a ka="com-blocker1-question" href="/question/company/11514/#co_tab" title="百度问答">问答</a></li>
+                <li><a ka="com-blocker1-review" href="/gsr11514.html#co_tab" title="百度怎么样">点评</a></li>
+                <li><a ka="com-blocker1-interview" class="active" href="/gsm11514.html#co_tab" title="百度面试问题及面试流程">面试</a></li>
+                <li><a ka="com-blocker1-salary" href="/gsx11514.html#co_tab" title="百度工资待遇">工资</a></li>
+                <li><a ka="com-blocker1-job" href="/job/g11514.html" title="百度最新招聘信息">招聘</a></li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+得到基本信息后，主要针对面经信息进行爬取。下面的html代码为一些基本的元素信息。
+
+
+
+
+
+面经基本信息
+
+#面试的基本信息
+<a href="">
+       ![](/v3/images/portrait/i_header02.png)#头像
+</a>
+<p class="f_14 grey_99 dd_bot">面试百度的<a target="_blank" ka="interview-name1" href="/interview/3626/" class="green">数据分析实习生</a>.北京</p>#面试公司、职位、地点
+<a target="_blank" ka="interview-result-1" href="/gsmsh8189347.html">
+       <span class="feel_fail">面试未通过</span> #面试结果
+</a>
+<article>
+      <a href="/gsmsh8189347.html?ka=interview-detail1-1" ka="interview-detail1-1" target="_blank">
+       <h3 class="question_title">#面经标题
+                    面试官很亲切 数据分析岗位更愿意招收性格内向的员工。</h3>
+        <p class="question_content">#面经内容
+                        面试官很亲切，虽然因为开会延迟了面试时间。岗位主要是数据分析...</p>
+        </a>
+  </article>
+<div class="rdrc_center">#面试难度测评
+      <div>
+           ![](/v3/images/star/i_star_blue.png)
+           <span class="grey_7a">我觉得面试有难度</span>
+     </div>
+     <div>
+           ![](/v3/images/star/i_star_blue.png)
+           <span class="grey_7a">面试总体感觉很好</span>
+    </div>
+</div>
+
+阶段总结
+总体得到了初步的爬取方案，具体要爬取的页面、关键的元素等等，可以为后序的爬虫工作做准备。
+
+本文为 泰阁志-解密大数据 学习笔记，了解更多请关注微信“泰阁志”
+
+
+
+
+
+
+

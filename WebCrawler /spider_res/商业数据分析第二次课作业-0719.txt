@@ -1,0 +1,314 @@
+
+感谢 Dr.fish 的耐心讲解和细致回答。
+本次课的作业如下：
+2016年美国大选数据分析
+
+前言
+拿到这次的题目，仿佛回到大学时代做大作业的心情，又兴奋又怕怕。兴奋于又能天马行空的乱想乱玩了，但是又怕看到老师批作业时吹胡子瞪眼的怪表情。(.)
+还记得课堂尾声的时候，Dr.fish说：
+
+真的是有非常认真的在准备数据的。
+
+
+在现今杂乱的时代，能拿到一份如此干净的数据是应该抱有感恩的心情的。
+
+确是如此，真的好感谢这种专业的态度，有这样的伙伴，这个社群一定会越来越好（认真脸）。当然，我也定不会糊弄了事，认真对待每次作业，这是对老师最起码的尊重以及感谢，我懂的，嗯。
+嗯…作为一个活在自己小世界的技术白，不但没关注过米国政治，甚至连《纸牌屋》也没看过呢。不过说了要认真对待，那就问问度娘放放狗，搞搞清楚米国的大选投票是个什么方法。但是让人沮丧的是，经过了左一榔头又一棒子的查阅，还是没找到完整的文献来解释这个方法（急于看数据的小白表示好心塞…嘤嘤嘤）。算了，挂白旗投降，还是把珍贵的时间用在有用的地方吧，总结下查到资料的共同点：
+
+总票数538张，来源有三：
+
+
+众议员（435人）：根据各州人口密度计算每个州众议员人数；
+参议员（100人）：各州2名（没研究怎么搞出来的）；
+特区票（3人）：华盛顿特区不参与众议员基数计算，恒定3张选票（一不留神就霸气侧漏了，啧啧）；
+
+
+投票方法：
+
+
+具有投票权的民众投出州议员（各州不等，共计435人）；
+州议员依据本州民众对两党派的支持情况，将选票投给支持呼声高的竞选者；
+参议员投票（这个没看懂是自己随便投还是也得听老百姓的）；
+华盛顿特区3人投票。
+
+
+获胜方法：
+
+获得超过270票的被选人将成为新任总统。
+不去考证这个方法对不对了（反正他们也不选我做总统(o_o)），姑且先按照这个来吧。
+又啰哩吧嗦说这么一堆，下次改，下次改，吼吼。
+
+说明
+
+本次全部分析过程均遵循“前言”中描（zi）述（zhuan）的投票方法；
+由于给出的数据存在缺失州（缺失12个州）情况，故会将众议员票数做相应删减（以求相对精准结果，请原谅患有尴尬症的处女座小白）；
+由于未给出参议员及特区投票数据，故本次仅针对各州支持情况对众议员投票情况进行分析预测。
+
+为了提升可读性，正文会依据分析报告方式撰写（结论+佐证图表）。所用函数会在相应位置增加标注，没空看长篇大论的小伙伴可以直接翻阅代码区块。
+
+哎，正经说话真累~
+
+-----
+
+**听说下面终于可以是正文了**
+
+*本次要解决的问题：*
+>1. 预测希望较大的候选人；
+>2. 提升投票率方法建议。
+
+*报告题纲：*
+>1. 总体结论
+
+>2. 统计部分
+
+>3. 行动指南（建议）
+
+-----------------------
+
+## 总体结论 ##
+
+###### 1. 截止目前，Hillary  支持率较大； ######
+
+###### 2. 因 加利福尼亚、德克萨斯、佛罗里达、纽约 四个州参议员数量较多，且已投票人数较少，建议重点关注，以便于争取大比重票数。######
+
+----------------
+
+### 正式开始代码部分 ###
+
+![导入分析包和数据包](http://upload-images.jianshu.io/upload_images/3948578-cb7d302cba3a8a01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+#### 说明 ####
+在整理`election_data.csv`时发现 state 存在缺失（美国实际50个州，但`election_data.csv`中仅有38个州），在翻阅美国统计局网站（https://www.census.gov/data/tables/2016/demo/popest/nation-detail.html） 时，发现与给出数据存在误差（统计局网站数据为2010年提取，计算得出2016年的数据）。本次分析以给出数据源为准，统计局数据仅供有效选民（年龄≥18岁）比例核算及参考。
+
+>Note: 
+
+>The estimates are based on the 2010 Census and reflect changes to the April 1, 2010 population due to the Count Question Resolution program and geographic program revisions. See Geographic Terms and Definitions at http://www.census.gov/popest/about/geo/terms.html for a list of the states that are included in each region.  All geographic boundaries for the 2016 population estimates series except statistical area delineations are as of January 1, 2016.  For population estimates methodology statements, see http://www.census.gov/programs-surveys/popest/technical-documentation/methodology/index.html.
+
+
+通过`.info()`查看 **数据总条数** 、**字段类型** 及 **是否有缺失**
+![.info 查看数据](http://upload-images.jianshu.io/upload_images/3948578-3eda1c5deeb0f747.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+通过`.head()`进一步查看数据样式
+
+![.head 查看数据](http://upload-images.jianshu.io/upload_images/3948578-c4b191d818bca3d4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+通过`.columns`重新定义字段名，便于后面使用
+重新执行`.info`查看字段名是否定义成功
+
+![.columns 重新定义列名](http://upload-images.jianshu.io/upload_images/3948578-df8001dca3e11144.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+-------------------------
+
+## 统计部分 ##
+
+### 美国人口整体情况 ###
+
+#### 1. 各项分布 ####
+
+通过`.describe()`计算基础统计项，但是存在以下缺陷：
+
+1. 由于`state_abb`为object格式，故无法得出结果；
+2. `Hillary`、`Trump`、`popu`均需要做sum计算，故也无法得出结果。
+
+综上所述，需针对统计项分别计算
+
+![.describe() 计算基础统计项](http://upload-images.jianshu.io/upload_images/3948578-a15ae0b676a357a3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+啪啪啪~~ 敲黑板，前方进入高能区，请佩戴好安全帽。
+
+##### 计算每个州包含的县数量 #####
+
+![计算每个州包含的县数量](http://upload-images.jianshu.io/upload_images/3948578-e7f797a5cd116fe7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+###### 备注 ######
+通过`.groupby() `对 state_abb 进行分组，做`.count()`计数统计，得出每个州包含的县数量。
+
+`.state.count()` 用 `state` 进行计数（未键入 `.state` 则对全字段进行计数）
+
+>#### 小喇叭开始广播啦： #####
+
+>在此处，小白必须要非常认真的跪拜一下 ** Tch.polo ** 
+
+>话说这张图小白真的是纠结了整整一下午，bar 一直在报 ValueError 的错，真的是一直一直。小白笨拙的爬~墙出去放了一下午的狗也没找到原因是什么，仿佛全世界的人都没有遇到这个问题。无奈小白只好胆战心惊的请教了Tch.polo，polo炒鸡耐心的帮小白找bug，终于还是搞定啦~ 好嗨森  \\(^o^)/~
+
+
+##### 计算样本数据中州的数量 #####
+
+![计算“州”数量](http://upload-images.jianshu.io/upload_images/3948578-9087b07c8a8819b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+###### 备注 ######
+两次`.count()`对 state_abb 进行计数
+
+咦咦咦，怎么好像粥少了？谁动了米国的大米粥（⊙o⊙）
+###### *注：事实上美国应该是50个州，由此发现总数据存在缺失，需要进行误差矫正。 ######
+
+##### 其他基础统计项 #####
+
+
+![其他基础统计项](http://upload-images.jianshu.io/upload_images/3948578-e0c8f8375d303cfc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+###### 备注 ######
+通过观察对`election_data.csv`做的总体基础统计，发现以下问题：
+>1. state 总数与实际情况不相符（少了12个州）；
+>2. 总人口数`定义待查（未投票人群占比90%，此数据不正常。美国宪法规定年满18周岁公民具有投票权，怀疑给出的总人口数非≥18周岁人口数）
+
+另外，从目前支持率看，两位参选者并没有太悬殊的支持差异，一切努力都还来得及~
+###### *注：虽然总州数存在缺失，但并不妨碍对有效州的计算，故先将基础统计项进行计算，后续进行缺失州票数删减。 ######
+
+#### 2. 处理缺失州 ####
+
+查看一下从统计局扒下来的数据
+
+![查看数据](http://upload-images.jianshu.io/upload_images/3948578-1098bfd30f254512.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+苍天呐，怎么又多出来一个州 (+_+)
+
+原来是哥伦比亚特区，吓死鸟~ (+_+) (+_+)
+
+![查看数据](http://upload-images.jianshu.io/upload_images/3948578-0cf3358dc9d2e0e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+赶紧删掉它！
+
+
+![.drop 删除指定行](http://upload-images.jianshu.io/upload_images/3948578-f68d1c0280b918ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+快来看看具有投票权的样本量有多少
+
+![计算年龄≥18周岁人数及占比](http://upload-images.jianshu.io/upload_images/3948578-86455359488e211e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+###### 备注 ######
+通过计算，发现美国全境人口中≥18周岁的人口大约占整体的77%。最简单的方法是将此比例引入`election_data.csv`中计算样本数据中具有投票权的样本基数。
+
+###### *注：理论上应该获取样本州≥18周岁的人口数量，但考虑到`www.census.gov`也为推算数据，故此处仅用比例带入计算样本数据
+###### （好吧，小白承认自己太懒太笨了，不知道该如何从全量州中抽取样本州 /(ㄒoㄒ)/~。事实上正常的流程应该是抽取样本州的人数和计算的人数做 t 检验，查看差异性，若差异在可接受范围内，那便可以用计算的方式。否则，继续去满世界的找数据源。crying……）
+
+继续观察数据，发现未投票人群占比将近9成（好吧，小白不得不承认，折腾了一溜儿够后，未投票的比例并没有特别明显的差异。为此浪费了一个晚上宝贵时间的小白默默的又走去了墙角思过…(π_π)），说明落后的参选者还是有很大机会扳回一局的。
+
+![样本中具有投票权人口数及未投票人数占比](http://upload-images.jianshu.io/upload_images/3948578-08028270b0d9e419.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+那么，接下来我们来看一下有效的样本州应该包含的票数是多少呢
+
+#### 3. 更新样本数据 ####
+
+##### 计算样本数据参议员数量 #####
+
+![计算样本总体可拥有的有效票数（众议员数量）](http://upload-images.jianshu.io/upload_images/3948578-616be5939c35e2e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+![计算样本各州可拥有的有效票数（众议员数量）](http://upload-images.jianshu.io/upload_images/3948578-fa3873ec1a2fe847.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+如前文所述，众议员票数为435张，经过计算得出样本州可拥有票数为380张，各州的数量有点儿多，也有点儿晕（不足一票是个什么鬼(@_@)）。
+
+还是搞张图来看的清楚些
+
+![各州有效票数](http://upload-images.jianshu.io/upload_images/3948578-abdb5a5a8fa83b5e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+加利福尼亚、德克萨斯、佛罗里达、纽约 四个州的选票几乎占了样本票数的40%，如果能稳拿下它们应该还挺爽的。那后面可以看一下每个州对两位候选者支持的情况。
+
+-------------
+
+>--- 我是一块不务正业的注释 ---
+
+>其实写到此时此刻，小白的整个脑子已经坏掉了。不是不知道后面该怎么分维度展示数据，而是为什么 Python 这个工具让小白用的这么难用啊/(ㄒoㄒ)/~ ，word 天，小白的脑子究竟是怎么长的？在密闭思过的时候，想起来干脆再认真学习下 Dr.fish 的课堂笔记吧，看到最后那个散点图还挺好玩的，那下面就溜个号，模仿散点图看看这米国子民的学历和收入到底有没有关系 p(^o^)q 。
+
+
+![平均学历与收入相关性散点图](http://upload-images.jianshu.io/upload_images/3948578-d942696c9dfdd4ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+先出了个散点图，后来又计算了下相关系数，看起来貌似正相关，但是通过查看相关系数，好像关系也不是特别强烈。
+
+好吧，和天朝差不多，果然书读多少并不能显著的左右经济现状（发现真相的小白心塞塞），嗯 (@_@)。
+
+** --- 闲篇扯完，该继续说正事儿了 --- **
+
+---------
+
+上一回书说到这 加、德、佛、纽 四大州众议员数好多好多啊，怎么能拿下他们，还真是个问题。也不知道请吃饭好不好使，反正川大爷有的是钱，啧啧。
+
+那我们先看看这些个州们的喜欢偏好吧
+
+
+![各州支持情况](http://upload-images.jianshu.io/upload_images/3948578-01d5d0d342850cba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+AUV~，怎么瞧着这四大州的票是要落入小希同学的口袋了呀，不知道川大爷看了这个数据会不会心塞，反正小白是觉得蛮好的，“半边儿天” 终于要亮一次了，谁说我们女子不如男，吼吼~
+
+不过还记得一开始的时候查看过投票的人数也就不到10%，那看看每个州都有多少人还没投票吧
+
+
+![各州未投票人群分布](http://upload-images.jianshu.io/upload_images/3948578-0aed65a95d3737ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+好家伙，这四大户还这么老些人没投票呢，看来是值得好好争取争取了。
+
+再看看他们的平均学历和收入情况（是的，小白就是来找刺激的）
+
+![各州平均学历](http://upload-images.jianshu.io/upload_images/3948578-2a690647ceb7273f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+
+![各州平均收入](http://upload-images.jianshu.io/upload_images/3948578-d750af8a978c3fbc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+等等，马里兰州和新泽西州怎么平均收入这么高，这样真的好吗？他们有没有想过我们的感受 (T_T)
+
+最后再看看学历 / 收入和支持率之间有没有什么关系
+
+##### 计算平均学历与支持率关系 #####
+
+
+![学历和支持率关系](http://upload-images.jianshu.io/upload_images/3948578-4ce7caf6ce2d3ca7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+再验证一下相关系数
+
+![计算学历和支持率的相关系数](http://upload-images.jianshu.io/upload_images/3948578-2d6e8c803cd0553e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+至少目前还看不出来学历和支持倾向之间有什么关系。
+
+
+##### 计算平均收入与支持率关系 #####
+
+![收入和支持率关系](http://upload-images.jianshu.io/upload_images/3948578-d0eb253de3dde319.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+相关系数
+
+
+![计算收入和支持率的相关系数](http://upload-images.jianshu.io/upload_images/3948578-95512fd35d47d8f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+好吧，至少目前都看不出来学历和收入对支持倾向有什么影响。
+
+-------------------
+
+#### 统计部分小结####
+
+1. 样本数据中共包含380个众议员有效席位（票数过半，这些州的喜好已经能说明一些问题了）；
+2. 有将近90%的有效选民未作出支持答复（扭转的变数还很大，努力努力没准儿就江山易主了）；
+3. 加利福尼亚、德克萨斯、佛罗里达、纽约 四个州的选票几乎占了样本票数的40%（趁着投票的人还不多，赶紧做工作）；
+4. 整体看起来支持Hillary的州远多于支持Trump的州（川大爷，您要加油了）；
+5. 马里兰州和新泽西州平均收入特别高；
+6. 学历和收入对支持倾向没有显著影响。
+
+------------
+
+## 行动指南 ##
+
+##### 1. 考虑目前 Hillary 在大州支持呼声较高的现状，建议可继续主要进行大州，辅以周边州的拉票活动；
+##### 2. 综合考虑四个大州的地理位置，建议可以以纽约为中心，在美国东南 - 南部逐步开展拉票活动；
+##### 3. 继续观察学历及收入对支持倾向的影响，一点发生显著性改变，随时调整拉票线路。
+
+-------------------------
+
+** 尾声 **
+
+这篇作业终于写完了，从查找资料到扣哧这些个图，真真是花费了好多好多时间，但是做出来的还是很不满意。想想若是用平日里熟悉的软件，恐怕用不了一个晚上就能完成，而且还会比这个做的更好，果然“技术小白”这顶帽子不是白带的（T_T） 。通过本次学习，小白又一次深刻的体会到自己的英语究竟有多烂，总是不能很懂帮助的支援（再次被事实狠狠打在脸上的小白已哭晕在墙角）。除此之外便是…不要把想法只放在脑子里，多动手去试，没准儿就试出来了（^_^）。工具便是那样，越用越熟。
+
+那么今天的作业就到这啦，希望阅卷老师不要气的翘胡子呦，哈哈。
+
+
+
+
+
+
+
+

@@ -1,0 +1,490 @@
+
+网页结构分析
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+上面两个界面分别是评论栏，以及相关文章栏。
+再做进一步的拆分
+顶部导航栏分为：
+
+网页logo
+导航栏
+搜索栏
+个人入口
+
+评论栏分为：
+
+评论显示区
+评论操作区
+添加评论区
+
+相关文章栏分为：
+
+相关专题操作栏
+权限管理
+更多精彩内容
+
+html元素标签位置
+标题：
+<title>爬虫入门01-获取网络数据的原理作业 - 简书</title>
+
+顶部导航栏：
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="width-limit">
+    <!-- 左上方 Logo -->
+    <a class="logo" href="/">![](//cdn2.jianshu.io/assets/web/logo-58fd04f6f0de908401aa561cda6a0688.png)</a>
+
+    <!-- 右上角 -->
+      <!-- 登录显示写文章 -->
+      <a class="btn write-btn" target="_blank" href="/writer#/">
+        <i class="iconfont ic-write"></i>写文章
+</a>
+    <!-- 如果用户登录，显示下拉菜单 -->
+      <div class="user">
+        <div data-hover="dropdown">
+          <a class="avatar" href="/u/aa2fffcc968b">![](//upload.jianshu.io/users/upload_avatars/4624028/79253035-5780-4edf-9194-8e8e7c80baad?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120)</a>
+        </div>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="/u/aa2fffcc968b">
+              <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+</a>          </li>
+          <li>
+            <!-- TODO bookmarks_path -->
+            <a href="/bookmarks">
+              <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
+</a>          </li>
+          <li>
+            <a href="/users/aa2fffcc968b/liked_notes">
+              <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
+</a>          </li>
+          <li>
+            <a href="/wallet">
+              <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
+</a>          </li>
+          <li>
+            <a href="/settings">
+              <i class="iconfont ic-navigation-settings"></i><span>设置</span>
+</a>          </li>
+          <li>
+            <a href="/faqs">
+              <i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
+</a>          </li>
+          <li>
+            <a rel="nofollow" data-method="delete" href="/sign_out">
+              <i class="iconfont ic-navigation-signout"></i><span>退出</span>
+</a>          </li>
+        </ul>
+      </div>
+
+    <div class="style-mode"><a class="style-mode-btn"><i class="iconfont ic-navigation-mode"></i></a> <div class="popover-modal" style="left: 0px; display: none;"><div class="meta"><i class="iconfont ic-navigation-night"></i><span>夜间模式</span></div> <div class="switch day-night-group"><a class="switch-btn">开</a> <a class="switch-btn active">关</a></div> <hr> <div class="switch font-family-group"><a class="switch-btn font-song">宋体</a> <a class="switch-btn font-hei active">黑体</a></div> <div class="switch"><a class="switch-btn active">简</a> <a class="switch-btn">繁</a></div></div></div>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="nav navbar-nav">
+            <li class="">
+              <a href="/">
+                <span class="menu-text">发现</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+</a>            </li>
+            <li class="">
+              <a href="/subscriptions">
+                <span class="menu-text">关注</span><i class="iconfont ic-navigation-follow menu-icon"></i>
+</a>            </li>
+            <li class="notification"><a data-hover="dropdown" href="/notifications" class="notification-btn"><span class="menu-text">消息</span> <i class="iconfont ic-navigation-notification menu-icon"></i> <!----> <!----></a> <ul class="dropdown-menu"><li><a href="/notifications#/comments"><i class="iconfont ic-comments"></i> <span>评论</span> <!----></a></li><li><a href="/notifications#/chats"><i class="iconfont ic-chats"></i> <span>简信</span> <!----></a></li><li><a href="/notifications#/requests"><i class="iconfont ic-requests"></i> <span>投稿请求</span> <!----></a></li><li><a href="/notifications#/likes"><i class="iconfont ic-likes"></i> <span>喜欢和赞</span> <!----></a></li><li><a href="/notifications#/follows"><i class="iconfont ic-follows"></i> <span>关注</span> <!----></a></li><li><a href="/notifications#/money"><i class="iconfont ic-money"></i> <span>赞赏</span> <!----></a></li><li><a href="/notifications#/others"><i class="iconfont ic-others"></i> <span>其他消息</span> <!----></a></li></ul></li>
+          <li class="search">
+            <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <input type="text" name="q" id="q" value="" placeholder="搜索" class="search-input">
+              <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+              <!-- <div id="navbar-trending-search"></div> -->
+</form>          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+其中
+
+网页logo：
+
+<a class="logo" href="/">![](//cdn2.jianshu.io/assets/web/logo-58fd04f6f0de908401aa561cda6a0688.png)</a>
+
+
+个人入口：
+
+<!-- 登录显示写文章 -->
+<a class="btn write-btn" target="_blank" href="/writer#/">
+        <i class="iconfont ic-write"></i>写文章
+</a>
+ <!-- 如果用户登录，显示下拉菜单 -->
+<div class="user">
+        <div data-hover="dropdown">
+          <a class="avatar" href="/u/aa2fffcc968b">![](//upload.jianshu.io/users/upload_avatars/4624028/79253035-5780-4edf-9194-8e8e7c80baad?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120)</a>
+        </div>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="/u/aa2fffcc968b">
+              <i class="iconfont ic-navigation-profile"></i><span>我的主页</span>
+</a>          </li>
+          <li>
+            <!-- TODO bookmarks_path -->
+            <a href="/bookmarks">
+              <i class="iconfont ic-navigation-mark"></i><span>收藏的文章</span>
+</a>          </li>
+          <li>
+            <a href="/users/aa2fffcc968b/liked_notes">
+              <i class="iconfont ic-navigation-like"></i><span>喜欢的文章</span>
+</a>          </li>
+          <li>
+            <a href="/wallet">
+              <i class="iconfont ic-navigation-wallet"></i><span>我的钱包</span>
+</a>          </li>
+          <li>
+            <a href="/settings">
+              <i class="iconfont ic-navigation-settings"></i><span>设置</span>
+</a>          </li>
+          <li>
+            <a href="/faqs">
+              <i class="iconfont ic-navigation-feedback"></i><span>帮助与反馈</span>
+</a>          </li>
+          <li>
+            <a rel="nofollow" data-method="delete" href="/sign_out">
+              <i class="iconfont ic-navigation-signout"></i><span>退出</span>
+</a>          </li>
+        </ul>
+      </div>
+
+
+导航栏：
+
+<li class="">
+              <a href="/">
+                <span class="menu-text">发现</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+</a>            </li>
+
+<li class="">
+              <a href="/subscriptions">
+                <span class="menu-text">关注</span><i class="iconfont ic-navigation-follow menu-icon"></i>
+</a>            </li>
+
+<li class="notification"><a data-hover="dropdown" href="/notifications" class="notification-btn"><span class="menu-text">消息</span> <i class="iconfont ic-navigation-notification menu-icon"></i> <!----> <!----></a> <ul class="dropdown-menu"><li><a href="/notifications#/comments"><i class="iconfont ic-comments"></i> <span>评论</span> <!----></a></li><li><a href="/notifications#/chats"><i class="iconfont ic-chats"></i> <span>简信</span> <!----></a></li><li><a href="/notifications#/requests"><i class="iconfont ic-requests"></i> <span>投稿请求</span> <!----></a></li><li><a href="/notifications#/likes"><i class="iconfont ic-likes"></i> <span>喜欢和赞</span> <!----></a></li><li><a href="/notifications#/follows"><i class="iconfont ic-follows"></i> <span>关注</span> <!----></a></li><li><a href="/notifications#/money"><i class="iconfont ic-money"></i> <span>赞赏</span> <!----></a></li><li><a href="/notifications#/others"><i class="iconfont ic-others"></i> <span>其他消息</span> <!----></a></li></ul></li>
+
+
+搜索栏：
+
+<li class="search">
+            <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <input type="text" name="q" id="q" value="" placeholder="搜索" class="search-input">
+              <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+              <!-- <div id="navbar-trending-search"></div> -->
+</form>          </li>
+
+标题栏：
+<h1 class="title">爬虫入门01-获取网络数据的原理作业</h1>
+
+作者信息栏:
+<div class="author">
+          <a class="avatar" href="/u/aa2fffcc968b">
+            ![](//upload.jianshu.io/users/upload_avatars/4624028/79253035-5780-4edf-9194-8e8e7c80baad?imageMogr2/auto-orient/strip|imageView2/1/w/144/h/144)
+</a>          <div class="info">
+            <span class="tag">作者</span>
+            <span class="name"><a href="/u/aa2fffcc968b">汤尧</a></span>
+            <!-- 关注用户按钮 -->
+            <div data-author-follow-button=""></div>
+            <!-- 文章数据信息 -->
+            <div class="meta">
+              <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
+                <span class="publish-time">2017.06.30 14:07</span>
+              <span class="wordage">字数 217</span>
+            <span class="views-count">阅读 21</span><span class="comments-count">评论 2</span><span class="likes-count">喜欢 2</span></div>
+          </div>
+          <!-- 如果是当前作者，加入编辑按钮 -->
+        <a href="/writer#/notebooks/9594484/notes/14041315" target="_blank" class="edit">编辑文章</a></div>
+
+作者栏中每个标签的HTML语言如下：
+
+作者头像
+
+<a class="avatar" href="/u/aa2fffcc968b">
+            ![](//upload.jianshu.io/users/upload_avatars/4624028/79253035-5780-4edf-9194-8e8e7c80baad?imageMogr2/auto-orient/strip|imageView2/1/w/144/h/144)
+</a>
+
+
+作者：
+
+<span class="tag">作者</span>
+
+
+作者名字：
+
+<span class="name"><a href="/u/aa2fffcc968b">汤尧</a></span>
+
+
+关注用户按钮：
+
+<div data-author-follow-button=""></div>
+
+
+文章日期：
+
+<span class="publish-time">2017.06.30 14:07</span>
+
+
+文章字数：
+
+<span class="wordage">字数 217</span>
+
+
+文章阅读数：
+
+<span class="views-count">阅读 21</span>
+
+
+文章评论数：
+
+<span class="comments-count">评论 2</span>
+
+
+文章喜欢数：
+
+<span class="likes-count">喜欢 2</span>
+
+
+编辑按钮：
+
+<a href="/writer#/notebooks/9594484/notes/14041315" target="_blank" class="edit">编辑文章</a>
+
+正文栏：
+<div class="show-content">
+          <p>作业:</p>
+<ul>
+<li>要爬取的数据类别</li>
+<li>对应的数据源网站</li>
+<li>爬取数据的URL</li>
+<li>数据筛选规则</li>
+</ul>
+<p>我的答案是这样的：</p>
+<ul>
+<li>要爬取的数据是豆瓣网上评分在7.0以上的电影以及其简介。</li>
+<li>对应的数据源网站是豆瓣网电影板块。</li>
+</ul>
+<div class="image-package">
+![](//upload-images.jianshu.io/upload_images/4624028-b5873f4aa084be96.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)<br><div class="image-caption"></div>
+</div>
+<ul>
+<li>爬取数据的URL是<a href="https://movie.douban.com/explore#!type=movie&amp;tag=%E7%83%AD%E9%97%A8&amp;sort=rank&amp;page_limit=20&amp;page_start=0" target="_blank">https://movie.douban.com/explore#!type=movie&amp;tag=%E7%83%AD%E9%97%A8&amp;sort=rank&amp;page_limit=20&amp;page_start=0</a><br>以及每个影片对应的链接如：<br><a href="https://movie.douban.com/subject/26580232/?tag=%E7%83%AD%E9%97%A8&amp;from=gaia" target="_blank">https://movie.douban.com/subject/26580232/?tag=%E7%83%AD%E9%97%A8&amp;from=gaia</a>
+</li>
+<li>数据筛选规则：</li>
+</ul>
+<div class="image-package">
+![](//upload-images.jianshu.io/upload_images/4624028-08c1124dc4044ef3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)<br><div class="image-caption"></div>
+</div><p><br>要爬取图中被标记的那一部分以及下图中被标记的一部分</p>
+<div class="image-package">
+![](//upload-images.jianshu.io/upload_images/4624028-b8623f8fe37c4dd4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)<br><div class="image-caption"></div>
+</div>
+<blockquote><p>本文为tiger解密大数据社群爬虫入门课第一次课的作业。了解更多关注微信“泰阁志”</p></blockquote>
+<div class="image-package">
+![](//upload-images.jianshu.io/upload_images/4624028-77223022c82b025b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)<br><div class="image-caption"></div>
+</div>
+
+        </div>
+
+在正文栏中，链接对应的html语言是：
+<a href="https://movie.douban.com/explore#!type=movie&amp;tag=%E7%83%AD%E9%97%A8&amp;sort=rank&amp;page_limit=20&amp;page_start=0" target="_blank">https://movie.douban.com/explore#!type=movie&amp;tag=%E7%83%AD%E9%97%A8&amp;sort=rank&amp;page_limit=20&amp;page_start=0</a>
+
+<a href="https://movie.douban.com/subject/26580232/?tag=%E7%83%AD%E9%97%A8&amp;from=gaia" target="_blank">https://movie.douban.com/subject/26580232/?tag=%E7%83%AD%E9%97%A8&amp;from=gaia</a>
+
+图片对应的html语言是：
+![](//upload-images.jianshu.io/upload_images/4624028-08c1124dc4044ef3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![](//upload-images.jianshu.io/upload_images/4624028-b8623f8fe37c4dd4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![](//upload-images.jianshu.io/upload_images/4624028-77223022c82b025b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+文章操作栏：
+<div class="side-tool"><ul><li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="回到顶部"><a class="function-button"><i class="iconfont ic-backtop"></i></a></li> <li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="文章投稿"><a class="js-submit-button"><i class="iconfont ic-note-requests"></i></a> <!----></li> <li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="收藏文章"><a class="function-button"><i class="iconfont ic-mark"></i></a></li> <li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="分享文章"><a tabindex="0" role="button" data-toggle="popover" data-placement="left" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="<ul class='share-list'>
+                <li><a class=&quot;weixin-share&quot;><i class=&quot;social-icon-sprite social-icon-weixin&quot;></i><span>分享到微信</span></a></li>
+                <li><a href=&quot;javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f='http://v.t.sina.com.cn/share/share.php?appkey=1881139527',u=z||d.location,p=['&amp;url=',e(u),'&amp;title=',e(t||d.title),'&amp;source=',e(r),'&amp;sourceUrl=',e(l),'&amp;content=',c||'gb2312','&amp;pic=',e(p||'')].join('');function%20a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(s.width-440)/2,',top=',(s.height-430)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,'','','http://cwb.assets.jianshu.io/notes/images/14041315/weibo/image_861eca216150.jpg', '我写了新文章《爬虫入门01-获取网络数据的原理作业》（ 分享自 @简书 ）','http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo','页面编码gb2312|utf-8默认gb2312'));&quot;><i class='social-icon-sprite social-icon-weibo'></i><span>分享到微博</span></a></li>
+                <li><a href=&quot;http://cwb.assets.jianshu.io/notes/images/14041315/weibo/image_861eca216150.jpg&quot; target=&quot;_blank&quot;><i class=&quot;social-icon-sprite social-icon-picture&quot;></i><span>下载长微博图片</span></a></li>
+                <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone')+'&amp;title='+e('我写了新文章《爬虫入门01-获取网络数据的原理作业》'),x=function(){if(!window.open(r,'qzone','toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class='social-icon-sprite social-icon-zone'></i><span>分享到QQ空间</span></a></li>
+                <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://twitter.com/share?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter')+'&amp;text='+e('我写了新文章《爬虫入门01-获取网络数据的原理作业》（ 分享自 @jianshucom ）')+'&amp;related='+e('jianshucom'),x=function(){if(!window.open(r,'twitter','toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class='social-icon-sprite social-icon-twitter'></i><span>分享到Twitter</span></a></li>
+                <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook',x=function(){if(!window.open(r,'facebook','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class='social-icon-sprite social-icon-facebook'></i><span>分享到Facebook</span></a></li>
+                <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://plus.google.com/share?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus'),x=function(){if(!window.open(r,'google_plus','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class='social-icon-sprite social-icon-google'></i><span>分享到Google+</span></a></li>
+                <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban')+'&amp;title='+e('爬虫入门01-获取网络数据的原理作业')+'&amp;sel='+e(s)+'&amp;v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&amp;r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;><i class='social-icon-sprite social-icon-douban'></i><span>分享到豆瓣</span></a></li>
+              </ul>" data-original-title="" title="" class="function-button"><i class="iconfont ic-share"></i></a> <!----></li></ul></div>
+
+其中：
+
+回到顶部:
+
+<li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="回到顶部" style="display: none;"><a class="function-button"><i class="iconfont ic-backtop"></i></a></li>
+
+
+文章投稿：
+
+<li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="文章投稿"><a class="js-submit-button"><i class="iconfont ic-note-requests"></i></a> <!----></li>
+
+
+收藏文章：
+
+<li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="收藏文章"><a class="function-button"><i class="iconfont ic-mark"></i></a></li>
+
+
+分享文章：
+
+<li data-placement="left" data-toggle="tooltip" data-container="body" data-original-title="分享文章"><a tabindex="0" role="button" data-toggle="popover" data-placement="left" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="<ul class='share-list'>
+                <li><a class=&quot;weixin-share&quot;><i class=&quot;social-icon-sprite social-icon-weixin&quot;></i><span>分享到微信</span></a></li>
+                <li><a href=&quot;javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f='http://v.t.sina.com.cn/share/share.php?appkey=1881139527',u=z||d.location,p=['&amp;url=',e(u),'&amp;title=',e(t||d.title),'&amp;source=',e(r),'&amp;sourceUrl=',e(l),'&amp;content=',c||'gb2312','&amp;pic=',e(p||'')].join('');function%20a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(s.width-440)/2,',top=',(s.height-430)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,'','','http://cwb.assets.jianshu.io/notes/images/14041315/weibo/image_861eca216150.jpg', '我写了新文章《爬虫入门01-获取网络数据的原理作业》（ 分享自 @简书 ）','http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo','页面编码gb2312|utf-8默认gb2312'));&quot;><i class='social-icon-sprite social-icon-weibo'></i><span>分享到微博</span></a></li>
+                <li><a href=&quot;http://cwb.assets.jianshu.io/notes/images/14041315/weibo/image_861eca216150.jpg&quot; target=&quot;_blank&quot;><i class=&quot;social-icon-sprite social-icon-picture&quot;></i><span>下载长微博图片</span></a></li>
+                <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone')+'&amp;title='+e('我写了新文章《爬虫入门01-获取网络数据的原理作业》'),x=function(){if(!window.open(r,'qzone','toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class='social-icon-sprite social-icon-zone'></i><span>分享到QQ空间</span></a></li>
+                <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://twitter.com/share?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter')+'&amp;text='+e('我写了新文章《爬虫入门01-获取网络数据的原理作业》（ 分享自 @jianshucom ）')+'&amp;related='+e('jianshucom'),x=function(){if(!window.open(r,'twitter','toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class='social-icon-sprite social-icon-twitter'></i><span>分享到Twitter</span></a></li>
+                <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook',x=function(){if(!window.open(r,'facebook','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class='social-icon-sprite social-icon-facebook'></i><span>分享到Facebook</span></a></li>
+                <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://plus.google.com/share?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus'),x=function(){if(!window.open(r,'google_plus','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class='social-icon-sprite social-icon-google'></i><span>分享到Google+</span></a></li>
+                <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban')+'&amp;title='+e('爬虫入门01-获取网络数据的原理作业')+'&amp;sel='+e(s)+'&amp;v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&amp;r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;><i class='social-icon-sprite social-icon-douban'></i><span>分享到豆瓣</span></a></li>
+              </ul>" data-original-title="" title="" class="function-button"><i class="iconfont ic-share"></i></a> <!----></li>
+
+文末栏：
+<div class="show-foot">
+          <a class="notebook" href="/nb/9594484">
+            <i class="iconfont ic-search-notebook"></i> <span>日记本</span>
+</a>          <div class="copyright" data-toggle="tooltip" data-html="true" data-original-title="转载请联系作者获得授权，并标注“简书作者”。">
+            © 著作权归作者所有
+          </div>
+          
+        </div>
+
+底部作者信息栏：
+<div class="follow-detail">
+        <div class="info">
+          <a class="avatar" href="/u/aa2fffcc968b">
+            ![](//upload.jianshu.io/users/upload_avatars/4624028/79253035-5780-4edf-9194-8e8e7c80baad?imageMogr2/auto-orient/strip|imageView2/1/w/144/h/144)
+</a>          <div data-author-follow-button=""></div>
+          <a class="title" href="/u/aa2fffcc968b">汤尧</a>
+            <i class="iconfont ic-man"></i>
+        <p>写了 21971 字，被 10 人关注，获得了 28 个喜欢</p></div>
+      </div>
+
+赞赏支持栏：
+<div class="support-author"><p>如果觉得我的文章对您有用，请随意赞赏。您的支持将鼓励我继续创作！</p> <div class="btn btn-pay">赞赏支持</div> <div class="supporter"><ul class="support-list"><li><a target="_blank" href="/u/001b56068a83" class="avatar">![](//upload.jianshu.io/users/upload_avatars/578661/19b2d724-d27e-4c97-84be-77353e8801a8.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120)</a></li></ul> <!----></div> <!----> <!----></div>
+
+点赞栏：
+<div class="like"><div class="btn like-group"><div class="btn-like"><a><i class="iconfont ic-like"></i>喜欢</a></div> <div class="modal-wrap"><a>2</a></div></div> <!----></div>
+
+分享栏中：
+
+分享到微信：
+
+<a class="share-circle" data-action="weixin-share" data-toggle="tooltip" data-original-title="分享到微信">
+          <i class="iconfont ic-wechat"></i>
+        </a>
+
+
+分享到微博：
+
+<a class="share-circle" data-toggle="tooltip" href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f='http://v.t.sina.com.cn/share/share.php?appkey=1881139527',u=z||d.location,p=['&amp;url=',e(u),'&amp;title=',e(t||d.title),'&amp;source=',e(r),'&amp;sourceUrl=',e(l),'&amp;content=',c||'gb2312','&amp;pic=',e(p||'')].join('');function%20a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(s.width-440)/2,',top=',(s.height-430)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,'','','http://cwb.assets.jianshu.io/notes/images/14041315/weibo/image_861eca216150.jpg', '我写了新文章《爬虫入门01-获取网络数据的原理作业》（ 分享自 @简书 ）','http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo','页面编码gb2312|utf-8默认gb2312'));" data-original-title="分享到微博">
+          <i class="iconfont ic-weibo"></i>
+        </a>
+
+
+下载长微博图片：
+
+<a class="share-circle" data-toggle="tooltip" href="http://cwb.assets.jianshu.io/notes/images/14041315/weibo/image_861eca216150.jpg" target="_blank" data-original-title="下载长微博图片">
+            <i class="iconfont ic-picture"></i>
+          </a>
+
+
+更多：
+
+<a class="share-circle more-share" tabindex="0" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content="
+          <ul class=&quot;share-list&quot;>
+            <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone')+'&amp;title='+e('我写了新文章《爬虫入门01-获取网络数据的原理作业》'),x=function(){if(!window.open(r,'qzone','toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class=&quot;social-icon-sprite social-icon-zone&quot;></i><span>分享到QQ空间</span></a></li>
+            <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://twitter.com/share?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter')+'&amp;text='+e('我写了新文章《爬虫入门01-获取网络数据的原理作业》（ 分享自 @jianshucom ）')+'&amp;related='+e('jianshucom'),x=function(){if(!window.open(r,'twitter','toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class=&quot;social-icon-sprite social-icon-twitter&quot;></i><span>分享到Twitter</span></a></li>
+            <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook',x=function(){if(!window.open(r,'facebook','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class=&quot;social-icon-sprite social-icon-facebook&quot;></i><span>分享到Facebook</span></a></li>
+            <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,r='https://plus.google.com/share?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus'),x=function(){if(!window.open(r,'google_plus','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();&quot;><i class=&quot;social-icon-sprite social-icon-google&quot;></i><span>分享到Google+</span></a></li>
+            <li><a href=&quot;javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e('http://www.jianshu.com/p/1ea730c97aae?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban')+'&amp;title='+e('爬虫入门01-获取网络数据的原理作业')+'&amp;sel='+e(s)+'&amp;v=1',x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330'))location.href=r+'&amp;r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()&quot;><i class=&quot;social-icon-sprite social-icon-douban&quot;></i><span>分享到豆瓣</span></a></li>
+          </ul>
+        " data-original-title="" title="">更多分享</a>
+
+添加评论区：
+<div><form class="new-comment"><a class="avatar">![](//upload.jianshu.io/users/upload_avatars/4624028/79253035-5780-4edf-9194-8e8e7c80baad?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114)</a> <textarea placeholder="写下你的评论..."></textarea> <!----></form></div>
+
+评论显示区：
+<div><div class="author"><a href="/u/d5a46056a73f" target="_blank" class="avatar">![](//upload.jianshu.io/users/upload_avatars/3670077/a3712cfa90bc.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114)</a> <div class="info"><a href="/u/d5a46056a73f" target="_blank" class="name">波罗学</a> <!----> <div class="meta"><span>2楼 · 2017.07.04 22:06</span></div></div></div> <div class="comment-wrap"><p>厉害，学会爬虫有益选择好电影。![](//static.jianshu.io/assets/emojis/smile.png) <br>除了基本评分与评价，是否可从多维度去探索分析，如类别，地区等对电影的影响，说不定会有很多有意思的发现。</p> <div class="tool-group"><a><i class="iconfont ic-zan"></i> <span>1人赞</span></a> <a><i class="iconfont ic-comment"></i> <span>回复</span></a> <a class="report"><span>举报</span></a> <a class="comment-delete"><span>删除</span></a></div></div></div>
+
+回复评论区：
+<div class="sub-comment-list"><div id="comment-12497441" class="sub-comment"><p><a href="/u/aa2fffcc968b" target="_blank">汤尧</a>：
+          <span> <a href="/users/d5a46056a73f" class="maleskine-author" target="_blank" data-user-slug="d5a46056a73f">@波罗学</a> 谢谢建议，收到，回忆了一下，在思考这个问题的时候只考虑到了自己的兴趣，却没有细想其中有哪些是可以进行探索数据分析的。</span></p> <div class="sub-tool-group"><span>2017.07.05 09:13</span> <a><i class="iconfont ic-comment"></i> <span>回复</span></a> <!----> <a class="subcomment-delete"><span>删除</span></a></div></div> <div class="sub-comment more-comment"><a class="add-comment-btn"><i class="iconfont ic-subcomment"></i> <span>添加新评论</span></a> <!----> <!----> <!----></div> <!----></div>
+
+评论操作区：
+
+两条评论:
+
+<span>2条评论</span>
+
+
+只看作者：
+
+<a class="author-only">只看作者</a>
+
+
+关闭评论：
+
+<a class="close-btn">关闭评论</a>
+
+
+按喜欢排序：
+
+<a class="active">按喜欢排序</a>
+
+
+按时间正序：
+
+<a class="">按时间正序</a>
+
+
+按时间倒序：
+
+<a class="">按时间倒序</a>
+
+相关专题操作栏：
+<div class="title">被以下专题收入，发现更多相似内容</div>
+
+<div class="include-collection"><div class="modal-wrap add-collection-wrap"><a class="add-collection"><i class="iconfont ic-follow"></i>收入我的专题</a></div> <a href="/c/9b4685b6357c?utm_source=desktop&amp;utm_medium=notes-included-collection" target="_blank" class="item">![](//upload.jianshu.io/collections/images/329425/%E8%A7%A3%E5%AF%86%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%9B%A2%E9%98%9F.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64)<div class="name">解密大数据</div></a> <!----></div>
+
+投稿管理栏：
+<a class="collection-settings"><i class="iconfont ic-settings-account"></i><span>投稿管理</span></a>
+
+更多精彩内容栏：
+<div class="recommend-note"><div class="meta"><div class="title">更多精彩内容</div> <div class="roll"></div></div> <div class="list"><div class="note"><!----> <a target="_blank" href="/p/76238014a03f?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="title">商业数据分析02作业</a> <p class="description">习题1： 参考字典设计的示例，尝试对一个具体的项目/产品/公司设计一个指标字典。基础指标不少于三个。 根据斗鱼TV设计出来的数据字典如下：</p> <a target="_blank" href="/u/aa2fffcc968b?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="author"><div class="avatar" style="background-image: url(&quot;http://upload.jianshu.io/users/upload_avatars/4624028/79253035-5780-4edf-9194-8e8e7c80baad&quot;);"></div> <span class="name">汤尧</span></a></div><div class="note"><a target="_blank" href="/p/9345d9417c27?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="cover" style="background-image: url(&quot;//upload-images.jianshu.io/upload_images/1767483-4621c3c3f4ea31eb.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240&quot;);"></a> <a target="_blank" href="/p/9345d9417c27?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="title">想努力却又努力不起来，怎么办</a> <p class="description">文/韩大爷的杂货铺 我每天都能收到好多读者朋友发来的私信，这话以前提起的时候，我挺自豪的，因为这代表着我受欢迎啊，爽。 后来我越来越不敢轻易说了，因为越说，发私信问问题的读者就越多，一方面回不过来，另一方面，遭遇一些“无解”的问题，答不上来显得我多low啊…… 真遇上过几个形式不同本质却差不多的无解提问，如： 韩大爷，我高三了，各科都拖后腿，拆了东墙补西墙，眼看着高考临近，却提不起劲头。 韩大爷，我大三了，正在提前备战考研，一大堆书在那摞着，想看，但就是看不进去。 韩大爷，我三十三了，而立之年一过，更能体会到肩上担子的分量，也明白要努力一点，但……我努力不起来。 有心直口快的朋友看了这几...</p> <a target="_blank" href="/u/3e2c151e2c9d?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="author"><div class="avatar" style="background-image: url(&quot;http://upload.jianshu.io/users/upload_avatars/1767483/6321b54d19be.jpeg&quot;);"></div> <span class="name">韩大爷的杂货铺</span></a></div><div class="note"><a target="_blank" href="/p/ee26768b4f54?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="cover" style="background-image: url(&quot;//upload-images.jianshu.io/upload_images/3332049-3b0bb83ff455d3f0.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240&quot;);"></a> <a target="_blank" href="/p/ee26768b4f54?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="title">自律，才能对得起自己这身好皮囊</a> <p class="description">自律，才能对得起自己这身好皮囊 01 在外企上班的那段时间，朋友的生活特规律。 早上六点起床，被子是豆腐块儿，脏衣服入篓，书籍上架，鞋尖是一条线，随后就戴上耳机在公园跑几圈儿，回来洗个热水澡，换上正装，打早班卡，逢人便微笑打招呼，工作上进，生活愉悦，体重正常。 三年后，他觉得这样的生活太束缚了，厌倦了拥挤的早班地铁，讨厌了末班地铁回家，太刻意，失去了享受“自由”的乐趣，需要时间，需要呼吸。 辞去工作，就回家就考了公务员，日子真的就是朝九晚五那样，无拘无束，没有压力，没有变数，没有多舛。 他说，白天可以上班，晚上就可以经营自己的小书店，可以和读者讨价还价，谈王小波的小流氓，谈徐志摩的风流，...</p> <a target="_blank" href="/u/74b5bcaca398?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="author"><div class="avatar" style="background-image: url(&quot;http://upload.jianshu.io/users/upload_avatars/3332049/f674ef31-bec0-41f2-896c-77c9b8eee32d.jpg&quot;);"></div> <span class="name">少校十三</span></a></div><div class="note"><a target="_blank" href="/p/505bf4a111a5?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="cover" style="background-image: url(&quot;//upload-images.jianshu.io/upload_images/1933412-809dde1a74646886?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240&quot;);"></a> <a target="_blank" href="/p/505bf4a111a5?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="title">你的自律，正在慢慢逼疯你</a> <p class="description"></p> <a target="_blank" href="/u/fd0599061897?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="author"><div class="avatar" style="background-image: url(&quot;http://upload.jianshu.io/users/upload_avatars/1933412/6ac672fc-9864-4d74-a6a4-37b5b0137a88.jpg&quot;);"></div> <span class="name">一棵花白</span></a></div><div class="note"><a target="_blank" href="/p/5df23f0c7056?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="cover" style="background-image: url(&quot;//upload-images.jianshu.io/upload_images/1669869-c431dcf36d68b4e7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240&quot;);"></a> <a target="_blank" href="/p/5df23f0c7056?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="title">和那个秒回你消息的人在一起</a> <p class="description">1. 上周末我们几个朋友一起喝下午茶的时候，原本晴空万里的天突然阴沉下来，继而马上下起了大雨。刘姐突然一拍脑门说，糟了，我早上洗的衣服还晾在阳台上没收呢，窗户也开着的，衣服要被打湿了。我们宽慰她说，不怕，姐夫在家的吧，打个电话让他收一下就好啦。 刘姐抬起手机，戳开微信，边打字边说，没事，我给他发条微信，他会看到的。 刘姐的微信还没发出去，电话就先进来了。电话是姐夫打来的，姐夫告诉她，衣服他收起来了，然后问她人在哪儿，有没有被雨淋到，冷不冷，要不要他送件外套过来。 刘姐一连串地应声回答着，末了连说了好几次“不用不用，你不用过来，我不冷”，才总算打消了姐夫开车过来给她送外套的念头。 挂了电话...</p> <a target="_blank" href="/u/c1fed915ed12?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=pc_all_hots&amp;utm_source=recommendation" class="author"><div class="avatar" style="background-image: url(&quot;http://upload.jianshu.io/users/upload_avatars/1669869/21cc1916b6a4.jpg&quot;);"></div> <span class="name">顾一宸</span></a></div></div></div>
+

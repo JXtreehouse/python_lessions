@@ -1,0 +1,529 @@
+
+自己每次研读完代码，就是直接把notebook文件copy到简书，使得排版特别杂乱，而且自己散乱的个人感悟，和代码混做一团，看起来毫无美感。 从这一篇开始，我要关注一下排版啦，而不是单纯地码完代码。
+ps：我研读的方法是整句默写fish的课件代码，所以有很多错误记录。
+这节课主要是展示一些可视化技巧。
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+% config InlineBackend.figure_format="retina"
+#% config InlineBackend.figure_format = 'retina' # 设置图像清晰度
+
+
+%matplotlib inline
+
+
+错误记录，IinlineBackend后面，应该加点，我没有加点
+
+data = pd.read_csv('WorldIndex.csv'
+                  )
+data.head()
+
+
+
+data.info()
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 177 entries, 0 to 176
+Data columns (total 5 columns):
+Country            177 non-null object
+Continent          177 non-null object
+Life_expectancy    169 non-null float64
+GDP_per_capita     169 non-null float64
+Population         176 non-null float64
+dtypes: float64(3), object(2)
+memory usage: 7.0+ KB
+
+
+个人理解： 这个info带括号，和不带括号差别好大呀。 不带括号的，是显示总的信息和明细信息。带括号，则只显示总体信息。
+从info看来，总共有177行，但是life，gdp，pop三项，的数量都少于177，这意味着有空的行。所以需要删除空行，我记得好像是dropna方法
+
+
+
+df =data.dropna()
+df.info()
+
+data.info()
+
+
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 164 entries, 0 to 175
+Data columns (total 5 columns):
+Country            164 non-null object
+Continent          164 non-null object
+Life_expectancy    164 non-null float64
+GDP_per_capita     164 non-null float64
+Population         164 non-null float64
+dtypes: float64(3), object(2)
+memory usage: 7.7+ KB
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 177 entries, 0 to 176
+Data columns (total 5 columns):
+Country            177 non-null object
+Continent          177 non-null object
+Life_expectancy    169 non-null float64
+GDP_per_capita     169 non-null float64
+Population         176 non-null float64
+dtypes: float64(3), object(2)
+memory usage: 7.0+ KB
+
+
+这里面的思路是这样的，把空行给删掉，成为新的数据啦，于是把新数据赋值给df。 那么data这个数据有变化吗？
+我尝试了一下，原来的data数据是没有变化的。
+
+df.head()
+
+
+
+查看了数据发现表头名称太长了，不方后期切片索引，要不，就把列名称改简单点吧。
+修改列名称，用的是columns=[]的方法。
+
+df.columns=['Country','Continent','Life','GDP','Pop']
+df.tail()
+
+
+必须赞叹一下，这功能太帅了呀。
+画直方图
+直方图的方法是.hist（）
+plt.hist(df.Life,bins=20,rwidth=0.9,color='blue')
+
+
+plt.show()
+
+错误记录：
+
+单词拼写错误，rwidth我拼写成ridwith
+没有写plt.show，结果只是出来一堆数字。应该是坐标数字
+
+
+
+
+
+
+output_7_0.png
+
+箱图
+plt.boxplot
+plt.boxplot(df.Life)
+
+
+
+
+个人点子：我记得有个函数，可以不用写plt.show，就能出图，是什么来着？
+
+查到了，%matplotlib inline
+
+{'boxes': [<matplotlib.lines.Line2D at 0xa918b00>],
+ 'caps': [<matplotlib.lines.Line2D at 0xa2682b0>,
+  <matplotlib.lines.Line2D at 0xa268748>],
+ 'fliers': [<matplotlib.lines.Line2D at 0xa0002e8>],
+ 'means': [],
+ 'medians': [<matplotlib.lines.Line2D at 0xa000748>],
+ 'whiskers': [<matplotlib.lines.Line2D at 0xa9185c0>,
+  <matplotlib.lines.Line2D at 0xa2a6400>]}
+
+
+
+
+
+
+output_9_1.png
+
+plt.boxplot(df.GDP) #用箱图画了人均寿命和人居GDP
+
+{'boxes': [<matplotlib.lines.Line2D at 0x9ed53c8>],
+ 'caps': [<matplotlib.lines.Line2D at 0x9edc2e8>,
+  <matplotlib.lines.Line2D at 0x9de2ba8>],
+ 'fliers': [<matplotlib.lines.Line2D at 0x9d78518>],
+ 'means': [],
+ 'medians': [<matplotlib.lines.Line2D at 0x9d904a8>],
+ 'whiskers': [<matplotlib.lines.Line2D at 0x9ed5b70>,
+  <matplotlib.lines.Line2D at 0x9edc710>]}
+
+
+
+
+
+
+output_10_1.png
+
+个人感悟：箱图和直方图，是用于画连续变量的。 接下来要画离散变量了。可以用条形图和饼图
+☆点子： 但是按国家来计算的话，分布太细散了，还是根据大洲吧来作图吧。 先把大洲汇总。 咦，对了，可以用groupby啊
+conti=list(df.groupby('Continent').size().index)
+conti
+
+哇哇，自己竟然摸索了一种方法，把名称取出来了，开心。
+简单说，这部分就是列表化索引列。
+['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America']
+
+list(df.Continent.value_counts().index)
+
+['Africa', 'Europe', 'Asia', 'North America', 'South America', 'Oceania']
+
+试着也用了value——counts的方法，实现相同效果。
+x =np.arange(len(conti))
+x
+
+
+错误记录：
+少输入了arange，话说这个arrange的作用是啥啊？
+array([0, 1, 2, 3, 4, 5])
+
+疑惑： 这一段的作用什么啊，是把各大洲的名称，映射为数字吗？
+plt.bar(x,df.groupby('Continent').size())
+plt.xticks(x,conti,rotation=20)
+
+
+错误记录：
+
+拼写错误：xticks，被我拼写为xtricks。
+
+拼写错误 :rotation被我拼写为rodation。 话说，rotation什么意思啊？ 搜了一下，旋转的意思
+([<matplotlib.axis.XTick at 0xb54ad68>,
+<matplotlib.axis.XTick at 0x9ff5048>,
+<matplotlib.axis.XTick at 0xb555e80>,
+<matplotlib.axis.XTick at 0xc66c780>,
+<matplotlib.axis.XTick at 0xc66f198>,
+<matplotlib.axis.XTick at 0xc66fb70>],
+<a list of 6 Text xticklabel objects>)
+
+
+
+
+
+
+
+output_15_1.png
+
+conti_count=df.groupby('Continent').size()
+conti_count
+
+Continent
+Africa           48
+Asia             36
+Europe           41
+North America    19
+Oceania           9
+South America    11
+dtype: int64
+
+plt.pie(conti_count,labels=conti,autopct='%1.2f%%')
+plt.axis('equal'
+)
+
+个人理解：autopct,是自动显示百分比的意思，
+疑惑： 但是后面的%是什么意思，搞不懂。只知道.2代表小数点后2位
+个人理解：axis代表的意思是轴，参数equal即意味着饼图的横轴和纵轴，相等。 那么就是一个圆啦。
+(-1.1155765255707346,
+ 1.1007417393128922,
+ -1.108024726836466,
+ 1.1119198978159677)
+
+
+
+
+
+
+output_17_1.png
+
+散点图
+散点图可以绘制出数据间的相关性
+plt.plot(df.GDP,df.Life,'g.')
+
+[<matplotlib.lines.Line2D at 0xc6d3160>]
+
+
+
+
+
+
+output_19_1.png
+
+plt.scatter(df.GDP,df.Life)
+
+<matplotlib.collections.PathCollection at 0xc664f28>
+
+
+
+
+
+
+output_20_1.png
+
+##矩阵图
+
+ pd.scatter_matrix(df)
+
+错误记录：plt.scatter_matrix(df)
+又一个比较大的错误，这个scatter_matrix是pandas的，不是plt的。 完全不是同一个库啊。 这就是常识缺乏了。那么pd可以画散点图吗？（试过不行）
+  File "<ipython-input-79-99f234ae8126>", line 4
+    pd.scatter_matrix(df)
+    ^
+IndentationError: unexpected indent
+
+ pd.scatter_matrix(df)
+
+d:\ProgramData\Anaconda3\lib\site-packages\ipykernel_launcher.py:1: FutureWarning: pandas.scatter_matrix is deprecated. Use pandas.plotting.scatter_matrix instead
+  """Entry point for launching an IPython kernel.
+
+
+
+
+
+array([[<matplotlib.axes._subplots.AxesSubplot object at 0x000000000A7B3828>,
+        <matplotlib.axes._subplots.AxesSubplot object at 0x000000000E432518>,
+        <matplotlib.axes._subplots.AxesSubplot object at 0x000000000D8C1400>],
+       [<matplotlib.axes._subplots.AxesSubplot object at 0x000000000DF8CC50>,
+        <matplotlib.axes._subplots.AxesSubplot object at 0x000000000DFE67F0>,
+        <matplotlib.axes._subplots.AxesSubplot object at 0x000000000DFE6828>],
+       [<matplotlib.axes._subplots.AxesSubplot object at 0x000000000E0BD4E0>,
+        <matplotlib.axes._subplots.AxesSubplot object at 0x000000000E12AC50>,
+        <matplotlib.axes._subplots.AxesSubplot object at 0x000000000E196BE0>]], dtype=object)
+
+
+
+
+
+
+output_22_2.png
+
+图表定制
+plt.rcParam['font.sanz_serif']=[
+在图表定制这块儿，太有营养了，干货满满啊。
+
+plt.rcParams['font.sans-serif']=['SimHei']
+
+plt.scatter(df.GDP,df.Life)
+plt.xlabel('各国人均GDP')
+plt.ylabel('人均寿命（年）')
+
+plt.title('经济与寿命的相关性2015')
+
+plt.xscale('log')
+
+
+错误记录：
+
+拼写错误sans_serif被我拼写为sanz_serif了。
+sans-serif。被我写成了下划线。
+
+个人理解： 翻译了一下 sans serif是无衬线字体的意思。
+新增知识点：对数变换。 
+疑惑： 对数变换到底什么意思，是指显示方式简化吗？这样看的话，确实显示更直观了。其实也是数字之间跨度更大了
+
+
+
+
+
+output_24_0.png
+
+感悟： 这一段代码，对我最困扰的就是设置中文显示的问题。 单词不熟，到底该横线还是下划线，不清晰，使得拼写老犯错。
+plt.rcParams['font.sans-serif']=['SimHei']
+
+plt.scatter(df.GDP,df.Life)
+plt.xlabel('各国人均GDP')
+plt.ylabel('人均寿命（年）')
+
+plt.title('经济与寿命的相关性2015')
+
+plt.xscale('log')
+
+tick_val=[1000,10000,100000]
+tick_lab=['1k','10k','100k']
+#如果只是到这一步的话，图形不会有任何改变，因为现在x轴的名字已经被固定了，只有重置一下
+plt.xticks(tick_val,tick_lab)
+
+
+
+困惑：这段儿就不太懂了，是把数字映射为10K等文字吗？
+([<matplotlib.axis.XTick at 0xbfe6588>,
+  <matplotlib.axis.XTick at 0xbe01f98>,
+  <matplotlib.axis.XTick at 0xc006588>],
+ <a list of 3 Text xticklabel objects>)
+
+
+
+
+
+
+output_26_1.png
+
+这几段代码，都是逐步增加知识点的。
+第一段新增的知识点有：
+
+设置中文标题。
+对数变换
+
+第二段新增的知识点有：
+
+置换x轴的刻度。
+
+马上接下来的一段会新增，泡泡颜色和泡泡大小。 接着来吧
+size = df.Pop/1e6*2.1     #此处新增一个参数size，用人口除以20万，为甚
+         要除以20万呢？   疑惑
+         除以20万的目的是把尺寸缩小到坐标轴能够容纳的程度。 不是固定
+          数值，只是这样看起来更合适，更直观而已。 
+
+plt.rcParams['font.sans-serif']=['SimHei']
+
+plt.scatter(df.GDP,df.Life,s=size)
+
+plt.xlabel('各国人均GDP')
+plt.ylabel('人均寿命（年）')
+
+plt.title('经济与寿命的相关性2015')
+
+plt.xscale('log')
+
+tick_val=[1000,10000,100000]
+tick_lab=['1k','10k','100k']
+###如果只是到这一步的话，图形不会有任何改变，因为现在x轴的名字已经被固定了，只有重置一下
+plt.xticks(tick_val,tick_lab)
+plt.show()
+
+##其实我可以把这段背下来使用的。
+
+
+df.groupby('Continent').size()
+
+新增知识点：plt.scatter(x,y,s),s代表点（也可以理解为小圆）的直径大小。s应该就是scatter的简写吧。
+
+
+
+
+
+output_28_0.png
+
+Continent
+Africa           48
+Asia             36
+Europe           41
+North America    19
+Oceania           9
+South America    11
+dtype: int64
+
+接下来会引入词典功能，一直没使用过这个功能，好奇呀，到底是怎么使用的呢？ 拭目以待
+
+
+map_dict = {      
+    'Asia':'red',
+    'Europe':'green',
+    'Africa':'yellow',
+    'North America':'black',
+    'South America':'black',
+    'Oceania':'blue'
+}
+colors = df.Continent.map(map_dict)
+
+
+
+错误记录：
+
+大洲之间，我没有逗号隔开，误以为空行了就可以分辨，其实是需要逗号的
+我的逗号是中文状态下的，使得报错invalid character in identifier，要知道这中英文的标点，电脑不给兼容啊。坑爹！
+
+个人理解：
+
+这个地方的转换很大，我按自己的理解梳理一下思路。 先是定义一个词典map_dict,然后将大洲的名字对应一个颜色，如A：red。
+然后再引入含有大洲名字的数据赋值给A。  就相当于两个方程式求解变量的感觉。 如初中数学，x = 1.5y，y=1.  可得出x=1.5.
+打个比喻，我有一个机器人保镖，我让他驻守关口，先给他两个规则：第一，看到坏人，就开大炮炸死他；看到好人，就发射面包给他。
+第二：拿刀的就是坏人，举双手的人就是好人。 然后说完，就让他自己去弄了。
+这个字典的本质，有点像这种状态，先告诉你，只要是亚洲的就给我标红色，再告诉机器，亚洲国家是哪些。
+
+size = df.Pop/1e6*2.1   
+
+plt.rcParams['font.sans-serif']=['SimHei']
+plt.scatter(df.GDP,df.Life,s= size,c=colors,alpha=0.5)
+
+plt.xlabel('各国人均GDP')
+plt.ylabel('人均寿命（年）')
+
+plt.title('经济与寿命的相关性2015')
+
+plt.xscale('log')
+
+tick_val=[1000,10000,100000]
+tick_lab=['1k','10k','100k']
+
+plt.xticks(tick_val,tick_lab)
+plt.show()
+
+
+
+
+
+
+
+
+output_31_0.png
+
+添加颜色和泡泡尺寸，感觉好有用啊。 不过，自己还是花了点时间才理解了。 这感觉真好啊，哈哈哈哈哈哈。
+接下来，比较简单，就是添加网格和字体到图标中。
+plt.rcParams['font.sans-serif']=['SimHei']
+
+size = df.Pop/1e6*2.1   
+
+map_dict = {      
+    'Asia':'red',
+    'Europe':'green',
+    'Africa':'yellow',
+    'North America':'black',
+    'South America':'black',
+    'Oceania':'blue'
+}
+colors = df.Continent.map(map_dict)
+
+plt.scatter(df.GDP,df.Life,s= size,c=colors,alpha=0.5)
+plt.xlabel('各国人均GDP')
+plt.ylabel('人均寿命（年）')
+plt.title('经济与寿命的相关性2015')
+plt.xscale('log')
+tick_val=[1000,10000,100000]
+tick_lab=['1k','10k','100k']
+
+plt.xticks(tick_val,tick_lab)
+
+plt.text(1550,73,'印度阿三')
+plt.text(5700,81,'天朝上国')# 很想知道，这个坐标是怎么确定的，是估计吗？还是根据印度的gdp和人均寿命的数字确定的呢？ 问题。
+
+plt.grid(True)  #grid就是网格的意思。
+plt.show()
+
+
+
+
+
+
+output_33_0.png
+
+我配的颜色，没有fish配得好看。 审美上差点。
+作业
+绘制人均GDP数据的直方图，要求
+
+设置图片标题和坐标轴名称
+只显示人均GDP在2万美元以内的数据
+设置区间数bins为30
+颜色设置成绿色
+
+参考：matplotlib中直方图函数hist的说明文档：
+https://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.hist
+
+df.head()
+
+df_poor = df[df.GDP<2e4]
+df_poor.head()
+
+
+df_poor = df[df.GDP<2e4]
+plt.hist(df_poor.GDP,bins=30,rwidth=0.85,color = 'green')
+plt.show()
+
+
+
+
+
+
+output_38_0.png
+
+
+
