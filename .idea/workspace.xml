@@ -1,50 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e6438d4-4e6c-4352-9bcc-e5cec0da3d43" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/statsmodelsTest.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data/11月1日违法建筑属性-修改后(1).xls" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data/11月1日违法建筑属性-修改后.xls" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data/2月1日-2月7日五违投诉件汇总（交公司）.xlsx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data/浦东新区“五违”整治GIS系统_操作手册.docx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data/浦东新区五违整治大屏.docx" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/__init__.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/application_helper.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/plot_print_helper.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/shared_imports.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/requirements.txt" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/README.md" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2008.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2009.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2010.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2011.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2012.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2013.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2014.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2015.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2016 - 副本.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2016.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2017.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2008_v2.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2009_v2.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2010_v2.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2011_v2.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2012_v2.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2013_v2.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2014_v2.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2015_v2.json" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/__init__.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/application_helper.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/plot_print_helper.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/shared_imports.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/import_file.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/GIS/ArcPythonNDVI.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/GIS/readme.md" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/WebCrawler /trip.py" afterPath="$PROJECT_DIR$/WebCrawler /trip.py" />
-      <change beforePath="$PROJECT_DIR$/WebCrawler /zhihuColumnFocuser.py" afterPath="$PROJECT_DIR$/WebCrawler /zhihuColumnFocuser.py" />
-    </list>
+    <list default="true" id="3e6438d4-4e6c-4352-9bcc-e5cec0da3d43" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,8 +20,8 @@
       <file leaf-file-name="selectCityLngLat.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+            <state relative-caret-position="180">
+              <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -218,19 +175,6 @@
               <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
               <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
               <item name="DataAnalysisCode" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="DataAnalysisCode" type="462c0819:PsiDirectoryNode" />
-              <item name="常见案例" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="DataAnalysisCode" type="462c0819:PsiDirectoryNode" />
-              <item name="常见案例" type="462c0819:PsiDirectoryNode" />
-              <item name="geojson相关" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
@@ -433,7 +377,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="470" y="24" width="1765" height="1056" extended-state="4" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -441,14 +384,14 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5320088" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15902495" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.75386316" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15902495" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39955848" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39955848" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -910,8 +853,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+        <state relative-caret-position="180">
+          <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
           <folding />
         </state>
       </provider>
