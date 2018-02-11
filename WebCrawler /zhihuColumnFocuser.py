@@ -17,6 +17,7 @@ class SimpleCrawler:
         response = requests.get(self.init_url, headers=headers, params=params)
         print(response.url)
         data = response.json()
+
         # 7000表示所有关注量
         # 分页加载更多，递归调用
         while self.offset < 7000:

@@ -2,7 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e6438d4-4e6c-4352-9bcc-e5cec0da3d43" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/statsmodelsTest.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data/11月1日违法建筑属性-修改后(1).xls" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data/11月1日违法建筑属性-修改后.xls" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data/2月1日-2月7日五违投诉件汇总（交公司）.xlsx" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data/浦东新区“五违”整治GIS系统_操作手册.docx" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data/浦东新区五违整治大屏.docx" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/__init__.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/application_helper.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/plot_print_helper.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/shared_imports.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/requirements.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2008.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2009.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2010.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2011.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2012.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2013.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2014.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2015.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2016 - 副本.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2016.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2017.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2008_v2.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2009_v2.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2010_v2.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2011_v2.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2012_v2.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2013_v2.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2014_v2.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/us/movie_list_2015_v2.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/__init__.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/application_helper.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/plot_print_helper.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/shared_imports.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/import_file.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/GIS/ArcPythonNDVI.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/GIS/readme.md" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/WebCrawler /trip.py" afterPath="$PROJECT_DIR$/WebCrawler /trip.py" />
+      <change beforePath="$PROJECT_DIR$/WebCrawler /zhihuColumnFocuser.py" afterPath="$PROJECT_DIR$/WebCrawler /zhihuColumnFocuser.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -11,8 +52,131 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/python_lessions$trip.coverage" NAME="trip Coverage Results" MODIFIED="1518335046113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/WebCrawler " />
+    <SUITE FILE_PATH="coverage/python_lessions$zhihuColumnFocuser.coverage" NAME="zhihuColumnFocuser Coverage Results" MODIFIED="1518335664150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/WebCrawler " />
+    <SUITE FILE_PATH="coverage/python_lessions$selectCityLngLat.coverage" NAME="selectCityLngLat Coverage Results" MODIFIED="1518346208845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关" />
+    <SUITE FILE_PATH="coverage/python_lessions$statsmodelsTest.coverage" NAME="statsmodelsTest Coverage Results" MODIFIED="1518160414097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DataAnalysisCode" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="selectCityLngLat.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegTest.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/正则表达式/RegTest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="367">
+              <caret line="125" column="16" lean-forward="true" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegTest2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/正则表达式/RegTest2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/正则表达式/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="-216">
+                <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="e-mail.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/正则表达式/e-mail.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="birthday.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/正则表达式/birthday.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="经纬度表.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/经纬度表.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-918">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="1073.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/1073.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="geojson-generator.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/geojson-generator.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/DataAnalysisCode/BasicAnalysis.py" />
+        <option value="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/README.md" />
+        <option value="$PROJECT_DIR$/DataAnalysisCode/statsmodelsTest.py" />
+        <option value="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/import_file.py" />
+        <option value="$PROJECT_DIR$/GIS/ArcPythonNDVI.py" />
+        <option value="$PROJECT_DIR$/GIS/readme.md" />
+        <option value="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/import_file.py" />
+        <option value="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/__init__.py" />
+        <option value="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/application_helper.py" />
+        <option value="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/shared_imports.py" />
+        <option value="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/plot_print_helper.py" />
+        <option value="$PROJECT_DIR$/WebCrawler /trip.py" />
+        <option value="$PROJECT_DIR$/WebCrawler /zhihuColumnFocuser.py" />
+        <option value="$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py" />
+      </list>
+    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -21,9 +185,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="1032" />
+    <option name="x" value="470" />
     <option name="y" value="24" />
-    <option name="width" value="928" />
+    <option name="width" value="1765" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
@@ -41,6 +205,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -48,18 +214,93 @@
               <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
               <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="DataAnalysisCode" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="DataAnalysisCode" type="462c0819:PsiDirectoryNode" />
+              <item name="常见案例" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="DataAnalysisCode" type="462c0819:PsiDirectoryNode" />
+              <item name="常见案例" type="462c0819:PsiDirectoryNode" />
+              <item name="geojson相关" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
+              <item name="douban" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
+              <item name="douban" type="462c0819:PsiDirectoryNode" />
+              <item name="douban" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
+              <item name="douban" type="462c0819:PsiDirectoryNode" />
+              <item name="douban" type="462c0819:PsiDirectoryNode" />
+              <item name="spiders" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
+              <item name="duitang" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
+              <item name="duitang" type="462c0819:PsiDirectoryNode" />
+              <item name="duitang" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
+              <item name="quotesbot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
+              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
+              <item name="正则表达式" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/data" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data" />
+      <recent name="$PROJECT_DIR$/DataAnalysisCode/常见案例/五违" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -72,6 +313,98 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager" selected="Python.selectCityLngLat">
+    <configuration name="selectCityLngLat" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python_lessions" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="statsmodelsTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DataAnalysisCode" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python_lessions" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DataAnalysisCode/statsmodelsTest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="trip" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WebCrawler " />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python_lessions" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WebCrawler /trip.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="zhihuColumnFocuser" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WebCrawler " />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="python_lessions" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WebCrawler /zhihuColumnFocuser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Python.statsmodelsTest" />
+      <item index="1" class="java.lang.String" itemvalue="Python.trip" />
+      <item index="2" class="java.lang.String" itemvalue="Python.zhihuColumnFocuser" />
+      <item index="3" class="java.lang.String" itemvalue="Python.selectCityLngLat" />
+    </list>
+    <recent_temporary>
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Python.selectCityLngLat" />
+        <item index="1" class="java.lang.String" itemvalue="Python.zhihuColumnFocuser" />
+        <item index="2" class="java.lang.String" itemvalue="Python.trip" />
+        <item index="3" class="java.lang.String" itemvalue="Python.statsmodelsTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -89,29 +422,39 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="1032" y="24" width="928" height="1056" extended-state="4" />
+    <frame x="470" y="24" width="1765" height="1056" extended-state="4" />
+    <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.8002207" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24943566" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5320088" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15902495" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39955848" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -122,8 +465,457 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/WebCrawler /trip.py</url>
+          <line>13</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/WebCrawler /douban/douban/spiders/dbfilm.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/WebCrawler /zhihuColumnFocuser.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/WebCrawler /zhihuColumnFocuser.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="53" />
+    </breakpoint-manager>
     <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/WebCrawler /ArticleSpider/ArticleSpider/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <marker date="1517979612027" expanded="true" signature="799:884" ph="INSERT INTO jobboleArticle... " />
+            <marker date="1517979612027" expanded="true" signature="2223:2308" ph="INSERT INTO jobboleArticle... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/bokehQuikStart.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#33#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/import_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="23" column="11" lean-forward="true" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebCrawler /ArticleSpider/ArticleSpider/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1517979612027" expanded="true" signature="799:884" ph="INSERT INTO jobboleArticle... " />
+            <marker date="1517979612027" expanded="true" signature="2223:2308" ph="INSERT INTO jobboleArticle... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/bokehQuikStart.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#33#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebCrawler /ArticleSpider/ArticleSpider/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
+          <folding>
+            <marker date="1517979612027" expanded="true" signature="799:884" ph="INSERT INTO jobboleArticle... " />
+            <marker date="1517979612027" expanded="true" signature="2223:2308" ph="INSERT INTO jobboleArticle... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Python制作数据分析工具.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/BasicAnalysis.py" />
+    <entry file="file://$PROJECT_DIR$/WebCrawler /ArticleSpider/ArticleSpider/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <marker date="1517979612027" expanded="true" signature="799:884" ph="INSERT INTO jobboleArticle... " />
+            <marker date="1517979612027" expanded="true" signature="2223:2308" ph="INSERT INTO jobboleArticle... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/bokehQuikStart.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#33#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/application_helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#29#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/plot_print_helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-332">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/shared_imports.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="e#35#112#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/helpers/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/statsmodelsTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#10#28#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/PycharmProjects/untitled/venv/lib/python3.5/site-packages/joblib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GIS/ArcPythonNDVI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GIS/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="126">
+            <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/import_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/五违/分析报告.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/import_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+          <folding>
+            <element signature="e#30#107#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="108">
+            <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="61" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/data/cn/movie_2008.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/application_helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/plot_print_helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/豆瓣&amp;IMDB电影评分比较/helpers/shared_imports.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+          <folding>
+            <element signature="e#36#113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebCrawler /duitang/duitang/middlewares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebCrawler /trip.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebCrawler /douban/douban/spiders/dbfilm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-99">
+          <caret line="9" column="5" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebCrawler /jiading.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebCrawler /followers.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebCrawler /zhihuColumnFocuser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="33" column="23" lean-forward="false" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/check.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/筛选城市经纬度.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/经纬度表.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/1052.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="0" column="5689" lean-forward="true" selection-start-line="0" selection-start-column="5689" selection-end-line="0" selection-end-column="5689" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/1073.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/geojson-generator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/经纬度表.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-918">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/正则表达式/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-216">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/正则表达式/e-mail.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/正则表达式/birthday.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/正则表达式/RegTest2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/正则表达式/RegTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="125" column="16" lean-forward="true" selection-start-line="126" selection-start-column="13" selection-end-line="126" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/10523.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>

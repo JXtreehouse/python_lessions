@@ -11,6 +11,7 @@ def get_attraction(url, data=None):
     # 使用BeautifulSoup对html解析时，当使用css选择器，对于子元素选择时，要将nth-child改写为nth-of-type才行
     #titles = soup.select('#taplc_attraction_coverpage_attraction_0 > div:nth-of-type(1) > div > div > div.shelf_item_container > div:nth-of-type(1) > div.poi > div > div.item.name > a')
     titles = soup.select('a.poiTitle')
+    print(titles)
     # imgs = soup.select('img.photo_image')
     imgs = soup.select('img[width="200"]')
 
