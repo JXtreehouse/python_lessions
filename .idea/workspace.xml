@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e6438d4-4e6c-4352-9bcc-e5cec0da3d43" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py" afterPath="$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,16 +22,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="1073.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/1073.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3564">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="birthday.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/正则表达式/birthday.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -94,11 +84,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="namedtuple_test.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="namedtuple_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PythonBasic/CollectionsOverview/namedtuple_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+            <state relative-caret-position="324">
+              <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -153,6 +153,7 @@
         <option value="$PROJECT_DIR$/DataAnalysisCode/常见案例/geojson相关/selectCityLngLat.py" />
         <option value="$PROJECT_DIR$/PythonBasic/CollectionsOverview/namedTuple_test.py" />
         <option value="$PROJECT_DIR$/PythonBasic/CollectionsOverview/namedtuple_test.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -163,9 +164,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="992" />
+    <option name="x" value="752" />
     <option name="y" value="24" />
-    <option name="width" value="928" />
+    <option name="width" value="1168" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
@@ -191,77 +192,6 @@
             <path>
               <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
               <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="DataAnalysisCode" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="GIS" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="PythonBasic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="PythonBasic" type="462c0819:PsiDirectoryNode" />
-              <item name="CollectionsOverview" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
-              <item name="douban" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
-              <item name="douban" type="462c0819:PsiDirectoryNode" />
-              <item name="douban" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
-              <item name="douban" type="462c0819:PsiDirectoryNode" />
-              <item name="douban" type="462c0819:PsiDirectoryNode" />
-              <item name="spiders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
-              <item name="duitang" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
-              <item name="duitang" type="462c0819:PsiDirectoryNode" />
-              <item name="duitang" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
-              <item name="python_lessions" type="462c0819:PsiDirectoryNode" />
-              <item name="WebCrawler " type="462c0819:PsiDirectoryNode" />
-              <item name="quotesbot" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="python_lessions" type="b2602c69:ProjectViewProjectNode" />
@@ -439,17 +369,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="992" y="24" width="928" height="1056" extended-state="4" />
+    <frame x="752" y="24" width="1168" height="1056" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42935982" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42935982" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26554173" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -506,17 +436,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WebCrawler /ArticleSpider/ArticleSpider/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding>
-            <marker date="1517979612027" expanded="true" signature="799:884" ph="INSERT INTO jobboleArticle... " />
-            <marker date="1517979612027" expanded="true" signature="2223:2308" ph="INSERT INTO jobboleArticle... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DataAnalysisCode/bokehQuikStart.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -938,8 +857,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PythonBasic/CollectionsOverview/namedtuple_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+        <state relative-caret-position="324">
+          <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
