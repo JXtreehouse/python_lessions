@@ -1,0 +1,206 @@
+
+本次作业
+
+爬取大数据专题所有文章列表，并输出到文本中保存。
+每篇文章需要爬取的数据：作者、标题、文章地址、摘要、缩略图地址、阅读数、平均数、点赞数、打赏数。
+
+
+前两次作业没成功，很大原因是自己的python环境没配置好，这次在conda的图形界面，配置了py2.7的环境，总算成功运行demo。
+
+
+
+
+
+配置python2.7
+
+输入demo代码
+# coding: utf-8
+"""
+版权所有，保留所有权利，非书面许可，不得用于任何商业场景
+版权事宜请联系：WilliamZeng2017@outlook.com
+"""
+
+import os
+import time
+import urllib2
+import urlparse
+from bs4 import BeautifulSoup  # 用于解析网页中文, 安装： pip install beautifulsoup4
+
+
+def download(url, retry=2):
+    """
+    下载页面的函数，会下载完整的页面信息
+    :param url: 要下载的url
+    :param retry: 重试次数
+    :return: 原生html
+    """
+    print "downloading: ", url
+    # 设置header信息，模拟浏览器请求
+    header = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36'
+    }
+    try: #爬取可能会失败，采用try-except方式来捕获处理
+        request = urllib2.Request(url, headers=header) #设置请求数据
+        html = urllib2.urlopen(request).read() #抓取url
+    except urllib2.URLError as e: #异常处理
+        print "download error: ", e.reason
+        html = None
+        if retry > 0: #未超过重试次数，可以继续爬取
+            if hasattr(e, 'code') and 500 <= e.code < 600: #错误码范围，是请求出错才继续重试爬取
+                print e.code
+                return download(url, retry - 1)
+    time.sleep(1) #等待1s，避免对服务器造成压力，也避免被服务器屏蔽爬取
+    return html
+
+def crawled_links(url_seed, url_root):
+    """
+    抓取文章链接
+    :param url_seed: 下载的种子页面地址
+    :param url_root: 爬取网站的根目录
+    :return: 需要爬取的页面
+    """
+    crawled_url = set()  # 需要爬取的页面
+    i = 1
+    flag = True #标记是否需要继续爬取
+    while flag:
+        url = url_seed % i #真正爬取的页面
+        i += 1 #下一次需要爬取的页面
+
+        html = download(url) #下载页面
+        if html == None: #下载页面为空，表示已爬取到最后
+            break
+
+        soup = BeautifulSoup(html, "html.parser") #格式化爬取的页面数据
+        links = soup.find_all('a', {'class': 'title'}) #获取标题元素
+        if links.__len__() == 0: #爬取的页面中已无有效数据，终止爬取
+            flag = False
+
+        for link in links: #获取有效的文章地址
+            link = link.get('href')
+            if link not in crawled_url:
+                realUrl = urlparse.urljoin(url_root, link)
+                crawled_url.add(realUrl)  # 记录未重复的需要爬取的页面
+            else:
+                print 'end'
+                flag = False  # 结束抓取
+
+    paper_num = crawled_url.__len__()
+    print 'total paper num: ', paper_num
+    return crawled_url
+
+def crawled_page(crawled_url):
+    """
+    爬取文章内容
+    :param crawled_url: 需要爬取的页面地址集合
+    """
+    for link in crawled_url: #按地址逐篇文章爬取
+        html = download(link)
+        soup = BeautifulSoup(html, "html.parser")
+        title = soup.find('h1', {'class': 'title'}).text #获取文章标题
+        content = soup.find('div', {'class': 'show-content'}).text #获取文章内容
+
+        if os.path.exists('spider_res/') == False: #检查保存文件的地址
+            os.mkdir('spider_res')
+
+        file_name = 'spider_res/' + title + '.txt' #设置要保存的文件名
+        if os.path.exists(file_name):
+            # os.remove(file_name) # 删除文件
+            continue  # 已存在的文件不再写
+        file = open('spider_res/' + title + '.txt', 'wb') #写文件
+        content = unicode(content).encode('utf-8', errors='ignore')
+        file.write(content)
+        file.close()
+
+url_root = 'http://www.jianshu.com'
+url_seed = 'http://www.jianshu.com/c/9b4685b6357c?page=%d'
+crawled_links = crawled_links(url_seed,url_root)
+crawled_page(crawled_links)  
+
+
+输入代码后，出现如下界面。  欣喜若狂。
+
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=1
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=2
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=3
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=4
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=5
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=6
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=7
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=8
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=9
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=10
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=11
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=12
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=13
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=14
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=15
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=16
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=17
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=18
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=19
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=20
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=21
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=22
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=23
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=24
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=25
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=26
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=27
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=28
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=29
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=30
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=31
+    downloading:  http://www.jianshu.com/c/9b4685b6357c?page=32
+    total paper num:  301
+    downloading:  http://www.jianshu.com/p/45df7e3ecc78
+    downloading:  http://www.jianshu.com/p/99ae5b28a51f
+    downloading:  http://www.jianshu.com/p/d6243f087bd9
+    downloading:  http://www.jianshu.com/p/ea40c6da9fec
+    downloading:  http://www.jianshu.com/p/59e0da43136e
+    downloading:  http://www.jianshu.com/p/e71e5d7223bb
+    downloading:  http://www.jianshu.com/p/dc07545c6607
+    downloading:  http://www.jianshu.com/p/99fd951a0b8b
+    downloading:  http://www.jianshu.com/p/02f33063c258
+    downloading:  http://www.jianshu.com/p/ad10d79255f8
+    downloading:  http://www.jianshu.com/p/062b8dfca144
+    downloading:  http://www.jianshu.com/p/cb4f8ab1b380
+    
+
+
+    ---------------------------------------------------------------------------
+
+在运行时出现了此错误代码
+    IOError                                   Traceback (most recent call last)
+
+    <ipython-input-2-c1e488fdceb1> in <module>()
+         99 url_seed = 'http://www.jianshu.com/c/9b4685b6357c?page=%d'
+        100 crawled_links = crawled_links(url_seed,url_root)
+    --> 101 crawled_page(crawled_links)
+    
+
+    <ipython-input-2-c1e488fdceb1> in crawled_page(crawled_url)
+         91             # os.remove(file_name) # 删除文件
+         92             continue  # 已存在的文件不再写
+    ---> 93         file = open('spider_res/' + title + '.txt', 'wb') #写文件
+         94         content = unicode(content).encode('utf-8', errors='ignore')
+         95         file.write(content)
+    
+
+    IOError: [Errno 22] invalid mode ('wb') or filename: u'spider_res/\u5546\u4e1a\u5206\u6790\u4e4b\u6570\u636e\u8bcd\u5178| \u5f97\u5230.txt'
+
+
+
+找到文件夹spider-res看爬虫效果：
+
+
+
+
+
+爬好的文件
+
+问题： 是什么原因导致，爬去中断了呢？  是代码需要更新了吗？
+把错误代码输入google，答案主要有两类：1.据说是window系统下，不能使用“：”，把冒号改为破折号，但是被提示的两条错误代码中没有冒号
+
+关于正斜杠和反斜杠的问题，应使用正斜杠，不过demo中使用的是正斜杠啊。
+
+暂时无解。

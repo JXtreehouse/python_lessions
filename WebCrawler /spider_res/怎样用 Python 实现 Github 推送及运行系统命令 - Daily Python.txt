@@ -1,0 +1,56 @@
+
+
+
+
+
+
+
+
+
+首发于微信公众号东哥夜谈。欢迎关注东哥夜谈，让我们一起聊聊个人成长、投资、编程、电影、运动等话题。
+本帐号所有文章均为原创。文章可以随意转载，但请务必注明作者。如果觉得文章有用，欢迎转发朋友圈分享。
+
+
+1. 缘起
+每次给 Gitpage 推送的时候都挺繁琐的。先启动终端、切换到目标目录，然后git add .，然后git commit -m "something"，然后git push origin master，等完事后还得退出。于是琢磨着怎么用 Python 来简化这一流程。
+2. 思路
+Git 命令本质上是在命令行里面输入一些 git 命令，所以只要我们能在 Python 里面模拟 Shell 环境输入命令即可。在《怎样在 Python 中调用系统程序打开文件》里面我们提到可以用subprocess.call(["open", "about.html"])。今天为了写这篇文章，本着严谨一点的态度又去翻看了一下文档，结果发现这个操作现在不是推荐操作了：
+
+The recommended approach to invoking subprocesses is to use the run() function for all use cases it can handle. For more advanced use cases, the underlying Popen interface can be used directly.
+17.5. subprocess — Subprocess management — Python 3.6.2 documentation
+
+一般来说推荐用run()，更高级的可以用Popen()。好吧，那就用run()吧。run()的参数可以为两类，一种是 str，包含所有命令和参数，另一种是列表，即把所有命令及相关参数按列表的方式提供。Python 文档建议采用列表，那就按它推荐的方法来吧。
+
+args is required for all calls and should be a string, or a sequence of program arguments. Providing a sequence of arguments is generally preferred, as it allows the module to take care of any required escaping and quoting of arguments (e.g. to permit spaces in file names).
+
+那下一步问题就简单了。
+3. 代码
+date = datetime.datetime.today().isoformat()[0:10]
+status = subprocess.run(["git", "status"])
+print(status)
+print('**********start git add.**********')
+gadd = subprocess.run(["git", "add", "."])
+print('**********git add done.**********')
+print('**********start git commit.**********')
+gcom = subprocess.run(["git", "commit", "-m" + date])
+print('**********git commit done.**********')
+print('**********start git push.**********')
+gpush = subprocess.run(["git", "push", "origin", "master"])
+print('**********git push done.**********')
+
+运行该脚本，即可自动化执行推送，Oh yeah。
+4. 延伸
+今天我们通过讨论如何用 Python 执行 git 命令，研究了如何调用 Python 执行系统 shell 的一些命令。这样就可以充分利用 shell 本身很有优势的地方，毕竟不管是 Mac 还是 Windows，原生的 shell 有些时候的确更为简单好用一些。
+借着这个脚本，我把之前的一些文章统计了出来，统一放到了一个新建的 Python 页面下，算是给自己开启了一个 Python 专栏，专门用来记录学习 Python 过程中的一些问题与思考。更新脚本就在这个推送脚本上修改，所以每次推送自动更新页面目录。欢迎大家围观哈。
+
+Python@DongTalks
+
+终于能用 Python 做点实际的东西了，呵，这种感觉真好 O(∩_∩)O
+5. 来源
+
+17.5. subprocess — Subprocess management — Python 3.6.2 documentation
+
+
+
+
+

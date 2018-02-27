@@ -1,0 +1,453 @@
+
+本文是解密大数据社群一期课程的结业作业。项目分为数据探索，使用sklearn完成回归和预测，利用神经网络进行预测 三部分。目前编码工作基本完成，整理后陆续贴上来。
+数据集介绍
+采用kaggle平台上的债务违约预测数据集。其中包含150000个用户的信贷信息。
+
+
+
+变量名
+变量类型
+变量含义
+
+
+
+
+SeriousDlqin2yrs
+取值为0或1
+两年内是否发生了90天以上逾期，即是否违约
+
+
+RevolvingUtilizationOfUnsecuredLines
+percentage
+无抵押贷款循环使用率，除不动产和车贷之外的贷款余额与个人信用总额度之比
+
+
+age
+integer
+借款人年龄
+
+
+NumberOfTime30-59DaysPastDueNotWorse
+integer
+过去两年中发生30-59天逾期的次数
+
+
+DebtRatio
+percentage
+负债比率
+
+
+MonthlyIncome
+real
+月收入
+
+
+NumberOfOpenCreditLinesAndLoans
+integer
+开放贷款（如汽车贷款或抵押贷款）和信用贷款数量（从数值看，应该是贷款的笔数）
+
+
+NumberOfTimes90DaysLate
+integer
+过去两年中发生90天逾期的次数
+
+
+NumberRealEstateLoansOrLines
+integer
+抵押贷款和不动产贷款数量
+
+
+NumberOfTime60-89DaysPastDueNotWors
+integer
+过去两年中发生60-89天逾期的次数
+
+
+NumberOfDependents
+integer
+家属数目
+
+
+
+SeriousDlqin2yrs 是要预测的对象，又称因变量，即根据其他变量判断用户会不会发生违约。其他10个变量为自变量，分为两类：客户自身属性（年龄，月收入，家属数目），客户信贷历史（负债比率，循环贷款使用率，开放贷款数目等）。自变量较少，而且它们对是否发生违约都有不同程度的影响，所以这里就不进行特征工程。
+分析目标
+1.针对数据集，分析当前用户的信贷信息，各自变量对因变量的影响。
+2.从数据中获得模型，预测用户发生违约的可能性
+%matplotlib inline
+import pandas as pd
+import numpy as np 
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib.gridspec as gridspec
+pd.set_option("display.max_columns",101)
+pd.set_option('display.float_format', lambda x: '%.5f' % x) #为了直观的显示数字，不采用科学计数法
+pd.options.display.max_rows = 15 #最多显示15行
+import warnings
+warnings.filterwarnings('ignore') #为了整洁，去除弹出的warnings
+
+数据概览
+df = pd.read_csv("cs-training.csv")  # 读入数据
+
+df  # Unnamed 列是csv文件中的索引列，可以删除
+
+
+
+
+
+
+p1.JPG
+
+df.dtypes # 查看每列的数据类型
+
+Unnamed: 0                                int64
+SeriousDlqin2yrs                          int64
+RevolvingUtilizationOfUnsecuredLines    float64
+age                                       int64
+NumberOfTime30-59DaysPastDueNotWorse      int64
+DebtRatio                               float64
+MonthlyIncome                           float64
+NumberOfOpenCreditLinesAndLoans           int64
+NumberOfTimes90DaysLate                   int64
+NumberRealEstateLoansOrLines              int64
+NumberOfTime60-89DaysPastDueNotWorse      int64
+NumberOfDependents                      float64
+dtype: object
+
+df.describe()
+
+
+
+
+
+
+image.png
+
+从以上一组数字特征中可以看出什么：
+从count值中看出MonthlyIncome和NumberOfDependents有缺失值(因为这两列的count值小于150000，表格太长，截图中显示不出)。SeriousDlqin2yrs的均值为0.06684，说明违约率是6.684%（发生违约的客户，该值为1，把所有值加起来就是违约客户的个数，除以客户总数也就相当于该列的均值）。age的最小值为0，存在异常值，银行不可能给18岁以下客户贷款。
+df.isnull().sum()  # 计算每个列的空值数目，MonthlyIncome和NumberOfDependents的缺失值分别为29731和3924。
+
+Unnamed: 0                                  0
+SeriousDlqin2yrs                            0
+RevolvingUtilizationOfUnsecuredLines        0
+age                                         0
+NumberOfTime30-59DaysPastDueNotWorse        0
+DebtRatio                                   0
+MonthlyIncome                           29731
+NumberOfOpenCreditLinesAndLoans             0
+NumberOfTimes90DaysLate                     0
+NumberRealEstateLoansOrLines                0
+NumberOfTime60-89DaysPastDueNotWorse        0
+NumberOfDependents                       3924
+dtype: int64
+
+数据清洗
+df=df.drop(df.columns[0], axis=1)   # 删除Unnamed列
+
+df[df['age']<18] # 找出年龄小于18的客户，只有一行
+
+
+
+
+
+
+p5.JPG
+
+df=df[df.age>=18] #只保留年龄大于18的客户
+
+
+
+初步分析
+先查看违约率在每个自变量上的分布，即生成下列样式的频率分布表。第一个比例是每个区间人数对总
+人数的占比，第二个比例是该区间上违约人数的占比。
+
+
+
+
+
+
+table.JPG
+
+#从RevolvingUtilizationOfUnsecuredLines开始尝试， 读取RevolvingUtilizationOfUnsecuredLines 和 SeriousDlqin2yrs两列数据
+df_tmp=df[['SeriousDlqin2yrs','RevolvingUtilizationOfUnsecuredLines']]
+
+#增加标签列，即给每行数据打上一个标签，标示它属于哪个区间。可以利用pandas提供的
+cut函数。该函数把连续变量转换成分类变量，例如把取值[1,2,……100]的变量映射为[1-10],[11-20]
+
+
+
+def binning(col, cut_points, labels=None):
+    minval = col.min()
+    maxval = col.max()
+    break_points = [minval] + cut_points + [maxval]
+     
+    if not labels:
+        labels = range(len(cut_points)+1)
+    else:
+        labels=[str(i+1)+":"+labels[i] for i in range(len(cut_points)+1)]  
+    colBin = pd.cut(col,bins=break_points,labels=labels,include_lowest=True)
+
+    return colBin
+
+cut_points = [0.25,0.5,0.75,1,2]
+labels = ["below 0.25","0.25-0.5","0.5-0.75","0.75-1.0","1.0-2.0","above 2"]
+#增加新列，它的值就是生成的标签
+df_tmp["Utilization_Bin"] = binning(df_tmp["RevolvingUtilizationOfUnsecuredLines"], cut_points, labels)
+
+#查看标签列，取值范围前面加上了序号，是便于后面生成表格时按顺序排列
+df_tmp 
+
+
+
+
+
+
+image.png
+
+#为了计算比例，要获得总人数，即df_tmp的行数
+total_size=df_tmp.shape[0] 
+
+#使用pandas的pivot_table函数生成汇总表
+
+per_table=pd.pivot_table(df_tmp,index=['Utilization_Bin'], aggfunc={"RevolvingUtilizationOfUnsecuredLines":[len, lambda x:len(x)/total_size*100],"SeriousDlqin2yrs":[np.sum] },values=['RevolvingUtilizationOfUnsecuredLines','SeriousDlqin2yrs'])
+
+#已经很接近上面的表格，还要计算违约人数所占比例
+per_table
+
+
+
+
+
+
+image.png
+
+#用该区间违约人数除以该区间总人数即可。注意表格的表头有两行，看看它的columns有什么特殊的地方
+per_table.columns
+
+MultiIndex(levels=[['RevolvingUtilizationOfUnsecuredLines', 'SeriousDlqin2yrs'], ['<lambda>', 'len', 'sum']],
+           labels=[[0, 0, 1], [0, 1, 2]])
+
+#这是一个有多重索引的dataframe，如果要定位其中某列，可按层次进行
+per_table['RevolvingUtilizationOfUnsecuredLines','<lambda>']
+
+Utilization_Bin
+1:below 0.25   58.43839
+2:0.25-0.5     14.03676
+3:0.5-0.75      9.17606
+4:0.75-1.0     16.13477
+5:1.0-2.0       1.96668
+6:above 2       0.24733
+Name: (RevolvingUtilizationOfUnsecuredLines, <lambda>), dtype: float64
+
+#因此，添加新列时也要按层次写列名。增加percent列，它的值来自另外两列数值之比
+per_table['SeriousDlqin2yrs','percent']=per_table['SeriousDlqin2yrs','sum']/per_table['RevolvingUtilizationOfUnsecuredLines','len']*100
+
+# 函数自动生成的列名不好理解，进行重命名
+per_table=per_table.rename(columns={'<lambda>':'percent','len': 'number','sum':'number'})
+
+per_table
+
+
+
+
+
+
+image.png
+
+#把number放在前面，percent放后面更合理，用reindex_axis调整顺序
+per_table=per_table.reindex_axis((per_table.columns[1],per_table.columns[0],per_table.columns[2],per_table.columns[3]),axis=1)
+
+per_table
+
+
+
+
+
+
+image.png
+
+# 把上述生成频率表的过程写成函数，用于对每个自变量进行类似处理
+def get_frequency(df,col_x,col_y, cut_points, labels,ifright=True):
+    df_tmp=df[[col_x,col_y]]
+    df_tmp['columns_Bin']=binning(df_tmp[col_x], cut_points, labels,ifright)
+    total_size=df_tmp.shape[0] 
+    per_table=pd.pivot_table(df_tmp,index=['columns_Bin'], aggfunc={col_x:[len, lambda x:len(x)/total_size*100],col_y:[np.sum] },values=[col_x,col_y])
+    per_table[col_y,'percent']=per_table[col_y,'sum']/per_table[col_x,'len']*100
+    per_table=per_table.rename(columns={'<lambda>':'percent','len': 'number','sum':'number'})
+    per_table=per_table.reindex_axis((per_table.columns[1],per_table.columns[0],per_table.columns[2],per_table.columns[3]),axis=1)
+    return per_table
+
+
+
+cut_points=[25,35,45,55,65]
+labels=['below 25', '26-35', '36-45','46-55','56-65','above 65']
+feq_age=get_frequency(df,'age','SeriousDlqin2yrs', cut_points, labels)
+feq_age
+
+
+
+
+
+
+image.png
+
+和上一个表格不太一样，怎么回事？
+#换一个变量试试
+cut_points = [0.25,0.5,0.75,1,2]
+labels = ["below 0.25","0.25-0.5","0.5-0.75","0.75-1.0","1.0-2.0","above 2"]
+feq_ratio=get_frequency(df,'DebtRatio','SeriousDlqin2yrs', cut_points, labels)
+feq_ratio
+
+
+
+
+
+
+image.png
+
+又符合要求了?看来对不同的列，生成的表格不太一样。回到get_frequency函数里面，一点点运行，找到原因。
+给dataframe添加列的时候，是直接往后加的。假如表格是
+
+
+
+
+
+image.png
+
+再添加['SeriousDlqin2yrs','percent']列，只会加在最后，变成
+
+
+
+
+
+image.png
+
+而不会和最前面的['SeriousDlqin2yrs','percent']合并在一起。应该可以通过列名来调整顺序，但这个multiindex我还没完全弄懂……采用折中办法，先把第一列挪到后面，再添加新列。
+# 重新修改函数
+def get_frequency(df,col_x,col_y, cut_points, labels):
+    df_tmp=df[[col_x,col_y]]
+    df_tmp['columns_Bin']=binning(df_tmp[col_x], cut_points, labels)
+    total_size=df_tmp.shape[0] 
+    per_table=pd.pivot_table(df_tmp,index=['columns_Bin'], aggfunc={col_x:[len, lambda x:len(x)/total_size*100],col_y:[np.sum] },values=[col_x,col_y])
+    if(per_table.columns[0][0]!=col_x): #假如col_x不在第一列，说明是在第2、3列，就把它们往前挪
+        per_table=per_table.reindex_axis((per_table.columns[1],per_table.columns[2],per_table.columns[0]),axis=1)
+    per_table[col_y,'percent']=per_table[col_y,'sum']/per_table[col_x,'len']*100
+    per_table=per_table.rename(columns={'<lambda>':'percent','len': 'number','sum':'number'})
+    per_table=per_table.reindex_axis((per_table.columns[1],per_table.columns[0],per_table.columns[2],per_table.columns[3]),axis=1)
+    return per_table
+
+
+cut_points=[25,35,45,55,65]
+labels=['below 25', '26-35', '36-45','46-55','56-65','above 65']
+feq_age=get_frequency(df,'age','SeriousDlqin2yrs', cut_points, labels)
+feq_age
+
+
+
+
+
+
+image.png
+
+小于25岁的人群和26-35岁的人群，违约率都超过10%。随着年龄增加，违约率在下降。
+feq_ratio #随着负债率的提高，区间的违约率也不断增加，负债率在1-2之间的人群违约率最高。但负债率大于2的时候，违约率又下降了。
+
+
+
+
+
+
+image.png
+
+cut_points=[5,10,15,20,25,30]
+labels=['below 5', '6-10', '11-15','16-20','21-25','26-30','above 30']
+feq_OpenCredit=get_frequency(df,'NumberOfOpenCreditLinesAndLoans','SeriousDlqin2yrs', cut_points, labels)
+feq_OpenCredit
+
+
+
+
+
+
+image.png
+
+在开放性贷款变量上，违约人数的分布比较均匀。近69%的借贷者有五笔以上贷款（应该是把信用卡也算在里面了）。
+cut_points=[5,10,15,20]
+labels=['below 5', '6-10', '11-15','16-20','above 20']
+feq_RealEstate=get_frequency(df,'NumberRealEstateLoansOrLines','SeriousDlqin2yrs', cut_points, labels)
+feq_RealEstate
+
+
+
+
+
+
+image.png
+
+99.47%借贷者的不动产和抵押贷款小于5笔，5笔以上的人群违约率明显增加。
+cut_points=[1,2,3,4,5,6,7]
+labels=['0', '1','2','3','4','5','6','7 and above']
+feq_30days=get_frequency(df,'NumberOfTime30-59DaysPastDueNotWorse','SeriousDlqin2yrs', cut_points, labels,ifright=False)
+feq_30days
+
+
+
+
+
+
+image.png
+
+没有发生过30-59天逾期的借贷者，违约率只有4%。随着逾期次数的增加，违约率不断升高。
+
+cut_points=[1,2,3,4,5,6,7]
+labels=['0', '1','2','3','4','5','6','7 and above ']
+feq_60days=get_frequency(df,'NumberOfTime60-89DaysPastDueNotWorse','SeriousDlqin2yrs', cut_points, labels,ifright=False)
+feq_60days
+
+
+
+
+
+
+image.png
+
+cut_points=[1,2,3,4,5,6,7]
+labels=['0', '1','2','3','4','5','6','7and above']
+feq_90days=get_frequency(df,'NumberOfTimes90DaysLate','SeriousDlqin2yrs', cut_points, labels,ifright=False)
+feq_90days
+
+
+
+
+
+
+image.png
+
+60-89天逾期数和90天逾期数这两个变量上的违约率也有同样趋势，因此是否发生过违约，是判断今后是否会违约的重要变量。
+cut_points=[5000,10000,15000]
+labels=['below 5000', '5000-10000','1000-15000','above 15000']
+feq_Income=get_frequency(df,'MonthlyIncome','SeriousDlqin2yrs', cut_points, labels)
+feq_Income
+
+
+
+
+
+
+image.png
+
+看起来是收入越高，违约率越低。但是MonthlyIncome列数据缺失较多，只能作为参考。
+cut_points = [1,2,3,4,5]
+labels = ["0","1","2","3","4","5 and more"]
+feq_dependent=get_frequency(df,'NumberOfDependents','SeriousDlqin2yrs', cut_points, labels,ifright=False)
+feq_dependent
+
+
+
+
+
+
+image.png
+
+拥有不同家属数量的人群，其违约率没有较大区别。
+以上是分区间对各变量统计获得的信息。
+吐个槽，简书的markdown不支持html。从jupyter notebook上导出的markdown文件里面，dataframe的显示都是<table>这样的html代码，在简书上显示不出来，只好一个个截图，所以排版看起来有点乱。
+上面提到的cut函数和pd.pivot_table都是分析数据时很有效的工具。我也是写代码时才慢慢摸索出它们的用法。小伙伴们想进一步了解的话，记得谷歌大法。也可留言提问_。

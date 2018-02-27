@@ -1,0 +1,304 @@
+
+本文内容整理自DataCamp课程之 Intro to Python for Data Science.
+
+本系列将包括以下内容：
+
+
+Python 基础
+Python 列表 list （本文）
+函数、方法和包
+Numpy 入门
+
+访问 我的github 可下载本文对应的notebook以及练习答案，便于亲手实践。
+
+注意：本文代码基于Python3版本。如果要在python2中执行，需要先导入_future_模块。
+#仅在Python2中使用
+#from __future__ import division
+#from __future__ import print_function
+
+1. List 数据类型
+上一讲中，我们提到了四种数据类型，分别是浮点型（float）、整型（int）、字符串（str）、布尔型（bool）。它们都有个共同特点，那就是这些类型的变量只能存放一个数值。如果我们想存储一家四口人的身高数据，该怎么办呢？是不是要创建4个变量？如果是一个国家的数据呢？
+显然我们需要新的数据类型，一种复合的数据类型，列表（list）则很好地地解决了这一大数据量的问题。
+列表可以看成是一串有序的数据集合，它可以存放任何类型的数据，甚至是不同类型的数据。你可以将它想象成一列队伍，其中有各个国家的人，甚至还要小猫和小狗。
+我们将数据放入一对方括号 [ ] 内来表示列表，数据之间用逗号相隔。以下是某个四口之家的身高数据列表：
+
+
+
+family = [1.73, 1.68, 1.71, 1.89]
+family
+ `[1.73, 1.68, 1.71, 1.89]`
+
+
+
+使用 `type()` 函数检查下它的数据类型： 
+
+
+>```python
+type(family)
+
+list
+以上列表并不能区分是谁的身高，如何改进呢？还记得我们说过，列表中的元素可以是不同类型的数据，所以我们做如下改动。
+
+
+
+family = ['me', 1.73, 'sister', 1.68, 'mom', 1.71, 'dad', 1.89]
+family
+`['me', 1.73, 'sister', 1.68, 'mom', 1.71, 'dad', 1.89]`
+
+
+
+上面将字符串和实数混合在一个列表中，区分了身高。那么再想一想，有没有更好的办法呢？当然是有的。
+
+
+>```python
+family2 = [['me', 1.73],
+          ['sister', 1.68],
+          ['mom', 1.71],
+          ['dad', 1.89]]
+family2
+
+[['me', 1.73], ['sister', 1.68], ['mom', 1.71], ['dad', 1.89]]
+看清了吗？列表的元素也可以是列表，以上将每一个小列表，嵌套入一个更大的列表之中，使得数据的结构更清晰。当然，还有其他多种方式来表达这组数据，比如字典，因为不是今天的主题就不在此处展开了。
+练习2-1：
+在记录了全家的身高后，你是不是打算再记录一下家里各个房间的面积呢。请根据下面的提示，创建一个房间面积的列表。
+# 各房间的面积变量（单位是平方米）
+hall = 11.25
+kit = 18.0
+liv = 20.0
+bed = 10.75
+bath = 9.50
+
+# 创建面积列表 areas
+
+
+# 打印输出 areas
+
+参考上文例子中的方法，创建一个更清晰的列表，能显示出是哪个房间面积。
+# 改进后的列表 areas
+
+# 打印输出 areas
+
+# 输出 areas 的数据类型
+
+
+2. 列表切片
+切片，顾名思义，就是截取一个片段。有时我们只需要使用列表中的部分数据，可以使用切片操作来实现。
+在讲具体操作前，我们首先需要了解Python列表的索引规则。列表是有序的，我们用索引来标记这一序列。索引既可以正着数，也可以倒着数，但要注意，正向索引时是从0开始计数的。
+
+
+
+
+
+索引
+
+在列表中取单个元素时，我们采用 list_name[index]，比如：
+
+
+
+family[3]
+`1.68`
+
+
+
+
+>```python
+family[-2]
+
+'dad'
+在列表中取连续的一串元素时，采用 list_name[start:end]，但尤其要注意，end 代表的元素并不包含在结果中。
+
+
+
+family[4:6]
+`['mom', 1.71]`
+
+
+
+如果从头部开始取数，或结束在尾部时，可采用省略模式。
+
+
+>```python
+family[:2]
+
+['me', 1.73]
+
+
+
+family[-2:]
+`['dad', 1.89]`
+
+
+
+
+>```python
+family[:] # 表示全部
+
+['me', 1.73, 'sister', 1.68, 'mom', 1.71, 'dad', 1.89]
+当然还可以设置特定的步长间隔。
+
+
+
+family[1:7:2]
+`[1.73, 1.68, 1.71]`
+
+
+
+#### 练习2-2：
+
+依旧使用上一节练习中的房间面积数据，让我们来练习下切片操作。
+
+
+```python
+# 创建 areas 列表
+areas = ["hallway", 11.25, "kitchen", 18.0, "living room", 20.0, "bedroom", 10.75, "bathroom", 9.50]
+
+# 打印输出 areas 中第2个元素
+
+# 打印输出 areas 中最后一个元素
+
+# 打印输出 living room 的面积
+
+
+让我们用列表元素做个小计算：
+# 计算厨房kitchen和卧室bedroom的总面积，并赋值给 eat_sleep_area
+
+# 打印输出 eat_sleep_area
+
+
+想象一下这是一个两层的迷你小别墅，楼下包括门厅hallway、厨房kitchen、客厅living room，楼上包括卧室bedroom和浴室bathroom。
+# 切片将楼下的数据存入 downstairs
+
+# 切片将楼上的数据存入 upstairs
+
+# 打印输出 downstairs 和 upstairs
+
+
+3. 列表操作
+接下来，让我们看看如何对列表进行修改、增加、移除等操作。
+随着时光老去，你发现爸爸不如以前高了，而自己似乎又长了点，于是你打算对 family 列表做下修改。
+
+
+
+family[7] = 1.86
+family[0:2] = ['taller_me', 1.78]
+family
+`['taller_me', 1.78, 'sister', 1.68, 'mom', 1.71, 'dad', 1.86]`
+
+
+
+但是可喜的是，又添了一个兄弟，于是把他也加入 family 中。
+
+
+>```python
+family = family + ['brother', 0.85]
+family
+
+['taller_me', 1.78, 'sister', 1.68, 'mom', 1.71, 'dad', 1.86, 'brother', 0.85]
+略感哀伤的是，姐姐嫁人了，离开了这个家庭，所以得把她从 family 中移除。
+
+
+
+del(family[2:4])
+family
+` ['taller_me', 1.78, 'mom', 1.71, 'dad', 1.86, 'brother', 0.85]`
+
+
+
+家庭故事就到这儿结束啦，让我们回归到逻辑层面，请猜一猜以下代码单元中的 x与y、x与z 之间是什么关系？
+
+
+>```python
+x = ['a', 'b', 'c']
+y = x
+print(x)
+print(y)
+
+['a', 'b', 'c']
+['a', 'b', 'c']
+如果改变y的值，会发生什么情况？
+
+
+
+y[0] = 'd'
+print(x)
+print(y)
+`['d', 'b', 'c']`
+`['d', 'b', 'c']`
+
+
+x的值竟然也跟着变了！我们再看：
+
+
+>```python
+x = ['a', 'b', 'c']
+z = list(x) # 或 z = x[:]
+print(x)
+print(z)
+
+['a', 'b', 'c']
+['a', 'b', 'c']
+我们会发现，如果改变z的值，x并不会跟着变。
+
+
+
+z[0] = 'e'
+print(x)
+print(z)
+`['a', 'b', 'c']`
+`['e', 'b', 'c']`
+
+
+让我们用下面这幅图来说明背后的逻辑。Python使用对象模型来存储数据，任何类型的值都是一个对象，所有对象都具备三个特性：身份（ID）、值（value）、类型（type）。这里的列表自然也是对象，x、y、z这类列表名称是ID，它们所指向的内容才是value。所以当使用 `y = x` 时，只是将ID进行传递，它们所指向的值是同一个。但是使用 `z = list(x)`，则是创建了一个新的对象z。
+
+
+![列表](http://upload-images.jianshu.io/upload_images/4420255-cd4011f21057fac1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+#### 练习2-3：
+
+现在你打算将房子改造一下，那么亲手试一下吧！
+
+
+```python
+# 创建 areas 列表
+areas = ["hallway", 11.25, "kitchen", 18.0, "living room", 20.0, "bedroom", 10.75, "bathroom", 9.50]
+
+# 将浴室bathroom的面积修改为10.5
+
+
+# 将"living room" 修改为"chill zone"
+
+
+print(areas)
+
+# 创建一个新的列表 areas_1，在原有 areas 列表的基础上，增加一个游泳池 poolhouse，面积是24.5平米
+areas_1 = 
+
+# 创建一个新的列表 areas_2，在 areas_1 的基础上，再增加一个面积为15.45平米的车库。
+areas_2 = 
+
+print(areas_2)
+
+# 创建 areas_list
+areas_list = [11.25, 18.0, 20.0, 10.75, 9.50]
+
+# 创建新的列表 areas_copy，使它的初始值和 areas_list 相同，但在改变 areas_copy 时不能影响 areas_list 的值
+areas_copy = ...
+
+# 改变 areas_copy
+areas_copy[0] = 5.0
+
+print(areas_list)
+print(areas_copy)
+
+
+补充：
+关于 我的github 中文件下载的方式：
+
+如果下载单个文件，点击所要下载的文件，在新打开的页面中找到右上方的 raw 按钮，右击另存为即可。另外文件名需要删除后缀 .txt，而保留原始格式后缀，如 .ipynb 。
+如果打包下载，回到github库的根目录中，点击右上方绿色的 Clone and download 按钮，选择 Download ZIP 即可。
+
+本文使用Jupyter notebook 编写，关于它的说明和安装方法，可以参考我之前的两篇文章。
+
+左手程序员，右手作家：你必须会的Jupyter Notebook
+致Python初学者们 - Anaconda入门使用指南
+

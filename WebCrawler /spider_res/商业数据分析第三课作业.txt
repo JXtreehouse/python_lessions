@@ -1,0 +1,84 @@
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+%config InlineBackend.figure_format = 'retina'
+
+df = pd.read_csv('HRSalaries.csv')
+df.head()
+
+1、计算 HRSalaries 数据中评分Review_Score 的均值和中位数，并判断其偏度是左偏还是右偏？
+score = df.Review_Score
+score.mean()
+
+6.455890899484876
+
+score.median()
+
+6.5
+
+score.mean() < score.median()
+左偏
+2、 Review_Score 的IQR是多少？并绘制该数据的box图。
+Q1 = score.quantile(0.25)
+Q1
+
+5.8
+
+Q3 = score.quantile(0.75)
+Q3
+
+7.2
+
+IQR = Q3 - Q1
+IQR
+
+1.4000000000000004
+
+score.plot(kind='box')
+plt.show()
+
+
+
+
+
+
+png
+
+3、Review_Score的标准差是多少？
+score.std()
+
+1.0304045880216559
+
+4、在Review_Score中，求落在两个标准差内的数据占总数的百分比。
+mean = score.mean()
+std = score.std()
+len(score[score.between(mean- 2 * std, mean + 2 * std)])/len(score)
+
+0.9617950072645621
+
+5、对于 DoIT 部门，计算其收入和评分的相关系数。
+doit_salary = df[df.Department == 'DoIT'].Annual_Salary
+doit_score = df[df.Department == 'DoIT'].Review_Score
+cov = np.cov(doit_salary, doit_score)
+cov
+
+array([[  1.68675014e+08,   8.22248389e+01],
+       [  8.22248389e+01,   1.10434064e+00]])
+
+np.corrcoef(doit_salary, doit_score)[0,1]
+
+0.0060245710104947512
+
+plt.scatter(doit_salary, doit_score)
+plt.show()
+
+
+
+
+
+
+png
+

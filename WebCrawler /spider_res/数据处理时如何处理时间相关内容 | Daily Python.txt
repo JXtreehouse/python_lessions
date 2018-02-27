@@ -1,0 +1,114 @@
+
+
+
+
+
+
+
+
+
+首发于微信公众号东哥夜谈。欢迎关注东哥夜谈，让我们一起聊聊个人成长、投资、编程、电影、运动等话题。
+本帐号所有文章均为原创。文章可以随意转载，但请务必注明作者。如果觉得文章有用，欢迎转发朋友圈分享。
+
+
+1. 缘起
+今天想分析一下这几年的房价，便去国家统计局网站上找了房价数据。最简单直接的办法，自然是先打张图看看了。数据内容存成一个文本文档，如下所示。
+2017-08-01,7142
+2017-07-01,7138
+2017-06-01,7095
+2017-05-01,7025
+2017-04-01,6968
+
+本以为简单的很，谁知第一步就出了问题。
+2. pandas 里面的 date
+首先读入数据，顺便转换 date 类型。
+import pandas as pd
+import numpy as mp
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import datetime
+
+fname = 'house_price.txt'
+columns = ['date','price']
+df = pd.read_csv(fname, parse_dates=True, names=columns)
+print(type(df.date[0]))
+
+<class 'str'>
+
+明明我已经要求 parse_dates 了啊，为什么 date 数据类型还是 str？查了 pandas 文档也没查出个所以然，鱼老师分明就是这样处理的啊。
+有时候计算机就是这么诡异……好吧，看来得试试手动转换了。
+df['date'] = pd.to_datetime(df.date)
+print(type(df.date[0]))
+
+<class 'pandas.tslib.Timestamp'>
+
+本以为会出一个 datetime 类型之类，这个 Timestamp 又是个什么鬼……好吧，好歹是时间相关的，应该差不多能用了吧？
+3. matplotlib 里面的 date
+作图需要横纵坐标，日期类型可以自己转换，设定起始日期为 0，然后手动转换之类。但 Python 已经内置了时间类型，所以不妨直接使用。
+
+Matplotlib provides sophisticated date plotting capabilities, standing on the shoulders of python datetime, the add-on modules pytz and dateutil.
+—— Matplotlib - Python Plot library
+
+其实搞编程，有几种数据类型是最基础的：
+
+数字相关(float/int...)
+文本相关(str/text...)
+日期相关(date/time...)
+逻辑相关(True/False/not/and/or)
+文件相关(file/folder/IO...)
+数组等复合对象(list/set/dict...)
+更高级的类/对象(class/object...)
+
+很多人更关注与后面那些看起来更高大上的东东，实际上前面几个才是利用的最频繁最广泛的。学编程把他们的相关搞明白了，就能处理 80% 的常见问题了。
+回到 matplotlib。
+看 matplotlib 文档很久，越看越迷糊。各种参数和设置相互关联，内容又极庞杂；更要命的是作为制图工具，实操性比较强，比如看完 locator 文档却发现完全不知道怎么用！
+我有点蒙。琢磨了一下，这个问题不可能是我第一个遇到，与其自己搞原创，不如学习学习前面高人的手笔。遂转战 gallery，搜 date，得到一些完全符合我要求的代码。
+
+api example code: date_demo.py — Matplotlib 2.0.2 documentation：https://matplotlib.org/examples/api/date_demo.html
+
+说实话，依然有点复杂。想了想，还是先直接拿来主义了。date 如何，time 如何，什么 locator， 什么 formatter，背后机理如何，对一个初学者，貌似太过深入不是什么好事儿。
+起码说，容易被打击。感觉编程这东西，屁大点个事儿都需要很多背景知识。比如我只不过想用网页做一个用户界面，却需要学习 http、request、线程、HTML、CSS 甚至正则表达式……其实我想要的不过是一个能输入一些文本，以及一个能相应的按钮罢了……
+所以说，对于初学者，最重要的是能有一个成品。一方面用这个成品给自己激励打劲儿，另一方面也可以有的放矢，在做中学。在做中学到的，才是最能深入到自己脑子里的。
+至于更多细节，有待以后慢慢挖么。
+4. 行动
+于是，复制代码，根据自己猜测大致修改了一下。
+years = mdates.YearLocator()   # every year
+months = mdates.MonthLocator()  # every month
+
+# format the ticks
+fig, ax = plt.subplots()
+
+ax.xaxis.set_major_locator(years)
+ax.xaxis.set_minor_locator(months)
+
+datemin = datetime.date(df.date.min().year, 1, 1)
+datemax = datetime.date(df.date.max().year + 1, 1, 1)
+ax.set_xlim(datemin, datemax)
+
+plt.plot(df.date, df.price)
+plt.show()
+
+结果出来，还算不错 :)。
+
+
+
+
+
+datetime.png
+
+5. 总结
+今天从房价入手，讨论了 pandas 在读取文件时如果没能正确解析 date 后应该如何处理的问题，以及如何在 matplotlib 里面处理 date 相关内容。
+其实没能完全搞定 …… 虽然希望能把前因后果说清楚，不过对于现阶段的自己来说难度还是大了一些。所以最后采取了比较折中的方案，在 gallery 里面找类似代码复制修改了一下，得到了自己想要的结果。
+虽然这种做法挺不黑客的……不过的确好使啊！囧rz……
+6. 来源
+
+Package overview — pandas 0.20.3 documentation
+
+
+
+
+
+
+
+DongTalks.jpg
+

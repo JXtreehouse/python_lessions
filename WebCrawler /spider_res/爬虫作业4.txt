@@ -1,0 +1,243 @@
+
+
+一、课程作业
+二、爬虫代码
+三、爬取结果
+四、存在问题
+
+一、课程作业：爬取大数据专题所有文章列表，并输出到文件中保存每篇文章需要爬取的数据： 作者，标题，文章地址，摘要，缩略图地址，阅读数，评论数，点赞数和打赏数
+二、爬虫代码
+#python3版本
+import os
+
+import time
+
+import urllib.request
+
+from urllib.parse import urljoin
+
+from bs4 import BeautifulSoup 
+
+def download(url, retry=2):
+ 
+    """
+
+    下载页面的函数，会下载完整的页面信息
+
+    :param url: 要下载的url
+
+    :param retry: 重试次数
+
+    :return: 原生html
+
+    """
+
+    print("downloading: ", url)
+    
+    # 设置header信息，模拟浏览器请求
+   
+    header = {
+
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36'
+
+    }
+    
+    try: 
+    #爬取可能会失败，采用try-except方式来捕获处理
+
+        request = urllib.request.Request(url, headers=header) 
+        #设置请求数据
+        
+        html = urllib.request.urlopen(request).read() 
+        #抓取url
+    
+    except urllib.request.URLError as e:
+        
+        print("download error:",e.reason)
+        
+        html = None
+        
+        if retry > 0:
+            
+            if hasattr(e, 'code') and 500 <= e.code < 600:
+                
+                print(e.code)
+                return download(url, retry - 1)
+    
+    time.sleep(1) 
+    #等待1s，避免对服务器造成压力，也避免被服务器屏蔽爬取
+
+    return html
+    
+def crawl_list(url):
+    
+    html = download(url)
+    if html == None:
+        return
+    soup = BeautifulSoup(html,'html.parser')
+    return soup.find(id = 'list-container').find('ul',{'class':'note-list'})
+
+def crawl_paper_tag(url,url_root):
+    
+    paperlist = []
+    lists = url.find_all('li')
+    count = 0
+    
+    for paper_tag in lists:
+    
+    
+        pic = 0
+        metaReward = 0
+        author = paper_tag.find('div',{'class':'content'}).find('div',{'class':'author'}).text #作者
+        title = paper_tag.find('div',{'class':'content'}).find('a',{'class':'title'}).text #标题
+        paperUrl = paper_tag.find('div',{'class':'content'}).find('a',{'class':'title'}).get('href') #文章地址
+        abstract = paper_tag.find('div',{'class':'content'}).find('p',{'class':'abstract'}).text #文章摘要
+        metaRead = paper_tag.find('div',{'class':'content'}).find('div',{'class':'meta'}).find('i',{'class':'iconfont ic-list-read'}).text #阅读数
+        metaComment = paper_tag.find('div',{'class':'content'}).find('div',{'class':'meta'}).find('i',{'class':'iconfont ic-list-comments'}).text #评论数
+        metaLike = paper_tag.find('div',{'class':'content'}).find('div',{'class':'meta'}).find('i',{'class':'iconfont ic-list-like'}).text #点赞数
+
+        try:
+            pic = paper_tag.find('a',{'class':'wrap-img'}).find('img',{'class':'img-blur'}).get('src') #文章缩略图
+        except AttributeError as e:
+            count+=1
+            
+        try:
+            metaReward = paper_tag.find('div',{'class':'content'}).find('div',{'class':'meta'}).find('i',{'class':'iconfont ic-list-money'}).text #打赏数
+        except AttributeError as e:
+            count+=1
+
+        paperAttr = {
+
+        'author':author,
+        'title':title,
+        'url':urljoin(url_root,paperUrl),
+        'abstract':abstract,
+        'pic':pic,
+        'read':metaRead,
+        'comment':metaComment,
+        'like':metaLike,
+        'reward':metaReward
+
+        }
+        paperlist.append(paperAttr)
+    
+    return paperlist
+
+三、爬取结果
+1.爬取部分的代码
+url_root = 'http://www.jianshu.com' 
+url_seed = 'http://www.jianshu.com/c/9b4685b6357c?page=1' 
+crawl_list(url_seed)
+result = crawl_paper_tag(crawl_list(url_seed),url_root)
+
+2.爬取结果
+[{'abstract': '\n      首发于微信公众号东哥夜谈。欢迎关注东哥夜谈，让我们一起聊聊个人成长、投资、编程、电影、运动等话题。本帐号所有文章均为原创。文章可以随意转载，但请务必注明作者。如果觉得文章有用...\n    ',
+  'author': '\n\n\n \n张利东\n\n\n',
+  'comment': '',
+  'like': '',
+  'pic': '//upload-images.jianshu.io/upload_images/118737-45b5fa74893c0f35.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/150/h/120',
+  'read': '',
+  'reward': 0,
+  'title': '多级嵌套 DataFrame 操作 - Daily Python',
+  'url': 'http://www.jianshu.com/p/a1624dfcf27f'},
+ {'abstract': '\n      感谢Dr.fish的耐心讲解和细致回答。 本次课的课后作业如下： 分别用 T 分布 和 bootsrrap 方法求年均降水量数据在置信度为95%的置信区间 上代码 做作业 Q...\n    ',
+  'author': '\n\n\n \n孤单不孤单\n\n\n',
+  'comment': '',
+  'like': '',
+  'pic': 0,
+  'read': '',
+  'reward': '',
+  'title': '商业分析第五次课作业-0808（求置信度95%的降水概率）',
+  'url': 'http://www.jianshu.com/p/364c1db69f38'},
+ {'abstract': '\n      感谢Dr.fish的耐心讲解和细致回答。 本次课的随堂作业如下： 有100个房屋面积的样本，均值300.85㎡，并已知总体标准差为86㎡用t分布求房屋平均面积在95%的置信区...\n    ',
+  'author': '\n\n\n \n孤单不孤单\n\n\n',
+  'comment': '',
+  'like': '',
+  'pic': 0,
+  'read': '',
+  'reward': 0,
+  'title': '商业分析第五次课课堂作业-0808',
+  'url': 'http://www.jianshu.com/p/02c23bef2877'},
+ {'abstract': '\n      课程作业 爬取大数据专题所有文章列表，并输出到文件中保存每篇文章需要爬取的数据：  作者，标题，文章地址，摘要，缩略图地址，阅读数，评论数，点赞数和打赏数 作业网址 http...\n    ',
+  'author': '\n\n\n \n不忘初心2017\n\n\n',
+  'comment': '',
+  'like': '',
+  'pic': 0,
+  'read': '',
+  'reward': 0,
+  'title': 'Python 爬虫入门课作业4－构建爬虫',
+  'url': 'http://www.jianshu.com/p/e9fef05094f8'},
+ {'abstract': '\n      课堂作业 爬取解密大数据专题所有文章列表，并输出到文件中保存 每篇文章需要爬取的数据：作者，标题，文章地址，摘要，缩略图地址，阅读数，评论数，点赞数和打赏数 参考资料 Bea...\n    ',
+  'author': '\n\n\n \namoyyean\n\n\n',
+  'comment': '',
+  'like': '',
+  'pic': '//upload-images.jianshu.io/upload_images/6401229-2a17f4804b594c44.png?imageMogr2/auto-orient/strip|imageView2/1/w/150/h/120',
+  'read': '',
+  'reward': 0,
+  'title': '课程作业-爬虫入门04-构建爬虫-WilliamZeng-20170729',
+  'url': 'http://www.jianshu.com/p/99657d135922'},
+ {'abstract': '\n      首发于微信公众号东哥夜谈。欢迎关注东哥夜谈，让我们一起聊聊个人成长、投资、编程、电影、运动等话题。本帐号所有文章均为原创。文章可以随意转载，但请务必注明作者。如果觉得文章有用...\n    ',
+  'author': '\n\n\n \n张利东\n\n\n',
+  'comment': '',
+  'like': '',
+  'pic': 0,
+  'read': '',
+  'reward': 0,
+  'title': '怎样用 Python 实现 Github 推送及运行系统命令 - Daily Python',
+  'url': 'http://www.jianshu.com/p/4f38600dae7c'},
+ {'abstract': '\n      蒙特卡洛模拟求圆周率 连续分布和正太分布 模拟面包重量的分布 假设是均值为950克，标准差为50克的正态分布。 那个数学家的故事，想起来了 计算买到的面包大于1000克的概率...\n    ',
+  'author': '\n\n\n \n_bobo_\n\n\n',
+  'comment': '',
+  'like': '',
+  'pic': '//upload-images.jianshu.io/upload_images/4421285-62ed671d65027f50.png?imageMogr2/auto-orient/strip|imageView2/1/w/150/h/120',
+  'read': '',
+  'reward': 0,
+  'title': '复现fish04课代码 ',
+  'url': 'http://www.jianshu.com/p/39d6793a6554'},
+ {'abstract': '\n      作业 爬取大数据专题所有文章列表,并输出到文件中保存每篇文章需要爬取的数据: 作者,标题,文章地址,摘要,缩略图地址,阅读数,评论数,点赞数和打赏数 本机环境 Windows...\n    ',
+  'author': '\n\n\n \npnjoe\n\n\n',
+  'comment': '',
+  'like': '',
+  'pic': '//upload-images.jianshu.io/upload_images/6581981-c09f1a9b23c815ce.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/150/h/120',
+  'read': '',
+  'reward': 0,
+  'title': '爬虫作业04-进一步爬取专栏文章相关数据',
+  'url': 'http://www.jianshu.com/p/87f36332b707'},
+ {'abstract': '\n      本次作业 爬取大数据专题所有文章列表，并输出到文本中保存。 每篇文章需要爬取的数据：作者、标题、文章地址、摘要、缩略图地址、阅读数、平均数、点赞数、打赏数。 前两次作业没成功...\n    ',
+  'author': '\n\n\n \n_bobo_\n\n\n',
+  'comment': '',
+  'like': '',
+  'pic': '//upload-images.jianshu.io/upload_images/4421285-0b61e20ea5b4256c.png?imageMogr2/auto-orient/strip|imageView2/1/w/150/h/120',
+  'read': '',
+  'reward': 0,
+  'title': '爬虫04作业',
+  'url': 'http://www.jianshu.com/p/2841c81d57fc'},
+ {'abstract': '\n      这个编程系列我采用的方法是，照着老师课件一步步跟做，遇到问题就记录，能搜索解决就搜索解决，搜不到的去提问，尽量找到解答。 知乎专栏里有非常完备的新手上路指南（从下载软件开始）...\n    ',
+  'author': '\n\n\n \nLY加油站\n\n\n',
+  'comment': '',
+  'like': '',
+  'pic': '//upload-images.jianshu.io/upload_images/4479083-e96e79c121886ba9?imageMogr2/auto-orient/strip|imageView2/1/w/150/h/120',
+  'read': '',
+  'reward': '',
+  'title': 'Python 学习笔记 Lesson01',
+  'url': 'http://www.jianshu.com/p/97ff0beca873'}]
+
+四、存在问题
+1.关于文章的阅读数、评论数、点赞数、打赏数并没有获取到值，可能与其html结构有关。
+<a target="_blank" href="/p/97ff0beca873">
+        <i class="iconfont ic-list-read"></i> 19
+</a>
+
+由上述结构可以看出，具体的阅读数等的值并不是标签<i>内部的内容。对于如何获取这部分内容有些疑惑。
+2.本次作业以一个网页作为被爬取目标，还未实现多个页面的内容爬取，以及对爬取内容的存储，整体代码简陋。
+3.对于上次课程的作业，代码已跑通了一遍。
+4.爬虫编写过程中也遇到过问题，有时无法解决，再次听了课程才有所觉悟。所以还有更多知识等着我去学习。
+
+本文为 泰阁志-解密大数据 学习笔记，了解更多请关注微信“泰阁志”
+
+
+
+
+
+
+

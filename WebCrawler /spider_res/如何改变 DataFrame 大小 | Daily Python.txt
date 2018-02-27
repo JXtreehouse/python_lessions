@@ -1,0 +1,43 @@
+
+
+
+
+
+
+pandas.png
+
+
+并未首发于微信公众号东哥夜谈，但依然欢迎关注东哥夜谈，让我们一起聊聊个人成长、投资、编程、电影、运动等话题。
+本帐号所有文章均为原创。文章可以随意转载，但请务必注明作者。如果觉得文章有用，欢迎转发朋友圈分享。
+
+
+1. 缘起
+数据分析前期准备自然不可能一下子就万事俱备，后期难免需要给原来的对象补充一些数据。那么对于 DataFrame 来说，具体如何操作呢？
+1.1 添加新列
+添加新列的方法非常简单，直接将列名指定相应数据即可，如 stock['fluctuation'] = stock['High'] - stock['Low'] 。
+1.2 用 loc 生成新行
+生成新行的时候可以用loc赋值，如 df.loc[2]= pd.Series(np.arange(10))
+这里需要注意的是，只可以用loc，不可以用iloc。尝试用iloc的时候系统会报错，说新赋值的行号不在索引里面。
+另外，用loc添加Series为新列的时候需要注意，Series 如果和原来的 df 有相同的 column，即 df 的 column 和 Series 的 index 一致，是没什么问题的，否则会显示一堆 NA，除非给出参数ignore_index=True。
+1.3 用 append 方法增加新行
+用 append 可以把一个新的 Series/dict-like object 添加到现有 df 后面，并返回一个新的 df。
+用 append 我能理解，但为什么会返回一个新的 df？百思不得其解。结果后来在 pandas 文档里面查到
+
+Mutability and copying of data
+All pandas data structures are value-mutable (the values they contain can be altered) but not always size-mutable. The length of a Series cannot be changed, but, for example, columns can be inserted into a DataFrame. However, the vast majority of methods produce new objects and leave the input data untouched. In general, though, we like to favor immutability where sensible.
+Package overview — pandas 0.20.3 documentation
+
+原来如此。关键部分，诸如一个 Series 的大小之类，还是不要总想着改变了。如果的确需要，最好是基于现有的数据结构再新建一个。DataFrame 呢，个人建议也是类似……保持一致性会让代码简单很多。
+反正Python的垃圾回收机制，会让不再使用的数据自动销毁。
+2. 来源
+
+Package overview — pandas 0.20.3 documentation
+
+
+
+
+
+
+
+DongTalks.jpg
+

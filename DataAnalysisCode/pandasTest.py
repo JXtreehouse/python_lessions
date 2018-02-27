@@ -84,7 +84,52 @@ def main():
     df3 = pd.DataFrame({"A": ["a","b","c","b"],"B":list(range(4))})
     print(df3.groupby("A").sum())
 
+    # DataFrame合并数据集
+    # 这是一种多对一合并
+    df1 = pd.DataFrame({
+      'key': ['b','b','a','c','a','a','b'],
+      'data1': range(7)
+    })
+    df2 = pd.DataFrame({
+        'key': ['a','b','d'],
+        'data2': range(3)
+    })
+    print(pd.merge(df1, df2))
+
+    # 注意： 我们没有指明用哪个列进行连接，默认会将重叠列的列名当做键
+    # 最好显示指定下
+    print(pd.merge(df1,df2,on='key'))
 
 
+    ###
+    #索引上的合并
+    # 有时候，DataFrame中的连接键位于其索引中，这种情况下，你可以传入left_index=True 或right_index=True以说明索引应该被用作连接键
+    ###
+    left1 = pd.DataFrame({
+        'key': ['a','b','a','a','b','c'],
+        'value': range(6)
+        })
+    right1 = pd.DataFrame({
+        'group_val':[3.5, 7]
+        },index= ['a', 'b'])
+    print(left1)
+    print(right1)
+    print(pd.merge(left1, right1, left_on='key', right_index=True))
+    # 因为默认的merge方法是求取连接键的交集，因此你可以通过外连接的方式得到它们的并集
+    print(pd.merge(left1, right1, left_on='key', right_index=True, how='outer'))
+
+
+
+   # left2 = pd.DataFrame({
+   #     'key1': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada'],
+   #     'key2': [2000, 2001, 2002, 2001, 2002],
+   #     'data': np.arrange(5.)
+   # })
+   #
+   # right2 = pd.DataFrame(np.arrange(12).reshape((6, 2)),
+   #                    index=[['Nevada', 'Nevada', 'Ohio','Ohio', 'Ohio', 'Ohio'],
+   #                    [2001, 2000, 2000, 2000, 2001, 2002]],
+   #                    columns = ['event1', 'event2'])
+   # print(left2)
 if __name__ == "__main__":
     main()
