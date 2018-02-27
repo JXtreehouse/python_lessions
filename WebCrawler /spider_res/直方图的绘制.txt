@@ -1,0 +1,163 @@
+
+这是第二次作业了，希望比起之前能取得一些进步！
+首先来做的是体重数据集
+#导入模块阶段
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+导入模块的作用是只要导入了一个模块，就可以引用它的任何公共的函数、类或属性。以上的四条命令含义是：
+
+导入pandas模块作为pd
+导入numpy模块作为np
+导入matplotlib模块的pyplot命令作为plt
+从scipy模块导入stats命令。
+
+#导入数据
+weight_data = pd.read_table('C:\\Users\\dell01\\Desktop\\weight.txt')
+
+数据的导入和我之前使用的R语言基本相同
+weight_data.shape
+
+(80, 1)
+
+我对shape命令的理解是展现数据结构，即数据为一个80*1的矩阵（或称之为列向量）
+weight.mean()
+weight.var()
+
+---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+
+<ipython-input-4-967b4d554b7e> in <module>()
+----> 1 weight.mean()
+      2 weight.var()
+
+
+NameError: name 'weight' is not defined
+
+在这里遇到了第一个也是最常见的的错误——没有定义变量
+#定义weight变量
+weight = weight_data['weight']
+
+weight.mean()
+weight.var()
+
+39.27594936708859
+
+接下来我遇到了第二个问题，同时把weight.mean()和weight.var()放在同一个区块中运行，结果只输出了方差的值，于是我将二者分进不同区块就能很好地得到结果
+#均值
+weight.mean()
+
+50.7
+
+#方差
+weight.var()
+
+39.27594936708859
+
+#作出直方图
+plt.rcParams['font.sans-serif']=['SimHei']
+plt.hist(weight,bins=15,rwidth=0.9)
+plt.title('体重')
+plt.show()
+
+
+
+
+
+
+weight1.png
+
+接下来通过改变bins值来得到不同的直方图
+#改变bins值作出直方图
+plt.rcParams['font.sans-serif']=['SimHei']
+plt.hist(weight,bins=10,rwidth=0.9)
+plt.title('体重')
+plt.show()
+
+
+
+
+
+
+weight2.png
+
+plt.rcParams['font.sans-serif']=['SimHei']
+plt.hist(weight,bins=20,rwidth=0.9)
+plt.title('体重')
+plt.show()
+
+
+
+
+
+
+weight3.png
+
+由直方图的结果我们可以看出，bins的数值影响着组距，即bins的数值为分组的个数
+接下来来研究飞机乘客数据集
+#导入数据
+AirPassengers_data = pd.read_csv('C:\\Users\\dell01\\Desktop\\AirPassengers.csv')
+
+AirPassengers_data.shape
+
+(144, 2)
+
+导入数据与之前基本相同，区别是这次的数据为csv格式，命令从read_table改为read_csv，该数据为一个144*2的矩阵
+passengers = AirPassengers_data['NumPassengers']
+mouth = AirPassengers_data['Month']
+
+#均值
+passengers.mean()
+
+280.2986111111111
+
+#方差
+passengers.var()
+
+14391.917200854701
+
+#作出直方图
+plt.rcParams['font.sans-serif']=['SimHei']
+plt.hist(passengers,bins=15,rwidth=0.9)
+plt.title('乘客')
+plt.show()
+
+
+
+
+
+
+passengers1
+
+#改变bins值作出直方图
+plt.rcParams['font.sans-serif']=['SimHei']
+plt.hist(passengers,bins=10,rwidth=0.9)
+plt.title('乘客')
+plt.show()
+
+
+
+
+
+
+passengers2.png
+
+plt.rcParams['font.sans-serif']=['SimHei']
+plt.hist(passengers,bins=20,rwidth=0.9)
+plt.title('乘客')
+plt.show()
+
+
+
+
+
+
+passengers3.png
+
+同样，通过改变bins值得到不同的直方图
+对于体重数据集，我们可以得到它的均值为50.7，方差为39.28，由直方图可以看出该数据中间高两边低，体重在45~50之间的人群人数最为庞大，可见该人群整体偏瘦。
+对于飞机乘客数据集，我们可以得到均值为280，方差为14391，而由直方图可以得到数据在100200之间出现频数最多，在500600间出现频数最少，由乘客人数从低到高依次排列，频数呈下降趋势。由数据信息可得，该数据为从1949年到1960年各月乘飞机的乘客人数数据，根据观察可得，从1949年到1953年之间，各月出游乘客人数多集中于100~200之间，而在1953年之后出游人数明显有所提升，而出游乘客人数高于500的月份多集中于1960年，这也正是导致直方图呈递减趋势的原因。
+这次作业对于一个第一次用Python的新手来说上手还是挺麻烦的，安装和调用Anaconda和Jupyter Notebook也挺懵逼的，多亏余博士的教学和群里各位的讨论，让我在做作业时少走不少弯路，同时坚持使用Markdown也让我逐渐适应起来，希望能做到tiger所说的be better。

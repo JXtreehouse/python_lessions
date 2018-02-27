@@ -1,0 +1,318 @@
+
+Kaggle获得了一份泰坦尼克号乘客的数据，来进行分析，哪些因素，会让乘客的生还率更高
+提出问题
+影响乘客生还的因素很多，这里只对乘客的性别、年龄、乘客等级、这三个因素感兴趣，
+看看这四个因素是否会影响乘客的生还率。
+
+1.性别是否会影响生还率
+2.年龄是否会影响生还率
+3.乘客等级会否会影响乘客率
+4.性别和舱位共同对生还率的影响
+5.年纪和性别共同对生还率的影响
+6.年纪和等级共同对生还率的影响
+
+这里。乘客的性别、年龄、等级、是三个自变量，生还率是因变量
+数据加工
+导入包
+import numpy as np
+import pandas as pd
+from pandas import Series,DataFrame
+import matplotlib.pyplot as plt
+from __future__ import division
+from scipy import stats
+import seaborn as sns
+###首先导入各种模块
+###让图片在ipython notebook上直接显示
+%matplotlib inline
+
+加载数据
+path='/Users/zhongyaode/Desktop/udacity—data/'
+df=pd.read_csv(path+'titanic-data.csv')
+
+熟悉数据
+先看看数据里有哪些信息，这些信息是怎样的格式
+
+PassengerId:乘客ID
+Survived:是否获救，用1和Rescued表示获救,用0或者not saved表示没有获救
+Pclass:乘客等级，“1”表示Upper，“2”表示Middle，“3”表示Lower
+Name:乘客姓名
+Sex:性别
+Age:年龄
+SibSp:乘客在船上的配偶数量或兄弟姐妹数量）
+Parch:乘客在船上的父母或子女数量
+Ticket:船票信息
+Fare:票价
+Cabin:是否住在独立的房间，“1”表示是，“0”为否
+embarked:表示乘客上船的码头距离泰坦尼克出发码头的距离，数值越大表示距离越远
+
+#查看前五行数据。了解数据包含的信息，
+df.head()
+
+
+
+
+
+
+屏幕快照 2017-05-22 下午10.45.35.png
+
+#查看各字段的数据类型
+df.info()
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 891 entries, 0 to 890
+Data columns (total 12 columns):
+PassengerId    891 non-null int64
+Survived       891 non-null int64
+Pclass         891 non-null int64
+Name           891 non-null object
+Sex            891 non-null object
+Age            714 non-null float64
+SibSp          891 non-null int64
+Parch          891 non-null int64
+Ticket         891 non-null object
+Fare           891 non-null float64
+Cabin          204 non-null object
+Embarked       889 non-null object
+dtypes: float64(2), int64(5), object(5)
+memory usage: 83.6+ KB
+
+#查看数据的摘要信息
+df.describe()
+
+
+
+
+
+
+屏幕快照 2017-05-22 下午10.45.47.png
+
+从数据摘要中可以看出。乘客的生还率大约在38%，超越50的乘客在3等级，乘客的平均年龄在30岁左右，普遍比较年轻
+数据清洗
+处理缺失值
+#Embarked有非常少的两个缺失值，这里用'S'填充
+df['Embarked']=df['Embarked'].fillna('S')
+
+#处理Age的缺失值，Age是连续数据，这里用平均值填充缺失值
+age_mean=df['Age'].mean()
+df['Age']=df['Age'].fillna(age_mean)
+
+处理性别数据
+#这里把性别数据值字符串不便于计算换成数值，
+#用1代表男性，用0代表女性，将性别数值化
+def sex_value(Sex):
+    if Sex=='male':
+        return 1
+    else:
+        return 0
+
+df['Sex']=df['Sex'].apply(lambda x:sex_value(x))
+
+数据探索
+#获取生还乘客的数据
+survives_passenger_df=df[df['Survived']==1]
+
+#定义几个常用的方法
+
+#按照xx对乘客进行分组，计算每组的人数
+def xx_group_all(df,xx):
+    #按照xx对乘客进行分组后 ，每个组的人数
+    return df.groupby(xx)['PassengerId'].count()
+
+#计算每个组的生还率
+def group_passenger_survived_rate(xx):
+    #按xx对乘客进行分组后每个组的人数
+    group_all=xx_group_all(df,xx)
+    #按xx对乘客进行分组后每个组生还者的人数
+    group_survived_value=xx_group_all(survives_passenger_df,xx)
+    #按xx对乘客进行分组后，每组生还者的概率
+    return group_survived_value/group_all
+
+#输出饼图
+def print_pie(group_data,title):
+    group_data.plt.pie(title=title,figsize=(6,6),autopct='%.2f%%'\
+                      ,startangle=90,legend=True)
+    
+    
+    
+
+#输出柱状图
+def print_bar(data,title):
+    bar=data.plot.bar(title=title)
+    for p in bar.patches:
+        bar.annotate('%.2f%%'%(p.get_height()*100),(p.get_x()*1.005\
+                     ,p.get_height()*1.005))
+
+
+性别对生还率的影响
+#不同性别对生还率的影响
+df_sex1=df['Sex'][df['Survived']==1]
+df_sex0=df['Sex'][df['Survived']==0]
+plt.hist([df_sex1,df_sex0],
+        stacked=True,
+        label=['Rescued','not saved'])
+plt.xticks([-1,0,1,2],[-1,'F','M',2])
+plt.legend()
+plt.title('Sex_Survived')
+
+<matplotlib.text.Text at 0x118427d90>
+
+
+
+
+
+
+output_18_1.png
+
+看出全体乘客中男性占了大部分，但是生还乘客中女性占了大部分；
+
+得出结论：女性的生还概率比男性的更高
+
+乘客等级对生还率的影响
+#不同等级对生还率的影响
+df_sex1=df['Pclass'][df['Survived']==1]
+df_sex0=df['Pclass'][df['Survived']==0]
+plt.hist([df_sex1,df_sex0],
+        stacked=True,
+        label=['Rescued','not saved'])
+plt.xticks([1,2,3],['Upper','Middle','lower'])
+plt.legend()
+plt.title('Pclass_Survived')
+
+<matplotlib.text.Text at 0x11807edd0>
+
+
+
+
+
+
+output_21_1.png
+
+全体乘客中lower等级的乘客超过了一半，生还乘客中upper等级的人最多，
+对比各个等级的死亡人数和生还人数：
+
+**可以得出结论：Upper等级生还概率大于Middle、lower的生存概率，等级越好生还概率越好
+
+年龄对生还率的影响
+#不同年龄对生还率的影响
+df_sex1=df['Age'][df['Survived']==1]
+df_sex0=df['Age'][df['Survived']==0]
+plt.hist([df_sex1,df_sex0],
+        stacked=True,
+        label=['Rescued','not saved'])
+#plt.xticks([1,2,3],['Upper','Middle','lower'])
+plt.legend()
+plt.title('title')
+plt.title('Age_Survived')
+
+<matplotlib.text.Text at 0x118698690>
+
+
+
+
+
+
+output_24_1.png
+
+#不同年龄段对生还率的影响elderly，child,youth
+#年龄数据进行处理，0-18为child(少年)，18-40为youth（青年），40-80为elderly（老年）
+def age_duan(age):
+    if age<=18:
+        return 1
+    elif age<=40:
+        return 2
+    else:
+        return 3
+    
+df['Age']=df['Age'].apply(lambda x:age_duan(x))
+
+
+df_sex1=df['Age'][df['Survived']==1]
+df_sex0=df['Age'][df['Survived']==0]
+plt.hist([df_sex1,df_sex0],
+        stacked=True,
+        label=['Rescued','not saved'])
+plt.xticks([1,2,3],['child','youth','elderly'])
+plt.legend()
+plt.title('Age_Survived')
+
+<matplotlib.text.Text at 0x11854e410>
+
+
+
+
+
+
+output_26_1.png
+
+全部乘客中大部分人否在30岁左右，而0-10的生还率比其他年龄段都要高
+
+结论：0-10岁的生还率率最高，20-40之间的生还人数最多
+
+多因素分析
+性别和乘客等级共同对生还率的影响
+print_bar(group_passenger_survived_rate(['Sex','Pclass']),'Sex_Pclass_Survived')
+
+
+
+
+
+
+output_30_0.png
+
+可以看到，对生还率的影响性别>乘客等级，其次是乘客等及对生还率的影响是1>2>3等姐
+性别和年纪对生还率的影响
+dd0=df[['Age','Sex','Pclass']]
+dd11=df[['Age','Sex','Pclass']][df['Survived']==1]
+c=Pclass_survived_all(dd11,['Age','Sex','Pclass'])
+dd0['Sex'].count()
+
+891
+
+#按Pclass分组计算每组的人数
+def Pclass_survived_all(data,Pclass):
+    return data.groupby(Pclass)['Sex'].count()
+
+#按Pclass分组计算每组的生还率
+def Pclass_survived_probability(data):
+    #计算每组生还者的人数
+    groupby_survived=Pclass_survived_all(dd11,data)
+    #计算每组的总人数
+    groupby_survived_all=Pclass_survived_all(dd0,data)
+    return groupby_survived/groupby_survived_all
+
+print_bar(Pclass_survived_probability(['Sex','Age']),'Sex_Sge_Survived')
+
+
+
+
+
+
+output_36_0.png
+
+可以看出，对生还率影响大的是性别，女性>男性
+其次少年的生还率大于青年和老年，青年跟老年的对生还率差不多
+年龄和乘客等级共同对生还率的影响
+#Age中用1表示少年,用2表示青年,用3表示老年
+print_bar(Pclass_survived_probability(['Age','Pclass']),'age_pclass_Survivedd')
+
+
+
+
+
+
+output_39_0.png
+
+可以看出乘客的等级对生还率的影响>乘客年龄的影响
+年龄越大生还率越小，乘客等级越差生还率越差
+结论
+通过分析，可以看出对生还率影响最大的因素是乘客等级，其次是性别，最后年龄段也对生化率有影响
+分析的局限性
+
+这里并没有从统计上分析得出这些结果的偶然性，所以并不知道这里的结果是真正的差异造成的还是噪音造成的
+年龄字段有一些缺失值，因为是连续数据这里用的是全体乘客年龄的均值填充缺失值，这样会缩小年龄之间的差异，也会影响分析结果
+
+结果的相关性
+这里的数据并非通过试验得出，所以无法说自变量之间的因果性，只能说她们之间有相关性
+参考文章![Microsoft Dynamics AX 技术博
+]http://www.cnblogs.com/msdynax/p/6099814.html
+[审阅参考意见]https://review.udacity.com/#!/reviews/521378

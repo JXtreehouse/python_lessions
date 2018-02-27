@@ -1,0 +1,347 @@
+
+
+
+
+
+
+
+
+
+课堂作业
+基于smoking_cancer.text数据，用描述统计量和统计图表对其进行分析，并投稿到简书“解密大数据”专栏
+
+
+思路
+
+人均吸烟数的集中趋势
+人均吸烟数的离散程度
+吸烟数与某种疾病的关系
+
+
+
+数据表的字段说明
+
+
+STATE: 美国州名的简写
+
+CIG: 人均吸烟的数量
+
+BLAD: 每10万人中死于膀胱癌（ bladder cancer）的人数
+
+LUNG: 每10万人中死于肺癌（lung cancer）的人数
+
+KID: 每10万人中死于肾癌（kidney cancer）的人数
+
+LEUK: 每10万人中死于白血病（leukemia）的人数
+
+
+
+
+导入模块
+import pandas as pd
+import numpy as np
+from scipy.stats import mode
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+%config InlineBackend.figure_format = 'retina'
+
+导入文件
+鱼心老师给的文件是smoking_cancer.txtTXT文件类型.
+自己强制改了扩展名为csv. 即重命名为smoking_cancer.csv.导入后,发现所有数据都挤到一栏里了.
+求助polo后,得到方法一:
+# 方法一: 强制改扩展名为csv.用pd.read_csv导入时加上参数
+data=pd.read_csv('smoking_cancer.csv', delimiter='\t')
+
+说明:delimiter 为分隔符的意思。\t是转义字符
+后来看了利东同学的作业.才得知导入txt文件的正确姿势,方法二:
+# 方法二:(推荐)
+data = pd.read_table('smoking_cancer.txt')
+
+在此鸣谢张利东同学
+微信群里鱼心老师又给了一个方法三：
+# 方法三：（推荐）
+data=pd.read_csv('smoking_cancer.txt', delimiter='\t')
+
+观察数据
+data.head()
+
+
+
+
+
+
+
+
+# 查看数据总体信息
+data.info()
+
+# 运行结果
+<class 'pandas.core.frame.DataFrame'>
+Index: 44 entries, AL to AK
+Data columns (total 5 columns):
+CIG     44 non-null float64
+BLAD    44 non-null float64
+LUNG    44 non-null float64
+KID     44 non-null float64
+LEUK    44 non-null float64
+dtypes: float64(5)
+memory usage: 2.1+ KB
+
+# 数据的统计描述
+data.describe()
+
+
+
+
+
+
+
+
+数据分析
+# 计算全美国(44州),每10万人死于这四种癌症的人数总和
+data.sum()
+
+# 运行结果
+CIG     1096.22
+BLAD     181.33
+LUNG     864.74
+KID      122.96
+LEUK     300.51
+dtype: float64
+
+
+美国( 44个州)死于这四种癌症的人数总和 情况如下:
+
+
+BLAD 每10万人中死于膀胱癌（ bladder cancer）的人数:118.33人
+
+
+LUNG 每10万人中死于肺癌（lung cancer）的人数:864.74人
+
+
+KID 每10万人中死于肾癌（kidney cancer）的人数:122.96人
+
+
+LEUK 每10万人中死于白血病（leukemia）的人数:300.51人
+
+
+
+
+# 画个饼图看一下四种癌症占比
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签 
+plt.figure(figsize = (8 , 6))
+
+labels = [u'膀胱癌 bladder',u'肺癌 lung',u'肾癌 kidney',u'白血病 leukemia']
+sizes = [181.33, 864.74, 122.96, 300.51]
+colors = ['#66cc99', '#cc9966', '#9966cc', '#99cc66']
+
+patches,l_text,p_text=plt.pie(sizes, labels=labels, colors=colors, labeldistance = 1.1, autopct = '%1.1f%%', shadow = False, startangle = 90, pctdistance = 0.6)
+#labeldistance，文本的位置离远点有多远，1.1指1.1倍半径的位置
+#autopct，圆里面的文本格式，%1.1f%%表示小数有1位，整数有一位的浮点数
+#shadow，饼是否有阴影
+#startangle，起始角度，0，表示从0开始逆时针转，为第一块。一般选择从90度开始比较好看
+#pctdistance，百分比的text离圆心的距离
+
+#改变文本的大小
+#方法是把每一个text遍历。调用set_size方法设置它的属性
+
+for t in l_text:
+    t.set_size(20)
+for t in p_text:
+    t.set_size(16)
+
+
+plt.axis('equal')  # 设置x，y轴刻度一致，这样饼图才能是圆的
+plt.legend(loc=(1,0),fontsize=16) #显示图例于右下角
+
+
+
+
+
+
+美国(44州)死于四种癌症占比 饼图
+
+
+1.分析人均吸烟数的集中趋势
+
+smoking = data[['CIG']]
+sk = smoking.CIG
+
+sk_mean = np.mean(sk)   # 使用numpy包计算平均值
+sk_median = sk.median()
+sk_mode = mode(sk)     # 使用scipy包计算
+print ('人均吸烟数 均值：',sk_mean)  
+print ('人均吸烟数 中位：',sk_median)
+print ('人均吸烟数 众数：',sk_mode)
+
+if sk_mean > sk_median :
+    print ('偏度为右偏')
+else:
+    print ('偏度为左偏')
+
+# 运行结果
+人均吸烟数 均值： 24.914090909090906
+人均吸烟数 中位： 23.765
+人均吸烟数 众数： ModeResult(mode=array([ 23.44]), count=array([2]))
+偏度为右偏
+
+数据分析少不了画个图
+# 为了图表展示美观,先排个序
+sk = sk.sort_values(ascending=False)
+
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签 
+x=np.arange(len(sk.index)) #有44个州,生成对应0-43数列来用于X轴
+
+plt.figure(figsize=(16,8))  # 设置整张图表的大小
+plt.bar(x,sk) # 画条形图
+
+zhou=list(sk.index)  # 将44个州的州名.转换成列表数据类型.对应0-43数列
+plt.xticks(x,zhou)  # 用州名替换掉X轴上的0-43数字,方便阅读
+
+plt.xlabel('美国44个州简称 按CIG值降序排列',fontsize=20)
+plt.ylabel('人均吸烟的数量 CIG',fontsize=20)
+plt.title('美国各州人均吸烟量分布图',fontsize=20)
+
+y=np.array(list(sk))
+for a,b in zip(x,y):
+    plt.text(a,b+0.03,b,ha='center',va='bottom',fontsize=10,rotation=60)
+plt.hlines(sk.mean(), -1,44,  colors = "r", linestyles = "dashed",label="平均值")
+plt.legend(loc='upper right',fontsize=15) # 显示图例于右上角
+
+
+
+
+
+
+
+
+
+根据上图可以看出
+
+NE 内布拉斯加州的数值最大:42.4
+DC 哥伦比亚特区的数值第二大:40.46
+UT 犹他州的数值最小:14.0
+
+
+
+
+2.分析人均吸烟数的离散程度
+
+Q1 = sk.quantile(0.25)
+Q3 = sk.quantile(0.75)
+IQR = Q3 - Q1
+print('CIG全距(极差)为:',sk.max()-sk.min())
+print('CIG的四分位距IQR为:',IQR)
+print('CIG的标准差为:',sk.std())
+
+# 运行结果
+CIG全距(极差)为: 28.4
+CIG的四分位距IQR为: 6.8675
+CIG的标准差为: 5.573286082643273
+
+来画个箱图 看一下离散程度.
+sk.plot(kind='box',vert=False,figsize=(13,4))
+
+
+
+
+
+
+CIG箱图
+
+总体来说不会太分散,只有两个离群值．
+# 各州四种癌症 离散程度 箱图
+plt.figure(figsize=(6,10))
+sns.boxplot(data=data[['BLAD','LUNG','KID','LEUK']])
+
+
+
+
+
+
+
+
+
+3.分析吸烟数与某种疾病的关系
+
+分别分析一下 人均吸烟数 与 四种癌症死亡数 的关系
+# BLAD 膀胱癌
+
+print ('CIG 与 BLAD 的协方差为:',np.cov(data.CIG,data.BLAD)[0,1])
+print ('CIG 与 BLAD 的相关系数为:',np.corrcoef(data.CIG,data.BLAD)[0,1])
+
+# 运行结果
+CIG 与 BLAD 的协方差为: 3.78393942918
+CIG 与 BLAD 的相关系数为: 0.703621859461
+
+
+# 画个散点图
+plt.scatter(data.CIG, data.BLAD, alpha=0.5)
+
+
+
+
+
+
+CIG 与 BLAD 关系散点图
+
+# LUNG 肺癌
+
+print ('CIG 与 LUNG 的协方差为:',np.cov(data.CIG,data.LUNG)[0,1])
+print ('CIG 与 LUNG 的相关系数为:',np.corrcoef(data.CIG,data.LUNG)[0,1])
+
+# 运行结果
+CIG 与 LUNG 的协方差为: 16.4339634249
+CIG 与 LUNG 的相关系数为: 0.697402504928
+
+# 画个散点图
+plt.scatter(data.CIG, data.LUNG, alpha=0.5)
+
+
+
+
+
+
+CIG 与 LUNG 关系散点图
+
+# KID 肾癌
+
+print ('CIG 与 KID 的协方差为:',np.cov(data.CIG,data.KID)[0,1])
+print ('CIG 与 KID 的相关系数为:',np.corrcoef(data.CIG,data.KID)[0,1])
+
+# 运行结果
+CIG 与 KID 的协方差为: 1.41000887949
+CIG 与 KID 的相关系数为: 0.487389617034
+
+# 画个散点图
+plt.scatter(data.CIG, data.KID, alpha=0.5)
+
+
+
+
+
+
+CIG 与 KID 关系散点图
+
+# LEUK 白血病
+
+print ('CIG 与 LEUK 的协方差为:',np.cov(data.CIG,data.LEUK)[0,1])
+print ('CIG 与 LEUK 的相关系数为:',np.corrcoef(data.CIG,data.LEUK)[0,1])
+
+# 运行结果
+CIG 与 LEUK 的协方差为: -0.243601374207
+CIG 与 LEUK 的相关系数为: -0.0684812294766
+
+# 画个散点图
+plt.scatter(data.CIG, data.LEUK, alpha=0.5)
+
+
+
+
+
+
+CIG 与 LEUK 关系散点图
+
+结论
+吸烟有害健康.  膀胱癌,肺癌 与 吸烟量有正相关的关系.关系系数约为0.7.

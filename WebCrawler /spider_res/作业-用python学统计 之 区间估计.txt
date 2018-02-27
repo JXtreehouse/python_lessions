@@ -1,0 +1,164 @@
+
+
+
+
+进阶作业
+分别用 t 分布 和 bootstrap 方法 求年均降雨量数据在95%的置信区间.源数据为rainfall.csv， 该数据是英国谢菲尔德气象台记录的从1883到2015年间的年降雨量。
+
+
+作业前,先复习个知识要点,
+
+t分布的自由度大于等于30时.趋近于正态分布.
+自由度df越大,越无限趋近于正态分布.
+自由度df = n - 1,其中n:样本数量.
+
+import scipy.stats
+import numpy as np
+import pandas as pd
+import matplotlib.mlab as mlab  
+import matplotlib.pyplot as plt
+
+%config InlineBackend.figure_format = 'retina'
+
+plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签 
+standard_norm = scipy.stats.norm  #标准正态分布
+t_dist = scipy.stats.t            #标准t分布
+
+x = np.arange(-4, 4, 0.01)
+plt.plot(x, standard_norm.pdf(x), label='standard normal',alpha=0.5)
+plt.plot(x, t_dist.pdf(x, df=30), label='t distribution',alpha=0.5)
+plt.title('自由度为30的t分布 与 标准正态分布 对比图')
+plt.legend()
+plt.show()
+
+
+
+
+
+
+
+
+开始作业
+data2 = pd.read_csv('rainfall.csv',header = None)
+rainfall = data2.iloc[:,0]
+
+# 定义一个求t分布的置信区间函数
+def ci_t (data,confidence=0.95):
+    
+    # 先求一下 bins ,以便画图用得上.
+    IQR = data.quantile(0.75) - data.quantile(0.25)
+    bin_size = 2 * IQR / len(data)**(1.0/3)
+    
+    
+    # 画个源数据图表.以便对源数据的一个直观了解
+    plt.rcParams['font.sans-serif']=['SimHei']
+    n = plt.hist(data,bins = round(bin_size),rwidth=0.9)
+    plt.vlines(data.mean(), 0,max(n[0])+1,colors = "r", linestyles = "dashed",label="平均值%.2f" % np.mean(data))
+    plt.title('源数据'+str(len(data))+'个样本分布 直方图')
+    plt.ylabel('频数')
+    plt.legend()
+    plt.show()
+    
+    # 真正开始计算
+    sample_mean = np.mean(data)
+    sample_std = np.std(data)    
+    sample_size = len(data)
+    alpha = 1 - 0.95
+    t_score = scipy.stats.t.isf(alpha / 2, df = (sample_size-1) )
+
+    ME = t_score * sample_std / np.sqrt(sample_size)
+    lower_limit = sample_mean - ME
+    upper_limit = sample_mean + ME
+
+    print( str(confidence*100)+ '%% Confidence Interval: ( %.2f, %.2f)' % (lower_limit, upper_limit))
+    return lower_limit, upper_limit
+
+ci_t(rainfall,0.95)
+
+# 运行结果
+95.0% Confidence Interval: ( 779.30, 820.88)
+
+(779.30082422089879, 820.88263442571781)
+
+
+
+
+
+
+
+
+# 定义一个用bootstrap方法函数
+def bootstrap(data,Confidence=0.95,times=1):
+    # 利用bootstrap方法生成多个样本.分别求样本的平均值.
+    # 返回 将times个样本的平均值做成的数组.(可用于做抽样分布)
+    
+    # 初始化长度为times的空数组
+    Samples_mean = np.empty(times)
+    size = len(data)
+    
+    #进行多次（times次）抽样，将每次得到的样本均值存储在Samples_mean列表里
+    for i in range(times):
+
+        # 随机从数据data中重复抽样，样本大小与data相同，并返回样本均值 
+        Random_Sample = np.random.choice(data, size)
+        Sample_mean = np.mean(Random_Sample)        
+        
+        Samples_mean[i] = Sample_mean  # 利用循环语句,将每个样本均值存入Samples_mean
+    Confidence *= 100
+    C_low = (100 - Confidence) / 2
+    C_high = 100 - C_low
+    C_interval = np.percentile(Samples_mean,[C_low, C_high])
+    
+    
+    # 下面是画图
+    
+    # 先求一下 bins ,以便画图用得上.
+    IQR = data.quantile(0.75) - data.quantile(0.25)
+    bin_size = 2 * IQR / len(data)**(1.0/3)
+    
+    S_mean = np.mean(Samples_mean)
+    S_std = np.std(Samples_mean)
+    plt.rcParams['font.sans-serif']=['SimHei']
+    plt.figure(figsize=(8,5))
+
+    plt.hist(Samples_mean,round(bin_size), normed=True, rwidth=0.7, alpha=0.5)
+    norm = scipy.stats.norm(S_mean, S_std)
+    x = np.arange(S_mean - S_std * 3.5, S_mean + S_std * 3.5, 1)
+    y = norm.pdf(x)
+    plt.plot(x, y,'r--',label='standard normal',alpha=0.7)
+    plt.title('用bootstrap生成'+str(times)+'样本,每个样本大小为'+str(size)+'.做成的抽样分布图',fontsize=16)
+    plt.xlabel('阴影部分为'+ str(Confidence)+ '%的置信区间')
+    
+    #绘制竖线
+    a = C_interval[0]
+    b = C_interval[1]
+    plt.vlines(a, 0, norm.pdf(a),'r')
+    plt.vlines(b, 0, norm.pdf(b),'r')
+
+    #填充颜色
+    x2 = np.arange(a, b + 1, 1)
+    y2 = norm.pdf(x2)
+    plt.fill_between(x2, y2, color='r', alpha=0.2)
+    
+    plt.legend()
+    plt.show()
+    print('用bootstrap生成抽样分布方法,计算出在'+str(Confidence)+'%的置信区间为:', C_interval[0],'--',C_interval[1])
+    return C_interval
+
+bootstrap(rainfall,0.95,30000)
+
+# 运行结果
+用bootstrap生成抽样分布方法,计算出在95.0%的置信区间为: 779.550958647 -- 820.585037594
+array([ 779.55095865,  820.58503759])
+
+
+
+
+
+
+
+
+
+从上图我们可以看到.t分布的自由度越足够大. (蓝柱状)就越趋近于正态分布(红虚线).
+而抽样的样本群足够大(这里模拟了3万个样本).答案就越趋近于用传统公式求得的答案. 几乎可以划 = 号.
+

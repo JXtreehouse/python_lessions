@@ -1,0 +1,78 @@
+
+这次直方图作业踩着Dr. Fish和很多同学的脚印，依然遭遇了许多“坑”。在这里一一记录下来，希望对其他同学能有所帮助。
+正确的作业步骤（将群里的步骤记录在这里）
+
+安装anaconda，详见简书余欣博士文章：http://www.jianshu.com/p/169403f7e40c?utm_campaign=hugo&utm_medium=reader_share&utm_content=note&utm_source=weixin-friends
+安装anaconda，官网下载速度太慢，可通过镜像下载：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/
+
+安装Jupyter notebook，详见简书余欣博士文章
+启动Jupyter notebook
+加载Python包
+导入数据
+数据处理
+数据可视化
+
+我遇到的"坑"
+
+启动Jupyter notebook 闪退（Win7 系统）
+刚开始启动就遇到了奇怪的问题，在命令行启动使用命令"jupyter notebook" 可以启动，但是在windows所有程序里找到"Anaconda3"---->"Jupyter Notebook"就会闪退。看到群里同学的提示，又研究了一下，终于解决了。
+
+步骤如下：
+
+
+选择"Anaconda3"---->"Jupyter Notebook",再右键选择属性。看到目标里最后有个"%HOME%",将它删掉。
+
+
+
+
+
+
+20170311105731.jpg
+
+
+
+
+
+
+
+404139091344321781.jpg
+
+
+按照文章ipython notebook 如何修改一开始打开的文件夹路径，
+打开 cmd 输入命令 jupyter notebook --generate-config，找到自己本机的.jupyter文件夹，打开jupyter_notebook_config.py文件。根据自己想设定的路径修改
+
+
+c.NotebookApp.notebook_dir = 'C:\Users\Windows7\Anaconda3\JNotebooks'
+
+这样就可以解决闪退了，并且修改了开始启动jupyter notebook的文件夹路径。
+
+快速熟悉Jupyter notebook
+打开Jupyter notebook后，一下子不知道该怎么用。感谢群里同学分享的文章Jupyter Notebook 快速入门
+，可以结合余博士的文章一起看。
+
+代码部分的疑惑：
+
+plt.hist(passenger, bins=15, rwidth=0.9)中的bins是什么意思？下面这段话是从如何选择bins这篇文章找到的。
+
+
+
+
+The bins parameter tells you the number of bins that your data will be divided into. You can specify it as an integer or as a list of bin edges.
+
+   **我的理解是数据分组数，不对的地方请大家指正。**
+
+- fig.add_subplot(111)是什么意思？下面这段话是从[fig.add_subplot参数含义](http://stackoverflow.com/questions/3584805/in-matplotlib-what-does-the-argument-mean-in-fig-add-subplot111)找到的。
+
+
+These are subplot grid parameters encoded as a single integer. For example, "111" means "1x1 grid, first subplot" and "234" means "2x3 grid, 4th subplot".
+Alternative form for add_subplot(111) is add_subplot(1, 1, 1).
+
+还是有些疑惑，下面这段在有道词典中的话更有帮助些。
+
+>函数功能
+
+subplot是MATLAB中的函数。
+使用方法：subplot（m,n,p）或者subplot（m n p）。
+subplot是将多个图画到一个平面上的工具。其中，m表示是图排成m行，n表示图排成n列，也就是整个figure中有n个图是排成一行的，一共m行，如果m=2就是表示2行图。p表示图所在的位置，p=1表示从左到右从上到下的第一个位置。
+在matlab的命令窗口中输入doc subplot或者help subplot即可获得该函数的帮助信息。
+ **我的理解是可以用它定义不同的坐标象限，将多个图画到同一个面上。**

@@ -1,0 +1,31 @@
+
+课堂作业
+
+要爬取的数据类别
+对应的数据源网站
+爬取数据的URL
+数据筛选规则(选做)
+
+学习python，想研究一些兼职的python脚本工作，分析一下主要的需求方面，重点学习和练习。
+要爬取的数据类型
+爬取网站每天发布的python相关工作需求，抓取的数据包括：
+
+所有的python job list
+每个 Job 的数据：
+job title
+job skills
+job details
+pricing
+
+对应的数据源网站
+https://www.upwork.com/
+爬取数据的URL
+https://www.upwork.com/o/jobs/browse/?q=python
+数据筛选规则
+根据id= "jobs-list"获取job list,
+根据class="job-title"获取单个job,
+根据class="break visited"获取单个job url
+
+根据class="row"获取单个job 的数据
+如需details，继续爬取该job url
+

@@ -1,0 +1,115 @@
+
+HTML基础
+HTML（Hyper Text Markup language）超文本标记语言。html是一种基础技术，常与CSS、Javascript一起被众多网站用于设计赏心悦目的网页、网页应用程序、以及移动应用程序的用户界面。html使用标记标签来描述网页。
+html标签通常成对出现，是由< >包围的关键词，前面的表示开始标签，后面的表示结束标签。例如"< p >"和"< /p > ".
+浏览器的作用是解释标签，而不显示标签。
+例如：
+<html>
+<body>
+<h1>My First Heading</h1>
+<p>My first paragraph.</p>
+</body>
+</html>
+
+下面介绍基本的html标签：
+
+html主体：
+
+<body>所有网页内容</body>
+
+
+html标题：
+
+<h1>一级标题</h1>
+<h2>二级标题</h2>
+…….
+<h6>六级标题<h6>```
+
+* html段落：
+
+<p>段落。</p>```
+
+html链接：
+
+<a href="https://www.google.com/">谷歌搜索</a>
+<a href="https://www.google.com/ target = "_blank"">谷歌搜索</a>
+<!-- target = "_blank"定义该链接在新窗口中显示 -->
+
+点击这里,查看更多内容。
+
+html图像：
+
+![](图片.jpg)
+
+点击这里，查看更多内容。
+
+html水平线：
+
+<hr />
+
+
+html注释：
+
+<!-- 注释的内容 -->
+
+
+html折行：
+用于在不打算产生新段落的情况下换行。
+
+<p>第一行<br />第二行<br />第三行<br />第四行</p>```
+注：在编辑html语言时，浏览器在显示时会自动过滤掉源代码中的空格以及换行符。
+* html样式：
+
+<html>
+<body style = "background-color:yellow">
+<h1 style = "text-align:center;font-family:arial;color:red;font-size:20px;">标题</h1>
+</body>
+</html>
+点击[这里](http://www.w3school.com.cn/html/html_formatting.asp)，查看更多的文本格式化标签。
+* html表格：
+
+<table border = "1">
+<caption>标题</caption>
+<tr>
+<td>100</td>
+<td>200</td>
+<td>300</td>
+</tr>
+<tr>
+<td>400</td>
+<td>500</td>
+<td>600</td>
+</tr>
+</table>
+注：此处table border = "1"是给表格设置边框。tr是指表格的行。td是指每一个元素。
+点击[这里](http://www.w3school.com.cn/html/html_tables.asp)，查看更多的表格标签。
+* html列表：
+无序列表：
+
+<ul>
+<li>100</li>
+<li>200</li>
+</ul>
+有序列表：
+
+<ol>
+<li>100</li>
+<li>200</li>
+</ol>
+定义列表：
+
+<dl>
+<dt>定义项目</dt>
+<dd>定义的描述</dd>
+<dt>红色</dt>
+<dd>一种常见的颜色</dd>
+<dl>
+点击[这里](http://www.w3school.com.cn/html/html_lists.asp)，查看更多内容。
+* html块
+<div></div>用来定义文档中的分区或节。
+<span></span>用来组合行内元素。
+* html布局
+参见[这里](http://www.w3school.com.cn/html/html_layout.asp)。
+
+**参考资料**：[W3school](http://www.w3school.com.cn/)（感谢polo助教）。
+爬虫入门课。
