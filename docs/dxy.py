@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 # -*- coding: utf-8 -*-
 
 import pandas as pd
@@ -13,12 +13,17 @@ df = df.dropna()
 
 dfg = df.groupby(u'发帖用户id')
 # 将发帖ｉｄ只出现一次的去除
+
 oneceid = df.drop_duplicates([u'发帖用户id'],keep = False)[u'发帖用户id']
+
+
 for idx in oneceid:
+
     df = df[df[u'发帖用户id']!= idx]
 # 按照发帖用户ｉｄ对表排序
 df = df.sort_values(by= [u"发帖用户id"],ascending=True)
-df.to_excel('dxy2.xlsx')
+# print(df.describe())
+# df.to_excel('dxy2.xlsx')
 
 
 
