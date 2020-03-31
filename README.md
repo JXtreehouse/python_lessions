@@ -92,7 +92,11 @@
 ├── [征服PYTHON：语言基础与典型应用].孙广磊.完美书签.清晰PDF版.pdf
 └── 自己动手写网络爬虫.pdf
 
+[《Python数据分析与数据化运营》电子版](https://zhuanlan.zhihu.com/p/33690429)
+
 ```
 
+# 参考代码片段
+- https://github.com/gxcuizy/Python
 
 

@@ -36,7 +36,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/zk/study/python_lessions/DataVisualiztion/venv"
+set -gx VIRTUAL_ENV "/home/mi/personal/python_lessions/DataVisualiztion/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
@@ -64,7 +64,7 @@ if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
         if test -n ""
             printf '%s%s' "" (set_color normal)
         else
-            printf '%s(%s%s%s) ' (set_color normal) (set_color -o white) (basename "$VIRTUAL_ENV") (set_color normal)
+            printf '%s(%s) ' (set_color normal) (basename "$VIRTUAL_ENV")
         end
 
         # Restore the original $status

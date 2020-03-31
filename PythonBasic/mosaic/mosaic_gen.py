@@ -10,3 +10,11 @@ import glob
 import math
 
 comparison_data_path = ''
+
+types = (comparison_data_path + '/*.png', comparison_data_path + '/*.png') # the tuple of file types
+grabbed_files = []
+
+for ext_type in types:
+    grabbed_files.extend(glob.glob(ext_type))
+
+
