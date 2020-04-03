@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 created on
+@describetion: 数据探索
 @author: AlexZ33
 reference: https://wizardforcel.gitbooks.io/ppdam-code-notes/content/3.html
 
@@ -90,11 +91,22 @@ def programmer_3(file_name):
     plt.ylabel(u'盈利（比例）')
     plt.show()
 
+def programmer_4(file_name):
+    catering_sale = file_name
+    data = pd.read_excel(catering_sale, index_col=u'日期')
+
+    data.corr()
+    data.corr()[u'百合酱蒸凤爪']
+    # data[u'']
+    # data[u'百合酱蒸凤爪'].corr(data[u'翡翠蒸香茜饺'])
+    print(data.corr()[u'百合酱蒸凤爪'])
+    print(data[u'百合酱蒸凤爪'].corr(data[u'翡翠蒸香茜饺']))
 
 if __name__ == "__main__":
     print('Python %s on %s' % (sys.version, sys.platform))
     path = os.getcwd()
     # programmer_1(path + '/data/catering_sale.xls')
     # programmer_2(path + '/data/catering_sale.xls')
-    programmer_3(path + '/data/catering_dish_profit.xls')
+    # programmer_3(path + '/data/catering_dish_profit.xls')
+    programmer_4(path + '/data/catering_sale_all.xls')
     pass
