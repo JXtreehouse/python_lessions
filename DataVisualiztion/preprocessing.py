@@ -4,6 +4,7 @@
 # @Author : AlexZ33
 # @Site :  数据预处理
 # @document: https://blog.csdn.net/qq_43333395/article/details/89330504
+# https://blog.csdn.net/sinat_25873421/article/details/80634976
 # @File : preprocessing.py
 # @Software: PyCharm
 
@@ -101,7 +102,7 @@ def programmer_1():
     mkdir(outputfiledir)
     data.to_excel(outputfile)
 
-０
+
 # 规范化
 # 　为了消除指标之间的量纲和取值范围差异的影响，进行标准化处理，将数据按照比例进行缩放，使之落入一个特定的区域，便于进行综合分析。
 
@@ -114,7 +115,56 @@ def programmer_2():
     print(data / 10 * np.ceil(np.log10(data.abs().max())))
 
 
+# 数据规范化
+def programmer_3():
+    datafile = path + '/data/discretization_data.xls'
+    data = pd.read_excel(datafile)
+    data = data[u'肝气郁结证型系数'].copy()
+    k = 4
+    # 方法一，直接对数组进行分类
+    # 等宽法
+    d1 = pd.cut(data, k, labels=range(k))  # 等宽离散化，各个类比依次命名为0,1,2,3
+    print(d1)
+
+    # 方法二， 等频率离散化
+    w = [1.0 * i / k for i in range(k + 1)]
+    # percentiles表示特定百分位数，同四分位数
+    w = data.describe(percentiles=w)[4:4 + k + 1]
+    w[0] = w[0] * (1 - 1e-10)
+    d2 = pd.cut(data, w, labels=range(k))
+
+    # 　方法三，使用Kmeans 基于聚类分析的方法
+    kmodel = KMeans(n_clusters=k, n_jobs=4)  # 建立模型，n_jobs是并行数，一般等于CPU数较好
+    # print(data.values.reshape(len(data), 1))
+    kmodel.fit(data.values.reshape(len(data), 1))  # 训练模型
+
+    # 输出聚类中心，并且排序(默认是随机序的）
+    c = DataFrame(kmodel.cluster_centers_).sort_values(0)
+    # 相邻两项求中点，作为边界点
+    w = DataFrame.rolling(c, 2).mean().iloc[1:]
+
+    # 加上首末边界点
+    w = [0] + list(w[0]) + [data.max()]  # 把首末边界点加上，w[0]中0为列索引
+    d3 = pd.cut(data, w, labels=range(k))
+    print(d3)
+
+    def cluster_plot(d, k):  # 自定义作图函数来显示聚类结果
+        plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+        plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
+
+        plt.figure(figsize=(8, 3))
+        for j in range(0, k):
+            plt.plot(data[d == j], [j for i in d[d == j]], 'o')
+        plt.ylim(-0.5, k - 0.5)
+        return plt
+
+    cluster_plot(d1, k).show()
+    cluster_plot(d2, k).show()
+    cluster_plot(d3, k).show()
+
+
 if __name__ == '__main__':
     # programmer_1()
-    programmer_2()
+    programmer_3()
+    # programmer_2()
     pass
