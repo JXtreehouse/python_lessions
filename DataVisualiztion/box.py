@@ -45,7 +45,7 @@ def programmer_1(file_name):
     p = data.boxplot(return_type='dict')
     x = p['fliers'][0].get_xdata()
     y = p['fliers'][0].get_ydata()
-    y = np.sort(y)
+    y = np.sort(y) # 从小到大排序，该方法直接改变原对象
 
     for i in range(len(x)):
         # 处理临界情况， i=0时

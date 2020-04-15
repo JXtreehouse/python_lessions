@@ -5,6 +5,8 @@
 # @Site :  数据预处理
 # @document: https://blog.csdn.net/qq_43333395/article/details/89330504
 # https://blog.csdn.net/sinat_25873421/article/details/80634976
+# https://write-bug.com/article/1940.html
+# https://www.pianshen.com/article/1701336279/
 # @File : preprocessing.py
 # @Software: PyCharm
 
@@ -116,6 +118,7 @@ def programmer_2():
 
 
 # 数据规范化
+# https://blog.csdn.net/sinat_25873421/article/details/80753121
 def programmer_3():
     datafile = path + '/data/discretization_data.xls'
     data = pd.read_excel(datafile)
@@ -163,8 +166,51 @@ def programmer_3():
     cluster_plot(d3, k).show()
 
 
+# 属性构造
+def programmer_4():
+    inputfile = path + "/data/electricity_data.xls"
+    outputfile = path + "/tmp/electricity_data.xls"
+    data = pd.read_excel(inputfile)
+    data[u"线损率"] = (data[u"供入电量"] - data[u"供出电量"]) / data[u"供入电量"]
+    data.to_excel(outputfile, index=False)
+
+
+def programmer_5():
+    inputfile = path + "/data/leleccum.mat"
+    mat = loadmat(inputfile)
+    signal = mat["leleccum"][0]
+    """
+        处理数据
+        返回结果为level+1个数字
+        第一个数组为逼近系数数组
+        后面的依次是细节系数数组    
+    """
+    coeffs = pywt.wavedec(signal, "bior3.7", level=5)
+    # https: // pywavelets.readthedocs.io / en / latest / regression / wavelet.html
+    # print(coeffs)
+
+
+# 数据规约-pca
+def programmer_6():
+    inputfile = path + "/data/principal_component.xls"
+    outputfile = path + "/tmp/dimention_reducted.xls"
+
+    data = pd.read_excel(inputfile, header=None)
+
+    pca = PCA()
+    pca.fit(data)
+    # print(pca.components_)  # 返回模型的各个特征向量
+    # print(pca.explained_variance_ratio_)  # 返回各个成分各自的方差百分比
+
+    pca.components_
+    pca.explained_variance_ratio_
+    data.to_excel(outputfile, index=False)
+
+
 if __name__ == '__main__':
     # programmer_1()
-    programmer_3()
+    # programmer_3()
     # programmer_2()
+    # programmer_4()
+    programmer_6()
     pass

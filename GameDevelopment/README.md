@@ -1,0 +1,8 @@
+- Cocos2d - cocos2d是用于构建2D游戏，演示和其他图形/交互式应用程序的框架。它基于pyglet。
+- Panda3D - 由迪士尼开发并由卡内基梅隆娱乐技术中心维护的3D游戏引擎。用C ++编写，完全用Python包装。 -推荐
+- Pygame - Pygame是一套用于编写游戏的Python模块。 -推荐
+- PyOgre - Ogre 3D渲染引擎的Python绑定，可用于游戏，模拟，任何3D。
+- PyOpenGL - 用于OpenGL的Python ctypes绑定及其相关的API。
+- PySDL2 - SDL2库的基于ctypes的包装器。
+- RenPy - Visual Novel引擎。
+- Harfang3D - Python framework for 3D, VR and game development. Manage and display complex 3D scenes, with physics, video, sound and music, access VR devices. All written in C++.

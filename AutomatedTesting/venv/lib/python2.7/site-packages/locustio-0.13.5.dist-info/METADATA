@@ -1,0 +1,35 @@
+Metadata-Version: 2.1
+Name: locustio
+Version: 0.13.5
+Summary: Website load testing framework
+Home-page: https://locust.io/
+Author: Jonatan Heyman, Carl Bystrom, Joakim Hamrén, Hugo Heyman
+Author-email: UNKNOWN
+License: MIT
+Platform: UNKNOWN
+Classifier: Topic :: Software Development :: Testing :: Traffic Generation
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Requires-Dist: gevent (==1.5a2)
+Requires-Dist: flask (>=0.10.1)
+Requires-Dist: requests (>=2.9.1)
+Requires-Dist: msgpack-python (>=0.4.2)
+Requires-Dist: six (>=1.10.0)
+Requires-Dist: pyzmq (>=16.0.2)
+Requires-Dist: geventhttpclient-wheels (==1.3.1.dev2)
+Requires-Dist: ConfigArgParse (==0.15.1)
+
+Locust is a python utility for doing easy, distributed load testing of a web site
+
+

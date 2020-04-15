@@ -18,9 +18,13 @@ if __name__ == '__main__':
 ```
 python hello.py
 ```
+# web框架
+## web.py
+## web2py
+## [Django](https://pythonguidecn.readthedocs.io/zh/latest/writing/structure.html#id2)
+- [navdeep-G/samplemod](https://github.com/navdeep-G/samplemod)
+## flask
 
-- web.py
-- web2py
 # 数据库
 - mysql
 - redis
