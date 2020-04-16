@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time : 2020/4/1 下午2:32
+# @Time : 2020/4/1
 # @Author : AlexZ33
 # @Site :  数据预处理
 # @document: https://blog.csdn.net/qq_43333395/article/details/89330504

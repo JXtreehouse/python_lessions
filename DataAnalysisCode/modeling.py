@@ -9,6 +9,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.linear_model import LogisticRegression as LR
 from sklearn.linear_model import RandomizedLogisticRegression as RLR
 
 """
@@ -38,15 +39,31 @@ def programmer_1():
     data = pd.read_excel(filename)
 
     # x = data.iloc[:, :8].as_matrix()
-    x = data.iloc[:, :8].values# 提取所有行，０到８列
-    y = data.iloc[:,8].values
-    print(data.iloc[:, :8])
-    print(x)
-    print(y)
+    x = data.iloc[:, :8].values  # 提取所有行，０到８列
+    y = data.iloc[:, 8].values
+    # print(data.iloc[:, :8])
+    # print(x)
+    # print(y)
 
-    rlr = RLR() # 建立随机逻辑回归模型,筛选变量
-    rlr.fit(x, y) # 训练模型
-    rlr.get_support()
+    rlr = RLR()  # 建立随机逻辑回归模型,筛选变量
+    rlr.fit(x, y)  # 训练模型
+
+    rlr_support = rlr.get_support(indices=True)  # 获取特征筛选结果,也可以通过.scores 方法获取各个特征的分数
+    """
+    这里rlr.get_support(indices=True)如果没有indices=True会报错
+    机器学习之逻辑回归错误总结: https://blog.csdn.net/sheep8521/article/details/85105221
+    """
+
+    # x = data[data.columns[rlr_support]].as_matrix() # 筛选好特征
+    x = data[data.columns[rlr_support]].values  # 筛选好特征
+    print(u' 有效特征为:%s' % ','.join(data[data.columns[rlr_support]]))
+    # 有效特征为:工龄, 地址, 负债率, 信用卡负债
+    lr = LR()  # 建立逻辑回归模型
+    lr.fit(x, y)  # 用筛选后的特征数据来训练模型
+    print("lr: {score}".format(score=lr.score(x, y)))
+    print(u' 模型的平均正确率为:% s' % lr.score(x, y))
+
+    # 　结果　lr: 0.814285714286
 
 
 if __name__ == "__main__":
